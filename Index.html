@@ -498,7 +498,6 @@ nav {
 .artists-header .section-title { color: white; }
 .artists-header .section-intro {
   font-size: 16px;
-  line-height: 1.8;
   color: rgba(255,255,255,0.75);
   max-width: 600px;
 }
@@ -744,260 +743,24 @@ nav {
 }
 
 .analysis-box p {
-  font-size: 14px;
-  line-height: 1.9;
-  color: rgba(26,18,16,0.7);
-  margin-bottom: 18px;
+  font-size: 14.5px;
+  line-height: 1.85;
+  color: rgba(26,18,16,0.65);
+  margin-bottom: 16px;
 }
 
 .analysis-pullquote {
   font-family: 'Fraunces', serif;
   font-style: italic;
-  font-size: 19px;
+  font-size: 20px;
   color: var(--vermillion);
-  border-left: 3px solid var(--vermillion);
-  padding: 12px 20px;
-  margin: 24px 0;
-  line-height: 1.55;
+  border-left: 4px solid var(--vermillion);
+  padding-left: 24px;
+  margin: 32px 0;
+  line-height: 1.6;
 }
 
-/* ── ESSAY ── */
-#essay {
-  background: var(--offwhite);
-  padding: 0;
-}
-
-.essay-header {
-  background: var(--jade);
-  padding: 80px 60px 60px;
-}
-
-.essay-header .section-label { background: white; color: var(--jade); }
-.essay-header .section-title { color: white; }
-
-.essay-columns {
-  display: grid;
-  grid-template-columns: 260px 1fr;
-  gap: 0;
-}
-
-.essay-sidebar {
-  background: var(--charcoal);
-  padding: 52px 36px;
-  position: sticky;
-  top: 52px;
-  align-self: start;
-  min-height: calc(100vh - 52px);
-}
-
-.essay-sidebar-title {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 14px;
-  letter-spacing: 0.15em;
-  color: rgba(255,248,239,0.4);
-  text-transform: uppercase;
-  margin-bottom: 24px;
-}
-
-.sidebar-theme {
-  padding: 16px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-}
-
-.theme-num {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 42px;
-  line-height: 1;
-}
-
-.theme-name {
-  font-family: 'Fraunces', serif;
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--cream);
-  margin: 4px 0;
-}
-
-.theme-desc {
-  font-size: 12px;
-  line-height: 1.65;
-  color: rgba(255,248,239,0.5);
-}
-
-.sidebar-theme:nth-child(2) .theme-num { color: var(--vermillion); }
-.sidebar-theme:nth-child(3) .theme-num { color: var(--sky); }
-.sidebar-theme:nth-child(4) .theme-num { color: var(--lime); }
-.sidebar-theme:nth-child(5) .theme-num { color: var(--magenta); }
-
-.essay-main {
-  padding: 64px 64px 80px;
-}
-
-.essay-main h3 {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 36px;
-  letter-spacing: 0.03em;
-  color: var(--charcoal);
-  margin: 48px 0 16px;
-  padding-left: 16px;
-  border-left: 4px solid var(--jade);
-}
-
-.essay-main h3:first-child { margin-top: 0; }
-
-.essay-main p {
-  font-size: 16px;
-  line-height: 1.95;
-  color: rgba(26,18,16,0.72);
-  margin-bottom: 22px;
-  max-width: 640px;
-}
-
-.essay-main p::first-letter {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 52px;
-  float: left;
-  line-height: 0.8;
-  padding-right: 8px;
-  padding-top: 6px;
-  color: var(--jade);
-}
-
-.essay-main p + p::first-letter,
-.essay-main h3 + p::first-letter {
-  font-size: inherit;
-  float: none;
-  line-height: inherit;
-  padding: 0;
-  color: inherit;
-}
-
-/* ── GALLERY ── */
-#gallery {
-  background: var(--sky);
-  padding: 80px 60px;
-}
-
-#gallery .section-label { background: var(--charcoal); color: white; }
-#gallery .section-title { color: var(--charcoal); }
-#gallery .gallery-intro {
-  font-size: 16px;
-  line-height: 1.8;
-  color: rgba(26,18,16,0.7);
-  max-width: 600px;
-  margin-bottom: 48px;
-}
-
-.gallery-hint {
-  font-family: 'Space Mono', monospace;
-  font-size: 9px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: rgba(26,18,16,0.4);
-  margin-bottom: 28px;
-}
-
-.gallery-mosaic {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-auto-rows: 220px;
-  gap: 8px;
-}
-
-.g-slot {
-  position: relative;
-  overflow: hidden;
-  cursor: pointer;
-  background: rgba(26,18,16,0.12);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 8px;
-  transition: background 0.2s;
-}
-
-.g-slot:nth-child(1) { grid-column: span 2; grid-row: span 2; background: rgba(26,18,16,0.18); }
-.g-slot:hover { background: rgba(26,18,16,0.22); }
-
-.g-slot.loaded { background: none; }
-.g-slot.loaded img { width: 100%; height: 100%; object-fit: cover; }
-
-.g-caption {
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  background: rgba(26,18,16,0.8);
-  padding: 10px 14px 10px;
-  font-family: 'Space Mono', monospace;
-  font-size: 8px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: white;
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-
-.g-slot:hover .g-caption { opacity: 1; }
-
-.g-plus {
-  font-size: 28px;
-  color: rgba(26,18,16,0.35);
-  font-weight: 100;
-}
-
-.g-label {
-  font-family: 'Space Mono', monospace;
-  font-size: 8px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: rgba(26,18,16,0.35);
-  text-align: center;
-  padding: 0 20px;
-}
-
-/* ── ABOUT ── */
-#about {
-  background: var(--charcoal);
-  padding: 0;
-}
-
-.about-top {
-  background: var(--plum);
-  padding: 80px 60px 60px;
-}
-
-.about-top .section-label { background: white; color: var(--plum); }
-.about-top .section-title { color: white; }
-
-.about-body {
-  display: grid;
-  grid-template-columns: 1.5fr 1fr;
-  gap: 0;
-}
-
-.about-text {
-  padding: 60px;
-  background: var(--charcoal);
-  border-right: 1px solid rgba(255,255,255,0.07);
-}
-
-.about-text .lead {
-  font-family: 'Fraunces', serif;
-  font-style: italic;
-  font-size: 19px;
-  color: rgba(255,248,239,0.88);
-  margin-bottom: 24px;
-  line-height: 1.65;
-}
-
-.about-text p {
-  font-size: 14px;
-  line-height: 1.95;
-  color: rgba(255,248,239,0.58);
-  margin-bottom: 16px;
-}
-
-.sources-col {
+.sources-footer {
   padding: 60px 48px;
   background: var(--charcoal);
 }
@@ -1071,13 +834,6 @@ footer {
   .tl-item { grid-template-columns: 80px 1fr; gap: 20px; }
   .artist-grid { grid-template-columns: 1fr 1fr; }
   .sources-layout { grid-template-columns: 1fr; }
-  .essay-columns { grid-template-columns: 1fr; }
-  .essay-sidebar { position: static; min-height: auto; }
-  .about-body { grid-template-columns: 1fr; }
-  .gallery-mosaic { grid-template-columns: 1fr 1fr; }
-  .g-slot:nth-child(1) { grid-column: span 2; grid-row: span 1; }
-  #gallery, #sources .sources-masthead, .about-top { padding: 60px 32px; }
-  .analysis-panel.open { grid-template-columns: 1fr; }
   footer { flex-direction: column; gap: 16px; text-align: center; }
   .footer-meta { text-align: center; }
 }
@@ -1101,9 +857,6 @@ footer {
     <li><a href="#timeline">Timeline</a></li>
     <li><a href="#artists">Artists</a></li>
     <li><a href="#sources">Sources</a></li>
-    <li><a href="#essay">Essay</a></li>
-    <li><a href="#gallery">Gallery</a></li>
-    <li><a href="#about">About</a></li>
   </ul>
 </nav>
 
@@ -1113,7 +866,7 @@ footer {
     <div>
       <p class="hero-eyebrow">University of Michigan · Hill Auditorium · 1980–2000</p>
       <h1 class="hero-title">STAGES<span>OF<br>CHANGE</span></h1>
-      <p class="hero-tagline">When the Michigan Mandate declared that diversity and excellence were one and the same, Hill Auditorium became the proof.</p>
+      <p class="hero-tagline">How live performance transformed what multiculturalism meant on a college campus.</p>
       <div class="hero-cta-row">
         <a href="#context" class="btn-primary">Enter the Gallery</a>
         <a href="#artists" class="btn-outline">Meet the Artists</a>
@@ -1125,18 +878,18 @@ footer {
     <div class="hero-img-top"></div>
     <div class="hero-stat-band">
       <div class="hero-stat">
-        <div class="hero-stat-num">2×</div>
-        <div class="hero-stat-label">Minority enrollment increase</div>
-      </div>
-      <div style="width:1px;height:60px;background:rgba(26,18,16,0.2)"></div>
-      <div class="hero-stat">
-        <div class="hero-stat-num">25%</div>
-        <div class="hero-stat-label">Minority enrollment by 1990s</div>
-      </div>
-      <div style="width:1px;height:60px;background:rgba(26,18,16,0.2)"></div>
-      <div class="hero-stat">
         <div class="hero-stat-num">6</div>
-        <div class="hero-stat-label">Artists profiled in this gallery</div>
+        <div class="hero-stat-label">Artists Profiled</div>
+      </div>
+      <div style="width:1px;height:60px;background:rgba(26,18,16,0.2)"></div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">20</div>
+        <div class="hero-stat-label">Years of Performances</div>
+      </div>
+      <div style="width:1px;height:60px;background:rgba(26,18,16,0.2)"></div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">1</div>
+        <div class="hero-stat-label">Auditorium · Many Voices</div>
       </div>
     </div>
   </div>
@@ -1146,57 +899,55 @@ footer {
 <section id="context">
   <div class="context-masthead">
     <div>
-      <p class="section-label reveal">Historical Context</p>
-      <h2 class="section-title reveal">The Michigan<br>Mandate</h2>
+      <p class="section-label reveal">The Central Question</p>
+      <h2 class="section-title reveal">How Performance<br>Shaped Culture</h2>
     </div>
-    <p class="intro-text reveal">Three intersecting forces shaped every performance in this gallery: a university administration committed to structural diversity, a legal landscape charged with political urgency, and a hundred-year-old auditorium whose walls absorbed the weight of every promise made in its name.</p>
+    <p class="intro-text reveal">Between 1980 and 2000, Hill Auditorium became a stage where the University of Michigan tested its commitment to multiculturalism in real time. When Ravi Shankar played the sitar, when Run-D.M.C. performed hip-hop, when Cecil Taylor unleashed free jazz—each performance forced the campus to confront what diversity actually meant.</p>
   </div>
 
   <div class="context-cards">
     <div class="ctx-card reveal">
       <div class="ctx-card-color-bar"></div>
-      <p class="ctx-card-label">Duderstadt · 50-Year History</p>
-      <h3 class="ctx-card-title">Diversity as Institutional Strategy</h3>
-      <p>After declining minority enrollment through the 1960s and 70s, the University of Michigan launched "carefully focused strategic actions" to build what President Duderstadt called a true multicultural community.</p>
-      <div class="ctx-quote">"Diversity and excellence are complementary and compelling goals for the university."</div>
-      <p>By the mid-1990s, underrepresented minorities among staff and students had doubled, and minority graduation rates were the highest of any public university in the country.</p>
+      <p class="ctx-card-label">Performance as Catalyst</p>
+      <h3 class="ctx-card-title">Art Beyond Policy</h3>
+      <p>This project focuses not on institutional mandates or enrollment statistics, but on the lived experience of artists and audiences encountering each other across difference. Live performance became the most direct test of whether diversity could be more than policy—whether it could be lived, felt, and transformed into genuine cultural change.</p>
+      <div class="ctx-quote">"Each performance was a moment where the campus had to decide: Does this music belong here? Do these voices matter?"</div>
     </div>
     <div class="ctx-card reveal">
       <div class="ctx-card-color-bar"></div>
-      <p class="ctx-card-label">Tobin · Michigan's Affirmative Action Debate</p>
-      <h3 class="ctx-card-title">A Mandate Forged Under Pressure</h3>
-      <p>James Tobin traces how Michigan's diversity initiatives were contested at every level — from the Black Action Movement protests to landmark Supreme Court cases challenging the university's admissions policies.</p>
-      <div class="ctx-quote">"A racially diverse student body makes for a healthier and more legitimate democracy."</div>
-      <p>By the mid-1990s, minority enrollment had risen to 25% — a hard-won figure inseparable from the legal and political battles that preceded it.</p>
+      <p class="ctx-card-label">The Michigan Daily as Witness</p>
+      <h3 class="ctx-card-title">Critical Language Reveals Truth</h3>
+      <p>The student newspaper's reviews of multicultural performances were not neutral documents. They functioned as contributions to an ongoing campus argument about whether diversity enhanced or compromised excellence. The language critics used—their hesitations, their defenses, their celebrations—reveals how the campus actually received these artists.</p>
+      <div class="ctx-quote">"The apology runs longer than the celebration." — Brian Berger, reviewing Run-D.M.C., 1987</div>
     </div>
     <div class="ctx-card reveal">
       <div class="ctx-card-color-bar"></div>
-      <p class="ctx-card-label">AADL · Hill Auditorium's Hundredth Birthday</p>
-      <h3 class="ctx-card-title">A Venue with a Double Life</h3>
-      <p>From Igor Stravinsky to Bob Dylan to the Grateful Dead, Hill had long served as Ann Arbor's window onto the wider world. When Ravi Shankar, Run-D.M.C., and Sweet Honey in the Rock took that same stage, they entered a space layered with meaning.</p>
-      <div class="ctx-quote">Hill was a "double-sided coin": theatre and music on one face, religious services and political debates on the other.</div>
+      <p class="ctx-card-label">A Hierarchy of Reception</p>
+      <h3 class="ctx-card-title">Not All Diversity Was Equal</h3>
+      <p>The six artists in this gallery experienced dramatically different receptions. Yo-Yo Ma was celebrated without defensive framing. Run-D.M.C. required justification. Cecil Taylor needed explanation. Sweet Honey was praised but still exoticized. These differences reveal the hidden hierarchies within multiculturalism itself.</p>
+      <div class="ctx-quote">Some artists belonged. Others had to prove they belonged. The difference mattered.</div>
     </div>
     <div class="ctx-card reveal">
       <div class="ctx-card-color-bar"></div>
-      <p class="ctx-card-label">The Michigan Daily</p>
-      <h3 class="ctx-card-title">Student Critics as Institutional Witnesses</h3>
-      <p>The student newspaper's reviews of multicultural performances at Hill were not merely entertainment journalism. They functioned, consciously or not, as contributions to the campus-wide argument about whether diversity enhanced or compromised academic excellence.</p>
-      <div class="ctx-quote">Each review was "a puzzle piece of a larger context" — micro-level evidence in a macro-level debate.</div>
+      <p class="ctx-card-label">What We Learn</p>
+      <h3 class="ctx-card-title">The Machinery of Change</h3>
+      <p>These performances show multiculturalism in action—not as a finished achievement, but as an ongoing struggle. The enthusiasm was real. The anxiety was real. Both coexist in these reviews because both existed in the campus that produced them. Understanding this struggle helps us understand our own.</p>
+      <div class="ctx-quote">Progress isn't a sudden transformation. It's a gradual shifting of what requires justification.</div>
     </div>
   </div>
 
   <div class="stats-row">
     <div class="stat-block">
-      <div class="stat-n">2×</div>
-      <div class="stat-l">Increase in underrepresented minorities by mid-1990s</div>
+      <div class="stat-n">6</div>
+      <div class="stat-l">Artists Profiled in This Gallery</div>
     </div>
     <div class="stat-block">
-      <div class="stat-n">25%</div>
-      <div class="stat-l">Minority enrollment by the mid-1990s</div>
+      <div class="stat-n">20</div>
+      <div class="stat-l">Years of Transformative Performances</div>
     </div>
     <div class="stat-block">
-      <div class="stat-n">100+</div>
-      <div class="stat-l">Years of Hill Auditorium's democratic legacy</div>
+      <div class="stat-n">1</div>
+      <div class="stat-l">Auditorium · Many Voices · Infinite Possibilities</div>
     </div>
   </div>
 </section>
@@ -1205,7 +956,7 @@ footer {
 <section id="timeline">
   <p class="section-label reveal">Chronology</p>
   <h2 class="section-title reveal">Performances<br>That Made History</h2>
-  <p class="timeline-intro reveal">A selective timeline of culturally significant performances at Hill Auditorium and the University Musical Society ecosystem, 1980–2000 — read alongside the Michigan Mandate that gave them institutional weight.</p>
+  <p class="timeline-intro reveal">A selective timeline of culturally significant performances at Hill Auditorium, 1980–2000. Each performance was a moment where the campus confronted what multiculturalism actually meant.</p>
 
   <div class="timeline-entries">
 
@@ -1216,7 +967,7 @@ footer {
         <p class="tl-body">The Michigan Daily called Shankar a "virtuoso" and an "emperor," terms that simultaneously elevated and exoticized him. The review framed Indian classical music through Western vocabulary while using "ragas" and "talas" as untranslated signifiers of otherness. His collaborations with Yehudi Menuhin and Philip Glass were cited as validation, implying Indian music required Western endorsement to be taken seriously on an American campus.</p>
         <div class="tl-tags">
           <span class="tl-tag tag-indian">Indian Classical</span>
-          <span class="tl-tag tag-classical">UMS</span>
+          <span class="tl-tag tag-indian">Exoticization</span>
         </div>
       </div>
     </div>
@@ -1228,7 +979,7 @@ footer {
         <p class="tl-body">Entertainment editor Brian Berger's preview declared rap "super-stars" Run-D.M.C. were "finally coming to Ann Arbor." The headline was enthusiastic, but the article's pivot to the 2 Live Crew obscenity trial and assurances about "positive" messages betrayed institutional nervousness. Hip-hop had arrived at the hallowed hall that hosted Stravinsky and Dylan — and the review worked hard to justify why it belonged there.</p>
         <div class="tl-tags">
           <span class="tl-tag tag-hiphop">Hip-Hop</span>
-          <span class="tl-tag tag-hiphop">Popular Innovation</span>
+          <span class="tl-tag tag-hiphop">Institutional Anxiety</span>
         </div>
       </div>
     </div>
@@ -1237,10 +988,10 @@ footer {
       <div class="tl-year">1988</div>
       <div>
         <h3 class="tl-content-title">Cecil Taylor — <em>Free Jazz at the Hill</em></h3>
-        <p class="tl-body">The anonymous Daily critic praised Taylor's "exploding" improvisational style, his "nimble-fingered" virtuosity — then immediately pivoted to lengthy pedagogical explanation. The review described his piano technique "like a mime artist" evoking "abstract expressionism of the human body." The dichotomy of rapturous praise followed by exhaustive justification mirrors the Run-D.M.C. preview exactly: innovation must be defended.</p>
+        <p class="tl-body">The anonymous Daily critic praised Taylor's "exploding" improvisational style and "nimble-fingered" virtuosity — then immediately turned to explaining his "radical chaos" to the uninitiated. Describing Taylor's piano technique "like a mime artist" evoking "abstract expressionism" transformed a musical performance into something closer to a visual art lecture — the critic becoming a docent for bewildered concertgoers.</p>
         <div class="tl-tags">
           <span class="tl-tag tag-jazz">Free Jazz</span>
-          <span class="tl-tag tag-jazz">Experimental Challenge</span>
+          <span class="tl-tag tag-jazz">Pedagogical Labor</span>
         </div>
       </div>
     </div>
@@ -1249,7 +1000,7 @@ footer {
       <div class="tl-year">1988</div>
       <div>
         <h3 class="tl-content-title">Gil Scott-Heron — <em>Lydia Mendelssohn Theatre</em></h3>
-        <p class="tl-body">Berger positioned Scott-Heron as the "significant influence on rap music" whose "street-level reality" in "The Revolution Will Not Be Televised" prophetically anticipated hip-hop — while remaining "largely unknown" to the mainstream. His cerebral style was praised precisely because it required the intellectual engagement the Michigan Mandate promised multiculturalism would cultivate.</p>
+        <p class="tl-body">Berger positioned Scott-Heron as the "significant influence on rap music" whose "street-level reality" in "The Revolution Will Not Be Televised" prophetically anticipated hip-hop — while remaining "largely unknown" to the mainstream. His cerebral style was praised precisely because it required the intellectual engagement the campus promised multiculturalism would cultivate.</p>
         <div class="tl-tags">
           <span class="tl-tag tag-spoken">Spoken Word</span>
           <span class="tl-tag tag-spoken">Political Prophecy</span>
@@ -1276,7 +1027,7 @@ footer {
         <p class="tl-body">Yo-Yo Ma's performances occupied a different position in the multicultural landscape — a Chinese-American artist performing within the Western classical tradition, celebrated without the defensive framing surrounding explicitly Black or non-Western popular genres. His presence embodies a particular kind of "acceptable" multiculturalism: global origin, Western form.</p>
         <div class="tl-tags">
           <span class="tl-tag tag-classical">Western Classical</span>
-          <span class="tl-tag tag-classical">UMS</span>
+          <span class="tl-tag tag-classical">Acceptable Diversity</span>
         </div>
       </div>
     </div>
@@ -1289,7 +1040,7 @@ footer {
   <div class="artists-header">
     <p class="section-label reveal">Artist Profiles</p>
     <h2 class="section-title reveal">The Performers</h2>
-    <p class="section-intro reveal">Six artists. Six encounters with a campus still learning what multiculturalism meant in practice. Click any profile to read the critical analysis.</p>
+    <p class="section-intro reveal">Six artists. Six encounters with a campus still learning what multiculturalism meant in practice. Click any profile to read the critical analysis from the Michigan Daily archives and explore the impact of their performances.</p>
   </div>
 
   <div id="artist-analysis-panel" class="analysis-panel">
@@ -1304,20 +1055,20 @@ footer {
   <div class="artist-grid">
 
     <!-- Ravi Shankar -->
-    <div class="artist-card" onclick="openPanel('Ravi Shankar','Sitarist · Hindustani Classical · India',`<p>The Michigan Daily's review language establishes Shankar as an extraordinary but fundamentally foreign figure. Calling him a "virtuoso" and an "emperor" simultaneously elevates and exoticizes him, turning one artist into a representative figure for an entire nation.</p><blockquote>"Amazing master" and "heart-throb Shankar" position his charisma as equally important as his musical talent — the exotic performer delivering a personalized cultural experience to the majority audience.</blockquote><p>The sitar is named repeatedly while the tabla, tamboura, and autoharp receive no explanation — reinforcing their foreignness. Western vocabulary (melodic, concertos, ballet) serves as the default language, with "ragas" and "talas" sprinkled in as untranslated exotica. His Western collaborations — Menuhin, Glass — are cited as validation, implying Indian music requires a Western frame to be legible to this audience.</p><p>Ticket prices of $18.50 and $12.00 situate this encounter within a commercialized campus economy: multiculturalism as leisure purchase rather than organic campus life.</p>`)">
+    <div class="artist-card" onclick="openPanel('Ravi Shankar','Sitarist · Hindustani Classical · India',`<p><strong>The Performance:</strong> Ravi Shankar brought Indian classical music to Hill Auditorium in the early 1980s, introducing U-M audiences to the sitar and challenging Western assumptions about what constituted "serious" music.</p><p><strong>Impact on Campus:</strong> Shankar's performances forced the campus to confront its own cultural assumptions. The Michigan Daily's language—calling him a "virtuoso" and "emperor"—simultaneously elevated and exoticized him, revealing how the university received non-Western classical traditions.</p><blockquote>&quot;Amazing master&quot; and &quot;heart-throb Shankar&quot; — the exotic performer delivering a personalized cultural experience to the majority audience.</blockquote><p><strong>What This Reveals:</strong> The sitar is named repeatedly while the tabla, tamboura, and autoharp receive no explanation — reinforcing their foreignness. Western vocabulary (melodic, concertos, ballet) serves as the default language, with "ragas" and "talas" sprinkled in as untranslated exotica. His Western collaborations — Menuhin, Glass — are cited as validation, implying Indian music requires a Western frame to be legible to this audience.</p>`)">
       <div class="artist-photo" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Ravi_Shankar_1974.jpg/800px-Ravi_Shankar_1974.jpg');background-position:center 20%;"></div>
       <div class="artist-overlay"></div>
       <div class="artist-info">
         <div class="artist-num">01 / 06</div>
         <div class="artist-name">Ravi Shankar</div>
         <div class="artist-genre">Sitar · Indian Classical</div>
-        <div class="artist-teaser">Called a "virtuoso" and an "emperor" — celebrated and exoticized in the same breath. The Daily's framing of Shankar reveals how Indian classical music was received at Hill Auditorium.</div>
+        <div class="artist-teaser">Called a "virtuoso" and an "emperor" — celebrated and exoticized in the same breath. The Daily's framing reveals how Indian classical music was received at Hill Auditorium.</div>
         <button class="artist-toggle-btn">Read Analysis</button>
       </div>
     </div>
 
     <!-- Run-D.M.C. -->
-    <div class="artist-card" onclick="openPanel('Run-D.M.C.','Hip-Hop · Queens, New York · 1987 Tour',`<p>Brian Berger's preview is caught between institutional celebration and institutional anxiety. The headline's exuberant pun — "Walk, Don't Run" — gives way to a review that spends as much time defending hip-hop against obscenity charges as it does praising the music.</p><blockquote>The article's "apologetic tone" mirrors Duderstadt's own framing: diversity requires "sacrifices," and Run-D.M.C. are proof that Black popular culture can achieve U-M's promise without compromising academic standards.</blockquote><p>Their "intelligent rhymes" and "innovative beats" are praised for bringing rap "from underground street art to mainstream pop sensation" — a trajectory that frames legitimacy as a journey toward Western mainstream acceptance. The very need to assure readers the lyrics glorify "hard work" reveals the unstated bar Black artists had to clear that Western classical performers did not.</p>`)">
+    <div class="artist-card" onclick="openPanel('Run-D.M.C.','Hip-Hop · Queens, New York · 1987 Tour',`<p><strong>The Performance:</strong> Run-D.M.C.'s "Tougher Than Leather" tour brought hip-hop to Hill Auditorium for the first time in November 1987. This performance marked a watershed moment: the arrival of Black popular music at an institution historically associated with Western classical traditions.</p><p><strong>Impact on Campus:</strong> Run-D.M.C.'s performance forced the university to confront the legitimacy of hip-hop as an art form. The Michigan Daily's preview spent as much time defending rap against obscenity charges as it did celebrating the music, revealing institutional anxiety about Black popular culture.</p><blockquote>Brian Berger's preview is caught between institutional celebration and institutional anxiety. The headline's exuberant pun — &quot;Walk, Don't Run&quot; — gives way to a review that spends as much time defending hip-hop against obscenity charges as it does praising the music.</blockquote><p><strong>What This Reveals:</strong> Their "intelligent rhymes" and "innovative beats" are praised for bringing rap "from underground street art to mainstream pop sensation" — a trajectory that frames legitimacy as a journey toward Western mainstream acceptance. The very need to assure readers the lyrics glorify "hard work" reveals the unstated bar Black artists had to clear that Western classical performers did not.</p>`)">
       <div class="artist-photo" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Run_DMC_2010.jpg/800px-Run_DMC_2010.jpg');background-position:center top;"></div>
       <div class="artist-overlay"></div>
       <div class="artist-info">
@@ -1330,7 +1081,7 @@ footer {
     </div>
 
     <!-- Cecil Taylor -->
-    <div class="artist-card" onclick="openPanel('Cecil Taylor','Avant-Garde Jazz · Pianist · New York City · 1988',`<p>The anonymous Daily critic is caught in a loop: praise the genius, then explain the chaos. Taylor's "exploding" style, his "nimble-fingered" virtuosity, his "gutbucket" approach — each term of celebration is followed by pedagogical scaffolding for the "uninitiated fan."</p><blockquote>Describing Taylor's piano technique "like a mime artist" evoking "abstract expressionism" transforms a musical performance into something closer to a visual art lecture — the critic becoming a docent for bewildered concertgoers.</blockquote><p>The dissonance of Taylor's work performed in a hall designed for orchestral clarity is reframed, brilliantly, as evidence of the Hill's experimental tradition. But this reframing also reveals the labor required: the Hill's acoustic identity must be reconstructed to accommodate what Taylor is doing, just as the Daily's critical identity must be reconstructed to accommodate the avant-garde.</p>`)">
+    <div class="artist-card" onclick="openPanel('Cecil Taylor','Avant-Garde Jazz · Pianist · New York City · 1988',`<p><strong>The Performance:</strong> Cecil Taylor's avant-garde free jazz performance at Hill Auditorium in 1988 challenged audiences to expand their understanding of what music could be. His "exploding" improvisational style demanded active listening and intellectual engagement.</p><p><strong>Impact on Campus:</strong> Taylor's performance revealed the labor required to accommodate experimental Black music within institutional spaces. The Michigan Daily critic praised Taylor's genius while simultaneously explaining his "radical chaos" to uninitiated audiences, transforming the review into a pedagogical exercise.</p><blockquote>Describing Taylor's piano technique &quot;like a mime artist&quot; evoking &quot;abstract expressionism&quot; transforms a musical performance into something closer to a visual art lecture — the critic becoming a docent for bewildered concertgoers.</blockquote><p><strong>What This Reveals:</strong> The dissonance of Taylor's work performed in a hall designed for orchestral clarity is reframed, brilliantly, as evidence of the Hill's experimental tradition. But this reframing also reveals the labor required: the Hill's acoustic identity must be reconstructed to accommodate what Taylor is doing, just as the Daily's critical identity must be reconstructed to accommodate the avant-garde.</p>`)">
       <div class="artist-photo" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/CecilTaylorMontreal1984.jpg/800px-CecilTaylorMontreal1984.jpg');background-position:center top;"></div>
       <div class="artist-overlay"></div>
       <div class="artist-info">
@@ -1343,7 +1094,7 @@ footer {
     </div>
 
     <!-- Gil Scott-Heron -->
-    <div class="artist-card" onclick="openPanel('Gil Scott-Heron','Spoken Word · Poet-Musician · 1988',`<p>Berger positions Scott-Heron as the intellectual ancestor of rap — his obscurity recast as evidence of his depth. By being "largely unknown," Scott-Heron paradoxically becomes more legitimate: he chose substance over commercial flash.</p><blockquote>"His very obscurity constitutes irrefutable proof of dedication to depth rather than flash" — a strategy that flatters U-M's self-conception as an academic powerhouse capable of appreciating what mass audiences miss.</blockquote><p>Scott-Heron's cerebral style is praised precisely because it requires the kind of intellectual engagement the Michigan Mandate promised multiculturalism would cultivate. Yet Berger's admission that Scott-Heron remains unknown even on an "activist campus like Michigan" is the review's most honest moment — revealing the lingering gaps between the university's diversity aspirations and its students' actual awareness of established Black intellectual traditions.</p>`)">
+    <div class="artist-card" onclick="openPanel('Gil Scott-Heron','Spoken Word · Poet-Musician · 1988',`<p><strong>The Performance:</strong> Gil Scott-Heron's sold-out performance at U-M in October 1988 brought political poetry and street-level reality to the campus. His iconic work "The Revolution Will Not Be Televised" became a rallying cry for activists and intellectuals alike.</p><p><strong>Impact on Campus:</strong> Scott-Heron's performance demonstrated the power of Black intellectual traditions to move and inspire. The Michigan Daily positioned him as a "significant influence on rap music," yet acknowledged that he remained "largely unknown" even on an "activist campus" like Michigan.</p><blockquote>Berger positions Scott-Heron as the intellectual ancestor of rap — his obscurity recast as evidence of his depth. By being &quot;largely unknown,&quot; Scott-Heron paradoxically becomes more legitimate: he chose substance over commercial flash.</blockquote><p><strong>What This Reveals:</strong> Scott-Heron's cerebral style is praised precisely because it requires the kind of intellectual engagement the campus promised multiculturalism would cultivate. Yet Berger's admission that Scott-Heron remains unknown even on an activist campus is the review's most honest moment — revealing the lingering gaps between the university's diversity aspirations and its students' actual awareness of established Black intellectual traditions.</p>`)">
       <div class="artist-photo" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/GilScottHeron.jpg/800px-GilScottHeron.jpg');background-position:center top;"></div>
       <div class="artist-overlay"></div>
       <div class="artist-info">
@@ -1356,20 +1107,20 @@ footer {
     </div>
 
     <!-- Sweet Honey -->
-    <div class="artist-card" onclick="openPanel('Sweet Honey in the Rock','A Cappella · Gospel · African Diaspora · Washington D.C.',`<p>Of all the artists in this gallery, Sweet Honey received the least defensive framing — and the most unambiguous celebration. Their "stunning harmonies" and "vocal acrobatics" were praised without the apologetic scaffolding that surrounded Run-D.M.C. or the pedagogical lectures that followed Taylor.</p><blockquote>The collective spirit of Sweet Honey's music, their "joyfully presented" empowerment anthems filling the Hill's vast interior — the Daily critic described this as "adorning accessibility," a politics made beautiful.</blockquote><p>But even here, a subtle exoticization persists. The blending of "West African songs," "gospel traditions," and "freedom songs" is presented as a remarkable fusion — as though these traditions were not simply the natural inheritance of Black American women, but a curated exhibition of global culture for a primarily white student audience.</p>`)">
+    <div class="artist-card" onclick="openPanel('Sweet Honey in the Rock','A Cappella · Gospel · African Diaspora · Washington D.C.',`<p><strong>The Performance:</strong> Sweet Honey in the Rock brought collective vocal power and joy to Hill Auditorium in the late 1980s. Their a cappella performances blended West African songs, gospel traditions, and civil rights freedom songs into a celebration of Black women's voices.</p><p><strong>Impact on Campus:</strong> Sweet Honey's performances received the least defensive framing of all the multicultural artists—yet even here, a subtle exoticization persisted. The Michigan Daily praised their "stunning harmonies" and "vocal acrobatics," but presented their cultural fusion as a curated exhibition rather than a natural inheritance.</p><blockquote>Of all the artists in this gallery, Sweet Honey received the least defensive framing and the most unambiguous celebration. Their &quot;stunning harmonies&quot; and &quot;vocal acrobatics&quot; were praised without the apologetic scaffolding that surrounded Run-D.M.C. or the pedagogical lectures that followed Taylor.</blockquote><p><strong>What This Reveals:</strong> The blending of "West African songs," "gospel traditions," and "freedom songs" is presented as a remarkable fusion — as though these traditions were not simply the natural inheritance of Black American women, but a curated exhibition of global culture for a primarily white student audience. The machinery of justification at its most invisible.</p>`)">
       <div class="artist-photo" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Sweet_Honey_in_the_Rock_2005.jpg/800px-Sweet_Honey_in_the_Rock_2005.jpg');background-position:center top;"></div>
       <div class="artist-overlay"></div>
       <div class="artist-info">
         <div class="artist-num">05 / 06</div>
         <div class="artist-name">Sweet Honey in the Rock</div>
-        <div class="artist-genre">A Cappella · Civil Rights · Gospel</div>
+        <div class="artist-genre">A Cappella · African Diaspora</div>
         <div class="artist-teaser">The most celebrated, the least defended — and yet still, softly, exoticized. The machinery of justification at its most invisible.</div>
         <button class="artist-toggle-btn">Read Analysis</button>
       </div>
     </div>
 
     <!-- Yo-Yo Ma -->
-    <div class="artist-card" onclick="openPanel('Yo-Yo Ma','Western Classical · Cellist · UMS Appearances 1980s–90s',`<p>Yo-Yo Ma's presence in this gallery complicates its central argument in productive ways. A Chinese-American artist performing Bach and Beethoven in the Western classical tradition, Ma was celebrated without the defensive framing that surrounded explicitly Black or non-Western popular artists.</p><blockquote>Where Run-D.M.C. had to be defended against obscenity charges, and Cecil Taylor had to be explained to bewildered audiences, Yo-Yo Ma was simply celebrated — his Chinese heritage rendered invisible or incidental by his mastery of Western form.</blockquote><p>His presence raises the question the exhibit cannot fully answer: was the Michigan Mandate's multiculturalism broad enough to accommodate genuinely different aesthetics, or did it ultimately reward artists who translated their diversity into Western-legible excellence? Ma's ease of reception, compared to the nervous justifications surrounding Black popular and experimental artists, suggests the latter.</p>`)">
+    <div class="artist-card" onclick="openPanel('Yo-Yo Ma','Western Classical · Cellist · UMS Appearances 1980s–90s',`<p><strong>The Performance:</strong> Yo-Yo Ma's frequent appearances at Hill Auditorium through the University Musical Society represented a different kind of multiculturalism. As a Chinese-American artist performing Bach and Beethoven in the Western classical tradition, Ma was celebrated without the defensive framing surrounding explicitly Black or non-Western popular artists.</p><p><strong>Impact on Campus:</strong> Yo-Yo Ma's presence in this gallery complicates its central argument in productive ways. His ease of reception—compared to the nervous justifications surrounding Black popular and experimental artists—reveals the hierarchy of diversity that the university's multiculturalism could not fully dismantle.</p><blockquote>Where Run-D.M.C. had to be defended against obscenity charges, and Cecil Taylor had to be explained to bewildered audiences, Yo-Yo Ma was simply celebrated — his Chinese heritage rendered invisible or incidental by his mastery of Western form.</blockquote><p><strong>What This Reveals:</strong> His presence raises the question the exhibit cannot fully answer: was the campus's multiculturalism broad enough to accommodate genuinely different aesthetics, or did it ultimately reward artists who translated their diversity into Western-legible excellence? Ma's ease of reception, compared to the nervous justifications surrounding Black popular and experimental artists, suggests the latter.</p>`)">
       <div class="artist-photo" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Yo-Yo_Ma_2009.jpg/800px-Yo-Yo_Ma_2009.jpg');background-position:center top;"></div>
       <div class="artist-overlay"></div>
       <div class="artist-info">
@@ -1415,241 +1166,56 @@ footer {
 
     <div class="analysis-box reveal">
       <h3>A Pattern of Praise and Defense</h3>
-      <p>Across four key Michigan Daily articles covering Run-D.M.C., Cecil Taylor, Gil Scott-Heron, and Sweet Honey in the Rock, a consistent rhetorical structure emerges: enthusiastic celebration followed by explanatory justification.</p>
+      <p>Across the Michigan Daily articles covering Run-D.M.C., Cecil Taylor, Gil Scott-Heron, and Sweet Honey in the Rock, a consistent rhetorical structure emerges: enthusiastic celebration followed by explanatory justification.</p>
       <div class="analysis-pullquote">"The unrelenting work of explanation — defending rap against obscenity charges, analyzing jazz abstraction, contextualizing poetry as the precursor to rap — finally reveals the aspirations rather than the accomplishments of campus multiculturalist discourse."</div>
-      <p>The pattern evolved between 1987 and the late 1980s. Run-D.M.C.'s preview was most anxious; Sweet Honey's coverage most assured. This trajectory mirrors Duderstadt's own account of rising institutional confidence in the wake of the Mandate's implementation.</p>
-      <p>But the very need for justification — the scaffolding of explanation that surrounds every Black artist but not Yo-Yo Ma — reveals a hierarchy that diversity could not fully dismantle.</p>
+      <p>The pattern evolved between 1987 and the late 1980s. Run-D.M.C.'s preview was most anxious; Sweet Honey's coverage most assured. This trajectory mirrors the campus's own account of rising institutional confidence in the wake of increased diversity. But the very need for justification — the scaffolding of explanation that surrounds every Black artist but not Yo-Yo Ma — reveals a hierarchy that diversity could not fully dismantle.</p>
     </div>
 
     <div class="analysis-box reveal" style="background:var(--offwhite);">
       <h3>Hill Auditorium as Democratic Space</h3>
-      <p>The AADL's centennial history positions Hill as a space of democratic possibility — a place where the Verdi Requiem and the Grateful Dead, Igor Stravinsky and Bob Dylan, could share the same stage across different decades.</p>
-      <p>The multicultural programming of the 1980s and 1990s extended this tradition. But the reviews suggest that the democracy of the stage was more complete than the democracy of the reception. Artists could perform at Hill; whether their traditions were received on their own terms was another question entirely.</p>
-      <p>Tobin's argument about legal pressure and Duderstadt's account of strategic action both suggest that Michigan's diversity initiatives were forged in contest, not consensus. The Hill Auditorium performances are the micro-level evidence of that larger contest.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ESSAY -->
-<section id="essay">
-  <div class="essay-header">
-    <p class="section-label reveal">Historical Essay</p>
-    <h2 class="section-title reveal">Staging Multiculturalism</h2>
-  </div>
-
-  <div class="essay-columns">
-    <div class="essay-sidebar">
-      <div class="essay-sidebar-title">Four Themes</div>
-
-      <div class="sidebar-theme">
-        <div class="theme-num">I</div>
-        <div class="theme-name">Popular Innovation</div>
-        <div class="theme-desc">Run-D.M.C., 1987. The apologetic anxieties of hip-hop's debut in a hall that hosted Stravinsky.</div>
-      </div>
-
-      <div class="sidebar-theme">
-        <div class="theme-num">II</div>
-        <div class="theme-name">Experimental Challenge</div>
-        <div class="theme-desc">Cecil Taylor, 1988. The pedagogical labor of extending the excellence model to Black experimentation.</div>
-      </div>
-
-      <div class="sidebar-theme">
-        <div class="theme-num">III</div>
-        <div class="theme-name">Political Prophecy</div>
-        <div class="theme-desc">Gil Scott-Heron, 1988. The bridge between obscurity and legitimacy, between street-level reality and academic discourse.</div>
-      </div>
-
-      <div class="sidebar-theme">
-        <div class="theme-num">IV</div>
-        <div class="theme-name">Communal Harmony</div>
-        <div class="theme-desc">Sweet Honey in the Rock, late 1980s. The most assured and the most quietly exoticized of the four.</div>
-      </div>
-    </div>
-
-    <div class="essay-main">
-      <h3>The Evidence on Stage</h3>
-      <p>Between 1980 and 2000, the University of Michigan used Hill Auditorium as a stage for its most ambitious institutional promise. The Michigan Mandate declared that diversity and excellence were not competing values but one and the same — and every multicultural performance that filled that hall became, whether the performers knew it or not, evidence in an ongoing institutional argument.</p>
-
-      <p>The secondary sources that frame this gallery each tell part of this story. Duderstadt and Tobin speak in the language of enrollment numbers, graduation rates, and Supreme Court precedents. The AADL speaks in the language of cultural prestige and architectural memory. None of them speaks in the language of the stage. That is what the Michigan Daily reviews offer, and why they matter.</p>
-
-      <h3>The Language of Exoticization</h3>
-      <p>What unites the Daily's treatment of Ravi Shankar and the four Black artists is a consistent rhetorical move: the performance is celebrated, then contextualized in ways that position it as remarkable precisely because of its distance from the dominant culture. Shankar is an "emperor." Run-D.M.C. has "finally" arrived. Taylor produces "bewilderment." Scott-Heron's obscurity is his credential. Sweet Honey's harmonies are "stunning" in the way that the unfamiliar is stunning.</p>
-
-      <p>This language is not malicious. It is the authentic expression of a campus community encountering cultural traditions outside its inherited frame of reference — and doing so under institutional pressure to find those encounters enriching rather than threatening. The enthusiasm is real. The anxiety is real. Both coexist in these reviews because both existed in the campus that produced them.</p>
-
-      <h3>What Progress Looks Like</h3>
-      <p>The evolution from the Run-D.M.C. preview's institutional nervousness in 1987 to the Sweet Honey coverage's relative assurance in the late 1980s does represent something real. The apologetic scaffolding becomes lighter. The celebration becomes more confident. The critical vocabulary expands to accommodate new aesthetics. This is what progress looks like from the inside: not a sudden transformation, but a gradual shifting of what requires justification.</p>
-
-      <p>The fragments this gallery assembles do not add up to a complete picture of multiculturalism at Michigan. They add up to something more honest: a picture of a community in the middle of learning what it meant to say that diversity and excellence were one and the same.</p>
-    </div>
-  </div>
-</section>
-
-<!-- GALLERY -->
-<section id="gallery">
-  <p class="section-label reveal">Visual Archive</p>
-  <h2 class="section-title reveal">Photo & Document Gallery</h2>
-  <p class="gallery-intro reveal">Primary source documents, photographs, concert programs, and archival images. Upload your scans using the slots below.</p>
-  <p class="gallery-hint">// Hover any slot to upload — click to activate</p>
-
-  <div class="gallery-mosaic reveal">
-    <div class="g-slot" onclick="triggerGalleryUpload(this)">
-      <input type="file" accept="image/*" style="display:none" onchange="loadGalleryImage(this)">
-      <div class="g-plus">+</div>
-      <div class="g-label">Ravi Shankar Michigan Daily Review</div>
-      <div class="g-caption">Ravi Shankar · Michigan Daily Review</div>
-    </div>
-    <div class="g-slot" onclick="triggerGalleryUpload(this)">
-      <input type="file" accept="image/*" style="display:none" onchange="loadGalleryImage(this)">
-      <div class="g-plus">+</div>
-      <div class="g-label">Run-D.M.C. Preview / Ticket Stub</div>
-      <div class="g-caption">Run-D.M.C. · 1987 Preview</div>
-    </div>
-    <div class="g-slot" onclick="triggerGalleryUpload(this)">
-      <input type="file" accept="image/*" style="display:none" onchange="loadGalleryImage(this)">
-      <div class="g-plus">+</div>
-      <div class="g-label">Hill Auditorium · Exterior / Interior</div>
-      <div class="g-caption">Hill Auditorium · Archival Photo</div>
-    </div>
-    <div class="g-slot" onclick="triggerGalleryUpload(this)">
-      <input type="file" accept="image/*" style="display:none" onchange="loadGalleryImage(this)">
-      <div class="g-plus">+</div>
-      <div class="g-label">Cecil Taylor · Sweet Honey Program</div>
-      <div class="g-caption">Cecil Taylor · Sweet Honey · Program</div>
-    </div>
-    <div class="g-slot" onclick="triggerGalleryUpload(this)">
-      <input type="file" accept="image/*" style="display:none" onchange="loadGalleryImage(this)">
-      <div class="g-plus">+</div>
-      <div class="g-label">UMS Concert Program · 1980s</div>
-      <div class="g-caption">UMS Concert Program · 1980s</div>
-    </div>
-    <div class="g-slot" onclick="triggerGalleryUpload(this)">
-      <input type="file" accept="image/*" style="display:none" onchange="loadGalleryImage(this)">
-      <div class="g-plus">+</div>
-      <div class="g-label">Michigan Daily · Campus Life 1987–90</div>
-      <div class="g-caption">Michigan Daily · 1987–1990</div>
-    </div>
-    <div class="g-slot" onclick="triggerGalleryUpload(this)">
-      <input type="file" accept="image/*" style="display:none" onchange="loadGalleryImage(this)">
-      <div class="g-plus">+</div>
-      <div class="g-label">Gil Scott-Heron · Lydia Mendelssohn</div>
-      <div class="g-caption">Gil Scott-Heron · Lydia Mendelssohn</div>
-    </div>
-    <div class="g-slot" onclick="triggerGalleryUpload(this)">
-      <input type="file" accept="image/*" style="display:none" onchange="loadGalleryImage(this)">
-      <div class="g-plus">+</div>
-      <div class="g-label">Yo-Yo Ma · UMS Performance</div>
-      <div class="g-caption">Yo-Yo Ma · UMS</div>
-    </div>
-    <div class="g-slot" onclick="triggerGalleryUpload(this)">
-      <input type="file" accept="image/*" style="display:none" onchange="loadGalleryImage(this)">
-      <div class="g-plus">+</div>
-      <div class="g-label">Bentley Library Archival Document</div>
-      <div class="g-caption">Bentley Library · Archival Document</div>
-    </div>
-  </div>
-</section>
-
-<!-- ABOUT -->
-<section id="about">
-  <div class="about-top">
-    <p class="section-label reveal">About This Project</p>
-    <h2 class="section-title reveal">The Research</h2>
-  </div>
-
-  <div class="about-body">
-    <div class="about-text reveal">
-      <p class="lead">This digital gallery was produced for AMCULT 103 at the University of Michigan under Professor Lyon. It is a close reading of campus media, institutional history, and cultural performance at one of American higher education's most storied venues.</p>
-      <p>The research emerges from a core tension: the Michigan Mandate's aspirational language about multiculturalism versus the micro-level evidence of how diverse artists were actually received on campus. The Michigan Daily reviews are the primary evidentiary base — not because they represent the full range of campus response, but because they are the contemporaneous public record of how student writers narrated the arrival of new cultural traditions in a space previously defined by Western classical music.</p>
-      <p>The secondary sources — Duderstadt, Tobin, and the AADL centennial history — provide the institutional, legal, and architectural frames within which these performances took place. Together, they allow a reading of Hill Auditorium as a space where the abstract commitments of a diversity mandate were tested in the specific, embodied encounter between a performer and an audience.</p>
-      <p>The gallery's central argument is not that the Michigan Mandate failed — by its own quantitative measures, it succeeded remarkably. The argument is that the success was more complex, more contested, and more interesting than the official narrative allows.</p>
-    </div>
-
-    <div class="sources-col reveal">
-      <h4>Source Materials</h4>
-      <div class="src-item">
-        <div class="src-type">Secondary Source</div>
-        <div class="src-title">Duderstadt, James J. <em>A 50-Year History of Social Diversity at the University of Michigan.</em> 1988–1999.</div>
-      </div>
-      <div class="src-item">
-        <div class="src-type">Secondary Source</div>
-        <div class="src-title">Tobin, James. "Michigan's Affirmative Action Debate." University of Michigan historical records.</div>
-      </div>
-      <div class="src-item">
-        <div class="src-type">Secondary Source</div>
-        <div class="src-title">Ann Arbor District Library. "Hill Auditorium's Hundredth Birthday." AADL Digital Collections.</div>
-      </div>
-      <div class="src-item">
-        <div class="src-type">Primary Source</div>
-        <div class="src-title">Berger, Brian. "Walk, Don't Run, To DMC's Tougher Than Leather Rap Show." <em>The Michigan Daily,</em> November 1987.</div>
-      </div>
-      <div class="src-item">
-        <div class="src-type">Primary Source</div>
-        <div class="src-title">Anonymous. Cecil Taylor review. <em>The Michigan Daily,</em> 1988.</div>
-      </div>
-      <div class="src-item">
-        <div class="src-type">Primary Source</div>
-        <div class="src-title">Berger, Brian. Gil Scott-Heron preview/review. <em>The Michigan Daily,</em> 1988.</div>
-      </div>
-      <div class="src-item">
-        <div class="src-type">Primary Source</div>
-        <div class="src-title">Anonymous. Sweet Honey in the Rock preview. <em>The Michigan Daily,</em> late 1980s.</div>
-      </div>
-      <div class="src-item">
-        <div class="src-type">Archive</div>
-        <div class="src-title">Bentley Historical Library, University of Michigan. UMS concert programs and photographs, 1980–2000.</div>
-      </div>
+      <p>The AADL's centennial history positions Hill as a space of democratic possibility — a place where the Verdi Requiem and the Grateful Dead, Igor Stravinsky and Bob Dylan, could share the same stage across different decades. The multicultural programming of the 1980s and 1990s extended this tradition. But the reviews suggest that the democracy of the stage was more complete than the democracy of the reception. Artists could perform at Hill; whether their traditions were received on their own terms was another question entirely. These performances are the micro-level evidence of a larger cultural contest.</p>
     </div>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-logo">STAGES OF CHANGE</div>
+  <div class="footer-logo">Stages of Change</div>
   <div class="footer-meta">
-    Nilay Mishra · AMCULT 103 · Professor Lyon<br>
-    University of Michigan · 2026
+    A Digital Humanities Project · University of Michigan<br>
+    Hill Auditorium & Multiculturalism · 1980–2000
   </div>
 </footer>
 
 <script>
-// Scroll reveal
-const obs = new IntersectionObserver(entries => {
-  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.08 });
-document.querySelectorAll('.reveal, .tl-item').forEach(el => obs.observe(el));
+// Reveal on scroll
+const observerOptions = { threshold: 0.1 };
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, observerOptions);
 
-// Artist analysis panel
-function openPanel(name, genre, bodyHTML) {
-  const panel = document.getElementById('artist-analysis-panel');
-  document.getElementById('panel-name').textContent = name;
-  document.getElementById('panel-genre').textContent = genre;
-  document.getElementById('panel-body').innerHTML = bodyHTML;
+document.querySelectorAll('.reveal, .tl-item').forEach(el => observer.observe(el));
+
+// Panel logic
+const panel = document.getElementById('artist-analysis-panel');
+const pName = document.getElementById('panel-name');
+const pGenre = document.getElementById('panel-genre');
+const pBody = document.getElementById('panel-body');
+
+function openPanel(name, genre, body) {
+  pName.innerText = name;
+  pGenre.innerText = genre;
+  pBody.innerHTML = body;
   panel.classList.add('open');
   panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 function closePanel() {
-  document.getElementById('artist-analysis-panel').classList.remove('open');
-}
-
-// Gallery upload
-function triggerGalleryUpload(slot) {
-  const input = slot.querySelector('input[type="file"]');
-  if (input) input.click();
-}
-
-function loadGalleryImage(input) {
-  const slot = input.closest('.g-slot');
-  const caption = slot.querySelector('.g-caption').textContent;
-  const file = input.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = e => {
-    slot.innerHTML = `<img src="${e.target.result}" alt="${caption}" style="width:100%;height:100%;object-fit:cover;"><div class="g-caption">${caption}</div>`;
-    slot.classList.add('loaded');
-  };
-  reader.readAsDataURL(file);
+  panel.classList.remove('open');
 }
 </script>
 

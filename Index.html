@@ -7,7 +7,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Instrument+Serif:ital@0;1&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,300;1,9..144,700;1,9..144,900&display=swap" rel="stylesheet">
-
 <style>
 :root {
   --vermillion: #E8401A;
@@ -16,16 +15,14 @@
   --jade: #1A8C5E;
   --magenta: #C0186C;
   --sky: #3CB4E8;
-  --lime: #8CC820;
   --plum: #6A1F9E;
   --cream: #FFF8EF;
   --charcoal: #1A1210;
   --offwhite: #FAF6F0;
+  --nav-h: 56px;
 }
-
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
-
 body {
   font-family: 'Instrument Serif', Georgia, serif;
   background: var(--cream);
@@ -33,52 +30,33 @@ body {
   overflow-x: hidden;
 }
 
-/* ── NAV ── */
+/* NAV */
 nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 200;
+  position: fixed; top: 0; left: 0; right: 0; z-index: 500;
   background: var(--charcoal);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 40px;
-  height: 52px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 40px; height: var(--nav-h);
   border-bottom: 3px solid var(--vermillion);
 }
-
 .nav-logo {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 22px;
-  letter-spacing: 0.08em;
-  color: var(--cream);
+  font-family: 'Bebas Neue', sans-serif; font-size: 20px;
+  letter-spacing: 0.08em; color: var(--cream); text-decoration: none;
 }
-
-.nav-links {
-  display: flex;
-  gap: 0;
-  list-style: none;
-}
-
+.nav-links { display: flex; gap: 0; list-style: none; }
 .nav-links a {
-  font-family: 'Space Mono', monospace;
-  font-size: 9px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: rgba(255,248,239,0.5);
-  text-decoration: none;
-  padding: 0 14px;
-  height: 52px;
-  display: flex;
-  align-items: center;
+  font-family: 'Space Mono', monospace; font-size: 9px;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(255,248,239,0.5); text-decoration: none;
+  padding: 0 14px; height: var(--nav-h);
+  display: flex; align-items: center;
   border-left: 1px solid rgba(255,255,255,0.08);
-  transition: all 0.15s;
+  transition: all 0.15s; white-space: nowrap;
 }
-.nav-links a:hover { background: var(--vermillion); color: white; }
+.nav-links a:hover, .nav-links a.active { background: var(--vermillion); color: white; }
 
-/* ── HERO ── */
+/* HERO */
 #hero {
-  padding-top: 52px;
+  padding-top: var(--nav-h);
   min-height: 100vh;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -88,802 +66,352 @@ nav {
 .hero-left {
   background: var(--cobalt);
   padding: 80px 60px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  position: relative;
-  overflow: hidden;
+  display: flex; flex-direction: column; justify-content: space-between;
+  position: relative; overflow: hidden;
 }
-
 .hero-left::before {
   content: '';
-  position: absolute;
-  top: -100px; right: -100px;
-  width: 400px; height: 400px;
-  border-radius: 50%;
-  background: rgba(232,64,26,0.25);
-  pointer-events: none;
+  position: absolute; top: -100px; right: -100px;
+  width: 400px; height: 400px; border-radius: 50%;
+  background: rgba(232,64,26,0.2); pointer-events: none;
+}
+.hero-left::after {
+  content: '';
+  position: absolute; bottom: -120px; left: -80px;
+  width: 300px; height: 300px; border-radius: 50%;
+  background: rgba(245,166,35,0.1); pointer-events: none;
 }
 
 .hero-eyebrow {
-  font-family: 'Space Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: rgba(255,248,239,0.55);
-  margin-bottom: 32px;
+  font-family: 'Space Mono', monospace; font-size: 10px;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: rgba(255,248,239,0.55); margin-bottom: 32px;
 }
 
 .hero-title {
   font-family: 'Bebas Neue', sans-serif;
   font-size: clamp(80px, 11vw, 160px);
-  line-height: 0.88;
-  color: var(--cream);
-  letter-spacing: 0.01em;
+  line-height: 0.88; color: var(--cream); letter-spacing: 0.01em;
 }
-
-.hero-title span {
-  display: block;
-  color: var(--saffron);
-}
+.hero-title span { display: block; color: var(--saffron); }
 
 .hero-tagline {
-  font-family: 'Fraunces', serif;
-  font-style: italic;
-  font-size: clamp(16px, 2vw, 22px);
-  color: rgba(255,248,239,0.8);
-  margin-top: 32px;
-  line-height: 1.5;
-  max-width: 400px;
+  font-family: 'Fraunces', serif; font-style: italic;
+  font-size: clamp(16px, 2vw, 21px);
+  color: rgba(255,248,239,0.8); margin-top: 32px;
+  line-height: 1.55; max-width: 400px;
 }
 
 .hero-cta-row {
-  display: flex;
-  gap: 12px;
-  margin-top: 48px;
-  flex-wrap: wrap;
+  display: flex; gap: 12px; margin-top: 48px; flex-wrap: wrap;
 }
 
 .btn-primary {
-  background: var(--vermillion);
-  color: white;
-  font-family: 'Space Mono', monospace;
-  font-size: 11px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  padding: 14px 28px;
-  text-decoration: none;
-  border: none;
-  cursor: pointer;
-  transition: background 0.2s;
-  display: inline-block;
+  background: var(--vermillion); color: white;
+  font-family: 'Space Mono', monospace; font-size: 11px;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  padding: 14px 28px; text-decoration: none;
+  border: none; cursor: pointer; transition: background 0.2s; display: inline-block;
 }
 .btn-primary:hover { background: #FF5030; }
-
 .btn-outline {
-  background: transparent;
-  color: var(--cream);
-  font-family: 'Space Mono', monospace;
-  font-size: 11px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  padding: 14px 28px;
-  text-decoration: none;
-  border: 1px solid rgba(255,248,239,0.35);
-  transition: all 0.2s;
-  display: inline-block;
+  background: transparent; color: var(--cream);
+  font-family: 'Space Mono', monospace; font-size: 11px;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  padding: 14px 28px; text-decoration: none;
+  border: 1px solid rgba(255,248,239,0.35); transition: all 0.2s; display: inline-block;
 }
 .btn-outline:hover { border-color: white; color: white; }
 
 .hero-right {
-  position: relative;
-  display: grid;
-  grid-template-rows: 1fr auto;
+  display: grid; grid-template-rows: 1fr auto;
 }
 
-.hero-img-top {
-  position: relative;
-  min-height: 350px;
-  overflow: hidden;
+.hero-visual {
+  background: var(--saffron);
+  position: relative; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
 }
 
-.hero-img-top::after {
-  content: 'HILL AUDITORIUM · ANN ARBOR';
-  position: absolute;
-  <img src="https://images.squarespace-cdn.com/content/v1/66b8aef7c83afa6b191c7068/d6d67962-091a-4d00-bbd8-84a712749d06/0494E+UofM+Hill+Auditorium+Int+3rd+floor+stage+right.jpg" alt="descriptive text">
-  bottom: 12px; left: 16px;
-  font-family: 'Space Mono', monospace;
-  font-size: 8px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: white;
-  background: rgba(0,0,0,0.6);
-  padding: 4px 10px;
+/* Decorative arch/Hill graphic */
+.hill-graphic {
+  width: 100%; height: 100%;
+  display: flex; align-items: flex-end; justify-content: center;
+  position: relative;
+  padding-bottom: 0;
+}
+
+.hill-arch-svg { width: 100%; height: 100%; position: absolute; bottom: 0; }
+
+.hero-visual-caption {
+  position: absolute; bottom: 16px; left: 20px;
+  font-family: 'Space Mono', monospace; font-size: 8px;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: white; background: rgba(0,0,0,0.5); padding: 5px 12px;
 }
 
 .hero-stat-band {
-  background: var(--saffron);
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  padding: 32px 40px;
-  flex-wrap: wrap;
-  gap: 16px;
+  background: var(--charcoal);
+  display: flex; align-items: center; justify-content: space-around;
+  padding: 40px 40px; flex-wrap: wrap; gap: 32px;
 }
 
 .hero-stat { text-align: center; }
-
 .hero-stat-num {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 56px;
-  line-height: 1;
-  color: var(--charcoal);
+  font-family: 'Bebas Neue', sans-serif; font-size: 56px;
+  line-height: 1; color: var(--saffron); letter-spacing: -0.02em;
 }
-
 .hero-stat-label {
-  font-family: 'Space Mono', monospace;
-  font-size: 8px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: rgba(26,18,16,0.7);
-  margin-top: 4px;
+  font-family: 'Space Mono', monospace; font-size: 8px;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(255,248,239,0.45); margin-top: 6px;
 }
 
-/* ── SECTION DEFAULTS ── */
+/* EXHIBIT INDEX */
+#exhibit-index {
+  background: var(--offwhite);
+  padding: 80px 60px;
+}
+
+.exhibit-index-header {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 60px; align-items: end; margin-bottom: 64px;
+}
+
 .section-label {
-  font-family: 'Space Mono', monospace;
-  font-size: 9px;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  margin-bottom: 12px;
-  display: inline-block;
-  padding: 5px 12px;
+  font-family: 'Space Mono', monospace; font-size: 9px;
+  letter-spacing: 0.25em; text-transform: uppercase;
+  margin-bottom: 12px; display: inline-block; padding: 5px 12px;
 }
-
 .section-title {
   font-family: 'Bebas Neue', sans-serif;
   font-size: clamp(48px, 7vw, 80px);
-  line-height: 0.95;
-  letter-spacing: 0.02em;
-  margin-bottom: 24px;
+  line-height: 0.95; letter-spacing: 0.02em; margin-bottom: 0;
 }
 
-/* ── CONTEXT ── */
-.context-masthead {
-  background: var(--charcoal);
-  padding: 48px 60px;
+.exhibit-index-desc {
+  font-size: 17px; line-height: 1.85; color: rgba(26,18,16,0.65);
+}
+
+/* Page cards grid */
+.pages-grid {
   display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 60px;
-  align-items: center;
-}
-
-.context-masthead .section-label {
-  background: var(--vermillion);
-  color: white;
-}
-
-.context-masthead .section-title { color: var(--cream); }
-
-.context-masthead .intro-text {
-  font-size: 17px;
-  line-height: 1.85;
-  color: rgba(255,248,239,0.72);
-}
-
-.context-cards {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 0;
+}
+
+.page-card {
   border: 2px solid var(--charcoal);
-}
-
-.ctx-card {
-  padding: 40px;
-  border: 1px solid rgba(26,18,16,0.12);
+  margin: -1px;
   position: relative;
-  transition: background 0.25s;
-}
-
-.ctx-card:hover { background: var(--offwhite); }
-
-.ctx-card-color-bar { height: 4px; margin-bottom: 20px; }
-.ctx-card:nth-child(1) .ctx-card-color-bar { background: var(--cobalt); }
-.ctx-card:nth-child(2) .ctx-card-color-bar { background: var(--vermillion); }
-.ctx-card:nth-child(3) .ctx-card-color-bar { background: var(--jade); }
-.ctx-card:nth-child(4) .ctx-card-color-bar { background: var(--magenta); }
-
-.ctx-card-label {
-  font-family: 'Space Mono', monospace;
-  font-size: 8px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: rgba(26,18,16,0.45);
-  margin-bottom: 10px;
-}
-
-.ctx-card-title {
-  font-family: 'Fraunces', serif;
-  font-size: 22px;
-  font-weight: 700;
-  color: var(--charcoal);
-  margin-bottom: 14px;
-  line-height: 1.25;
-}
-
-.ctx-card p {
-  font-size: 14px;
-  line-height: 1.85;
-  color: rgba(26,18,16,0.65);
-}
-
-.ctx-quote {
-  font-family: 'Fraunces', serif;
-  font-style: italic;
-  font-size: 15px;
-  color: var(--charcoal);
-  border-left: 3px solid;
-  padding-left: 16px;
-  margin: 16px 0;
-}
-
-.ctx-card:nth-child(1) .ctx-quote { border-color: var(--cobalt); }
-.ctx-card:nth-child(2) .ctx-quote { border-color: var(--vermillion); }
-.ctx-card:nth-child(3) .ctx-quote { border-color: var(--jade); }
-.ctx-card:nth-child(4) .ctx-quote { border-color: var(--magenta); }
-
-.stats-row {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0;
-}
-
-.stat-block {
-  padding: 40px;
-  text-align: center;
-  border-right: 1px solid rgba(255,255,255,0.1);
-}
-
-.stat-block:last-child { border-right: none; }
-.stat-block:nth-child(1) { background: var(--cobalt); }
-.stat-block:nth-child(2) { background: var(--vermillion); }
-.stat-block:nth-child(3) { background: var(--jade); }
-
-.stat-n {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 72px;
-  color: white;
-  line-height: 1;
-}
-
-.stat-l {
-  font-family: 'Space Mono', monospace;
-  font-size: 9px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.65);
-  margin-top: 8px;
-}
-
-/* ── TIMELINE ── */
-#timeline {
-  background: var(--charcoal);
-  padding: 80px 60px;
-}
-
-#timeline .section-label { background: var(--saffron); color: var(--charcoal); }
-#timeline .section-title { color: var(--cream); }
-
-.timeline-intro {
-  font-size: 16px;
-  line-height: 1.8;
-  color: rgba(255,248,239,0.6);
-  max-width: 600px;
-  margin-bottom: 64px;
-}
-
-.timeline-entries {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  border-left: 2px solid rgba(255,248,239,0.15);
-  padding-left: 0;
-}
-
-.tl-entry {
-  display: grid;
-  grid-template-columns: 120px 1fr;
-  gap: 0;
-  position: relative;
-  border-bottom: 1px solid rgba(255,248,239,0.07);
-}
-
-.tl-entry::before {
-  content: '';
-  position: absolute;
-  left: -7px; top: 32px;
-  width: 12px; height: 12px;
-  border-radius: 50%;
-  background: var(--saffron);
-}
-
-.tl-year {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 42px;
-  color: var(--saffron);
-  padding: 24px 32px 24px 24px;
-  line-height: 1;
-  flex-shrink: 0;
-}
-
-.tl-body {
-  padding: 24px 32px 24px 0;
-}
-
-.tl-tag {
-  font-family: 'Space Mono', monospace;
-  font-size: 8px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  padding: 3px 10px;
-  margin-bottom: 10px;
-  display: inline-block;
-}
-
-.tl-tag.campus    { background: var(--cobalt);    color: white; }
-.tl-tag.music     { background: var(--vermillion); color: white; }
-.tl-tag.politics  { background: var(--magenta);    color: white; }
-.tl-tag.arts      { background: var(--jade);       color: white; }
-.tl-tag.policy    { background: var(--plum);       color: white; }
-
-.tl-event-title {
-  font-family: 'Fraunces', serif;
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--cream);
-  margin-bottom: 10px;
-  line-height: 1.3;
-}
-
-.tl-desc {
-  font-size: 14px;
-  line-height: 1.75;
-  color: rgba(255,248,239,0.6);
-}
-
-.tl-source {
-  display: inline-block;
-  margin-top: 10px;
-  font-family: 'Space Mono', monospace;
-  font-size: 8px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--saffron);
-  border-bottom: 1px solid var(--saffron);
-  text-decoration: none;
-  opacity: 0.7;
-  transition: opacity 0.15s;
-}
-.tl-source:hover { opacity: 1; }
-
-/* ── ARTISTS ── */
-#artists {
-  background: var(--cream);
-  padding: 0;
-}
-
-.artists-header {
-  background: var(--vermillion);
-  padding: 60px 60px 40px;
-}
-
-.artists-header .section-label { background: var(--charcoal); color: var(--cream); }
-.artists-header .section-title { color: var(--cream); }
-
-.artists-header .section-desc {
-  font-size: 16px;
-  line-height: 1.8;
-  color: rgba(255,248,239,0.8);
-  max-width: 600px;
-}
-
-.artist-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0;
-  border-top: 3px solid var(--charcoal);
-}
-
-.artist-card {
-  border-right: 2px solid var(--charcoal);
-  border-bottom: 2px solid var(--charcoal);
+  display: flex; flex-direction: column;
+  text-decoration: none; color: inherit;
   overflow: hidden;
-  position: relative;
-  background: var(--offwhite);
-  transition: transform 0.2s;
+  transition: transform 0.2s, z-index 0.2s;
+  background: white;
+}
+.page-card:hover { transform: translateY(-4px); z-index: 3; }
+
+.page-card-top {
+  height: 180px; position: relative;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
 }
 
-.artist-card:nth-child(3n) { border-right: none; }
-.artist-card:hover { transform: translateY(-3px); z-index: 2; }
-
-.artist-img {
-  width: 100%;
-  height: 240px;
-  object-fit: cover;
-  object-position: center top;
-  display: block;
-  filter: grayscale(20%);
-  transition: filter 0.3s;
-}
-.artist-card:hover .artist-img { filter: grayscale(0%); }
-
-.artist-color-stripe {
-  height: 5px;
-}
-
-.artist-info {
-  padding: 28px 28px 20px;
-}
-
-.artist-era {
-  font-family: 'Space Mono', monospace;
-  font-size: 8px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  margin-bottom: 8px;
-}
-
-.artist-name {
+.page-card-num {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 34px;
-  letter-spacing: 0.03em;
-  color: var(--charcoal);
-  line-height: 1;
-  margin-bottom: 6px;
-}
-
-.artist-genre {
-  font-family: 'Fraunces', serif;
-  font-style: italic;
-  font-size: 14px;
-  color: rgba(26,18,16,0.5);
-  margin-bottom: 14px;
-}
-
-.artist-desc {
-  font-size: 13px;
-  line-height: 1.75;
-  color: rgba(26,18,16,0.65);
-  margin-bottom: 16px;
-}
-
-.artist-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.artist-link {
-  font-family: 'Space Mono', monospace;
-  font-size: 8px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  padding: 5px 12px;
-  text-decoration: none;
-  border: 1px solid;
-  transition: all 0.15s;
-}
-.artist-link:hover { color: white !important; }
-
-/* ── BAM / MULTICULTURAL SECTION ── */
-#bam {
-  background: var(--magenta);
-  padding: 80px 60px;
-}
-
-#bam .section-label { background: var(--charcoal); color: var(--cream); }
-#bam .section-title { color: var(--cream); }
-
-.bam-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
-  margin-top: 48px;
-}
-
-.bam-card {
-  background: rgba(255,255,255,0.12);
-  padding: 36px;
-  border: 1px solid rgba(255,255,255,0.2);
-}
-
-.bam-card-num {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 80px;
-  color: rgba(255,255,255,0.18);
-  line-height: 1;
-  position: absolute;
-  top: 20px; right: 24px;
+  font-size: 120px; line-height: 1;
+  color: rgba(255,255,255,0.15);
+  position: absolute; right: -10px; bottom: -20px;
   pointer-events: none;
 }
 
-.bam-card { position: relative; overflow: hidden; }
-
-.bam-card-year {
-  font-family: 'Space Mono', monospace;
-  font-size: 9px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.6);
-  margin-bottom: 10px;
+.page-card-icon {
+  font-size: 48px; position: relative; z-index: 1;
 }
 
-.bam-card-title {
-  font-family: 'Fraunces', serif;
-  font-size: 22px;
-  font-weight: 700;
-  color: white;
-  margin-bottom: 14px;
-  line-height: 1.25;
+.page-card-body { padding: 32px 28px; flex: 1; display: flex; flex-direction: column; }
+
+.page-card-num-label {
+  font-family: 'Space Mono', monospace; font-size: 8px;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: rgba(26,18,16,0.35); margin-bottom: 8px;
 }
 
-.bam-card p {
-  font-size: 14px;
-  line-height: 1.8;
-  color: rgba(255,255,255,0.75);
+.page-card-title {
+  font-family: 'Bebas Neue', sans-serif; font-size: 28px;
+  letter-spacing: 0.03em; color: var(--charcoal);
+  line-height: 1; margin-bottom: 14px;
 }
 
-.bam-card .tl-source { color: rgba(255,255,255,0.8); border-bottom-color: rgba(255,255,255,0.8); }
-
-.bam-quote-block {
-  grid-column: 1 / -1;
-  background: var(--charcoal);
-  padding: 48px;
-  border-left: 6px solid var(--saffron);
+.page-card-desc {
+  font-size: 13px; line-height: 1.75;
+  color: rgba(26,18,16,0.55); flex: 1;
 }
 
-.bam-quote-text {
-  font-family: 'Fraunces', serif;
-  font-style: italic;
-  font-size: 22px;
-  color: var(--cream);
-  line-height: 1.6;
-  margin-bottom: 16px;
+.page-card-arrow {
+  font-family: 'Space Mono', monospace; font-size: 9px;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  margin-top: 20px; color: rgba(26,18,16,0.4);
+  display: flex; align-items: center; gap: 8px;
 }
 
-.bam-quote-attr {
-  font-family: 'Space Mono', monospace;
-  font-size: 9px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--saffron);
-}
-
-/* ── MICHIGAN DAILY ARTICLES ── */
-#articles {
-  background: var(--offwhite);
-  padding: 80px 60px;
-}
-
-#articles .section-label { background: var(--cobalt); color: white; }
-#articles .section-title { color: var(--charcoal); }
-
-.articles-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0;
-  border: 2px solid var(--charcoal);
-  margin-top: 48px;
-}
-
-.article-card {
-  padding: 32px;
-  border-right: 1px solid rgba(26,18,16,0.12);
-  border-bottom: 1px solid rgba(26,18,16,0.12);
-  background: white;
-  transition: background 0.2s;
-  cursor: pointer;
-}
-
-.article-card:nth-child(3n) { border-right: none; }
-.article-card:hover { background: var(--cream); }
-
-.article-card-top {
-  height: 4px;
-  margin-bottom: 20px;
-}
-
-.article-date {
-  font-family: 'Space Mono', monospace;
-  font-size: 8px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: rgba(26,18,16,0.4);
-  margin-bottom: 8px;
-}
-
-.article-headline {
-  font-family: 'Fraunces', serif;
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--charcoal);
-  margin-bottom: 12px;
-  line-height: 1.3;
-}
-
-.article-body {
-  font-size: 13px;
-  line-height: 1.75;
-  color: rgba(26,18,16,0.65);
-  margin-bottom: 16px;
-}
-
-.article-read {
-  font-family: 'Space Mono', monospace;
-  font-size: 8px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  text-decoration: none;
-  padding: 6px 14px;
-  color: white;
-  display: inline-block;
-  transition: opacity 0.15s;
-}
-.article-read:hover { opacity: 0.85; }
-
-/* ── MICHIGAN MANDATE BAND ── */
-.mandate-band {
-  background: var(--jade);
-  padding: 64px 60px;
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 60px;
-  align-items: center;
-}
-
-.mandate-band .big-num {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(80px, 12vw, 160px);
-  color: rgba(255,255,255,0.2);
-  line-height: 1;
-}
-
-.mandate-band .mandate-title {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(36px, 5vw, 56px);
-  color: white;
-  line-height: 1;
-  margin-bottom: 20px;
-}
-
-.mandate-band p {
-  font-size: 16px;
-  line-height: 1.8;
-  color: rgba(255,255,255,0.8);
-}
-
-/* ── CLOSING ── */
-#closing {
+/* ARGUMENT BAND */
+.argument-band {
   background: var(--charcoal);
   padding: 80px 60px;
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 60px;
-  align-items: start;
+  display: grid; grid-template-columns: 1fr 2fr; gap: 80px; align-items: center;
 }
 
-.closing-title {
+.argument-band-left { }
+
+.argument-band-label {
+  font-family: 'Space Mono', monospace; font-size: 9px;
+  letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--saffron); margin-bottom: 20px; display: block;
+}
+
+.argument-band-title {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(48px, 8vw, 100px);
-  color: var(--cream);
-  line-height: 0.9;
-  margin-bottom: 32px;
+  font-size: clamp(48px, 7vw, 80px); line-height: 0.9;
+  color: var(--cream); letter-spacing: 0.02em;
 }
 
-.closing-title span { color: var(--saffron); }
+.argument-band-title em { color: var(--saffron); font-style: normal; }
 
-.closing-body {
-  font-size: 16px;
-  line-height: 1.85;
-  color: rgba(255,248,239,0.6);
-  margin-bottom: 32px;
+.argument-band-right { }
+
+.argument-thesis {
+  font-family: 'Fraunces', serif; font-style: italic;
+  font-size: clamp(20px, 2.5vw, 28px);
+  color: var(--cream); line-height: 1.6; margin-bottom: 32px;
+  border-left: 4px solid var(--vermillion); padding-left: 24px;
 }
 
-.closing-sidebar {
-  padding-top: 8px;
+.argument-body {
+  font-size: 15px; line-height: 1.85; color: rgba(255,248,239,0.6);
 }
 
-.closing-sidebar-item {
-  padding: 24px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
+/* SCHOLARS / SOURCES ROW */
+.scholars-row {
+  background: var(--cream);
+  padding: 60px;
+  border-top: 3px solid var(--charcoal);
 }
 
-.closing-sidebar-item:first-child { border-top: 1px solid rgba(255,255,255,0.1); }
-
-.cs-label {
-  font-family: 'Space Mono', monospace;
-  font-size: 8px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: rgba(255,248,239,0.35);
-  margin-bottom: 8px;
+.scholars-row-header {
+  display: flex; justify-content: space-between; align-items: baseline;
+  margin-bottom: 40px;
 }
 
-.cs-val {
-  font-family: 'Fraunces', serif;
-  font-size: 16px;
-  color: var(--cream);
-  line-height: 1.4;
+.scholars-row-title {
+  font-family: 'Bebas Neue', sans-serif; font-size: 42px;
+  color: var(--charcoal); line-height: 1;
 }
 
-/* ── FOOTER ── */
+.scholars-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 0;
+}
+
+.scholar-card {
+  padding: 32px; border: 1px solid rgba(26,18,16,0.12);
+  margin: -1px;
+}
+
+.scholar-color { height: 4px; margin-bottom: 20px; }
+
+.scholar-name {
+  font-family: 'Fraunces', serif; font-size: 20px; font-weight: 700;
+  color: var(--charcoal); margin-bottom: 6px;
+}
+
+.scholar-work {
+  font-family: 'Space Mono', monospace; font-size: 9px;
+  letter-spacing: 0.08em; color: rgba(26,18,16,0.5);
+  margin-bottom: 14px; text-transform: uppercase;
+}
+
+.scholar-contribution {
+  font-size: 14px; line-height: 1.75; color: rgba(26,18,16,0.65);
+}
+
+/* METHODOLOGY NOTE */
+.method-strip {
+  background: var(--vermillion); padding: 40px 60px;
+  display: flex; align-items: center; justify-content: space-between; gap: 40px;
+}
+
+.method-label {
+  font-family: 'Space Mono', monospace; font-size: 9px;
+  letter-spacing: 0.25em; text-transform: uppercase;
+  color: rgba(255,255,255,0.65); flex-shrink: 0;
+}
+
+.method-text {
+  font-family: 'Fraunces', serif; font-style: italic;
+  font-size: 18px; color: white; line-height: 1.5;
+  flex: 1;
+}
+
+/* FOOTER */
 footer {
-  background: black;
-  padding: 32px 60px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  background: black; padding: 32px 60px;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 16px;
 }
-
 .footer-logo {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 20px;
-  color: rgba(255,255,255,0.3);
-  letter-spacing: 0.08em;
+  font-family: 'Bebas Neue', sans-serif; font-size: 20px;
+  color: rgba(255,255,255,0.3); letter-spacing: 0.08em;
 }
-
+.footer-nav { display: flex; gap: 20px; list-style: none; flex-wrap: wrap; }
+.footer-nav a {
+  font-family: 'Space Mono', monospace; font-size: 8px;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(255,255,255,0.25); text-decoration: none; transition: color 0.15s;
+}
+.footer-nav a:hover { color: rgba(255,255,255,0.65); }
 .footer-note {
-  font-family: 'Space Mono', monospace;
-  font-size: 8px;
-  letter-spacing: 0.15em;
-  color: rgba(255,255,255,0.2);
-  text-transform: uppercase;
+  font-family: 'Space Mono', monospace; font-size: 8px;
+  letter-spacing: 0.12em; color: rgba(255,255,255,0.15);
+  text-transform: uppercase; width: 100%;
 }
 
-/* ── RESPONSIVE ── */
+/* RESPONSIVE */
 @media (max-width: 900px) {
   #hero { grid-template-columns: 1fr; }
-  .context-masthead { grid-template-columns: 1fr; }
-  .artist-grid { grid-template-columns: 1fr 1fr; }
-  .artist-card:nth-child(3n) { border-right: 2px solid var(--charcoal); }
-  .artist-card:nth-child(2n) { border-right: none; }
-  .bam-grid { grid-template-columns: 1fr; }
-  .articles-grid { grid-template-columns: 1fr 1fr; }
-  .article-card:nth-child(3n) { border-right: 1px solid rgba(26,18,16,0.12); }
-  .article-card:nth-child(2n) { border-right: none; }
-  .mandate-band { grid-template-columns: 1fr; }
-  #closing { grid-template-columns: 1fr; }
-  .context-cards { grid-template-columns: 1fr; }
-  .stats-row { grid-template-columns: 1fr; }
+  .hero-visual { min-height: 280px; }
+  .exhibit-index-header { grid-template-columns: 1fr; gap: 24px; }
+  .pages-grid { grid-template-columns: 1fr; }
+  .argument-band { grid-template-columns: 1fr; gap: 40px; }
+  .scholars-grid { grid-template-columns: 1fr; }
+  .method-strip { flex-direction: column; align-items: flex-start; }
   nav { padding: 0 20px; }
   .nav-links { display: none; }
+  #exhibit-index, .argument-band, .scholars-row, .method-strip { padding: 48px 24px; }
+  footer { padding: 32px 24px; }
 }
-
 @media (max-width: 600px) {
-  .artist-grid, .articles-grid { grid-template-columns: 1fr; }
-  .tl-entry { grid-template-columns: 80px 1fr; }
-  .hero-left, #timeline, #bam, #articles, #closing, footer { padding: 40px 24px; }
-  .context-masthead { padding: 40px 24px; }
-  .artists-header { padding: 40px 24px; }
-  .mandate-band { padding: 40px 24px; }
+  .hero-left { padding: 48px 24px; }
+  .hero-stat-band { padding: 32px 24px; }
+  .pages-grid { grid-template-columns: 1fr; }
 }
 </style>
 </head>
 <body>
 
-<!-- ── NAV ── -->
 <nav>
-  <div class="nav-logo">Stages of Change</div>
+  <a href="index.html" class="nav-logo">Stages of Change</a>
   <ul class="nav-links">
-    <li><a href="#context">Context</a></li>
-    <li><a href="#timeline">Timeline</a></li>
-    <li><a href="#artists">Artists</a></li>
-    <li><a href="#bam">BAM &amp; Activism</a></li>
-    <li><a href="#articles">Michigan Daily</a></li>
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="context.html">Context</a></li>
+    <li><a href="timeline.html">Timeline</a></li>
+    <li><a href="artists.html">Artists</a></li>
+    <li><a href="analysis.html">Analysis</a></li>
+    <li><a href="sources.html">Sources</a></li>
   </ul>
 </nav>
 
-<!-- ── HERO ── -->
+<!-- HERO -->
 <section id="hero">
   <div class="hero-left">
     <div>
@@ -893,14 +421,75 @@ footer {
         <span>OF</span>
         CHANGE
       </div>
-      <p class="hero-tagline">How Hill Auditorium's stage became a mirror of the campus's battle for a multicultural university.</p>
+      <p class="hero-tagline">How Hill Auditorium's stage became a mirror — and an argument — in the University of Michigan's battle for a truly multicultural university.</p>
     </div>
     <div class="hero-cta-row">
-      <a href="#artists" class="btn-primary">Meet the Artists</a>
-      <a href="#timeline" class="btn-outline">View Timeline</a>
+      <a href="context.html" class="btn-primary">Enter the Exhibit</a>
+      <a href="timeline.html" class="btn-outline">View Timeline</a>
     </div>
   </div>
-  
+
+  <div class="hero-right">
+    <div class="hero-visual">
+      <!-- Decorative SVG Hill Auditorium illustration -->
+      <svg class="hill-arch-svg" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMax meet">
+        <!-- Sky gradient -->
+        <defs>
+          <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#F5A623" stop-opacity="0.3"/>
+            <stop offset="100%" stop-color="#F5A623" stop-opacity="0"/>
+          </linearGradient>
+          <linearGradient id="groundGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#1A1210"/>
+            <stop offset="100%" stop-color="#2A1A10"/>
+          </linearGradient>
+        </defs>
+        <!-- Ground -->
+        <rect x="0" y="300" width="600" height="100" fill="url(#groundGrad)"/>
+        <!-- Main building body -->
+        <rect x="80" y="180" width="440" height="130" fill="#2A1A10"/>
+        <!-- Columns -->
+        <rect x="100" y="140" width="18" height="140" fill="#3A2A20"/>
+        <rect x="140" y="140" width="18" height="140" fill="#3A2A20"/>
+        <rect x="180" y="140" width="18" height="140" fill="#3A2A20"/>
+        <rect x="220" y="140" width="18" height="140" fill="#3A2A20"/>
+        <rect x="260" y="140" width="18" height="140" fill="#3A2A20"/>
+        <rect x="300" y="140" width="18" height="140" fill="#3A2A20"/>
+        <rect x="340" y="140" width="18" height="140" fill="#3A2A20"/>
+        <rect x="380" y="140" width="18" height="140" fill="#3A2A20"/>
+        <rect x="420" y="140" width="18" height="140" fill="#3A2A20"/>
+        <rect x="460" y="140" width="18" height="140" fill="#3A2A20"/>
+        <!-- Entablature -->
+        <rect x="85" y="130" width="430" height="18" fill="#1A1210"/>
+        <!-- Pediment -->
+        <polygon points="85,130 300,60 515,130" fill="#2A1A10"/>
+        <!-- Pediment detail -->
+        <polygon points="120,130 300,75 480,130" fill="#1A1210" opacity="0.5"/>
+        <!-- Door arch -->
+        <rect x="255" y="230" width="90" height="80" fill="#F5A623" opacity="0.15"/>
+        <path d="M255,230 Q300,200 345,230" fill="#F5A623" opacity="0.2"/>
+        <!-- Windows -->
+        <rect x="120" y="200" width="40" height="55" fill="#F5A623" opacity="0.08"/>
+        <rect x="175" y="200" width="40" height="55" fill="#F5A623" opacity="0.08"/>
+        <rect x="385" y="200" width="40" height="55" fill="#F5A623" opacity="0.08"/>
+        <rect x="440" y="200" width="40" height="55" fill="#F5A623" opacity="0.08"/>
+        <!-- Steps -->
+        <rect x="60" y="300" width="480" height="8" fill="#2A1A10"/>
+        <rect x="40" y="308" width="520" height="8" fill="#221510"/>
+        <!-- Title text -->
+        <text x="300" y="48" font-family="Georgia, serif" font-size="11" fill="#F5A623" opacity="0.7" text-anchor="middle" letter-spacing="4">HILL AUDITORIUM · EST. 1913</text>
+        <!-- Starfield dots -->
+        <circle cx="50" cy="30" r="1.5" fill="white" opacity="0.4"/>
+        <circle cx="130" cy="15" r="1" fill="white" opacity="0.3"/>
+        <circle cx="200" cy="40" r="1.5" fill="white" opacity="0.35"/>
+        <circle cx="400" cy="20" r="1" fill="white" opacity="0.4"/>
+        <circle cx="480" cy="35" r="1.5" fill="white" opacity="0.3"/>
+        <circle cx="550" cy="18" r="1" fill="white" opacity="0.4"/>
+        <circle cx="30" cy="70" r="1" fill="white" opacity="0.25"/>
+        <circle cx="570" cy="55" r="1.5" fill="white" opacity="0.35"/>
+      </svg>
+      <div class="hero-visual-caption">Hill Auditorium · Ann Arbor, Michigan</div>
+    </div>
     <div class="hero-stat-band">
       <div class="hero-stat">
         <div class="hero-stat-num">3,500</div>
@@ -918,682 +507,165 @@ footer {
   </div>
 </section>
 
-<!-- ── CONTEXT ── -->
-<section id="context">
-  <div class="context-masthead">
-    <div>
-      <span class="section-label">Background</span>
-      <h2 class="section-title">The Stage &amp; The Street</h2>
-    </div>
-    <p class="intro-text">
-      Between 1980 and 2000, the University of Michigan was two institutions at once. Inside Hill Auditorium, world-class artists performed to packed houses of 3,500. Outside—on the Diag, in Fleming Admin Building, at the Michigan Union—students demanded that the university finally look like the world it claimed to serve. These two stages were never separate.
-    </p>
+<!-- ARGUMENT -->
+<div class="argument-band">
+  <div class="argument-band-left">
+    <span class="argument-band-label">Research Argument</span>
+    <div class="argument-band-title">The Central <em>Claim</em></div>
   </div>
-
-  <div class="context-cards">
-    <div class="ctx-card">
-      <div class="ctx-card-color-bar"></div>
-      <div class="ctx-card-label">The Venue</div>
-      <div class="ctx-card-title">Hill Auditorium: "The Other Big House"</div>
-      <p>
-        Designed by Albert Kahn and opened in 1913, Hill Auditorium was engineered for acoustic perfection — legend holds that a pin dropped on stage could be heard from the upper balcony. By the 1980s, the University Musical Society (UMS) was booking artists of international repute: Yo-Yo Ma, Wynton Marsalis, Ravi Shankar, and Elton John all graced its oval stage.
-      </p>
-      <div class="ctx-quote">"Hill Auditorium speaks to the quality and the standards that we expect in our performances."<br><small>— Kenneth Kiesler, Director of University Orchestras</small></div>
+  <div class="argument-band-right">
+    <div class="argument-thesis">
+      "Michigan Daily concert reviews of minority artists at Hill Auditorium between 1980 and 2000 reflect both the aspirations and the limitations of the Michigan Mandate era — simultaneously celebrating artistic excellence and revealing persistent patterns of exoticization, cultural validation through Western frameworks, and institutional anxiety."
     </div>
-    <div class="ctx-card">
-      <div class="ctx-card-color-bar"></div>
-      <div class="ctx-card-label">The Context</div>
-      <div class="ctx-card-title">A Campus Demanding Change</div>
-      <p>
-        In January 1987, racist flyers appeared under dorm-room doors. A student radio show broadcast racist jokes to campus. Black enrollment, which had hit a high of 7.7% in 1977, had slid back to 5.4%. The United Coalition Against Racism (UCAR) and Black Action Movement III mobilized. The protests that followed would reshape the university's identity for a generation.
-      </p>
-      <div class="ctx-quote">"The single most important thing we have agreed on is that it is in the interest of the university to increase the representation of Blacks."<br><small>— President Harold Shapiro, Hill Auditorium rally, March 1987</small></div>
-    </div>
-    <div class="ctx-card">
-      <div class="ctx-card-color-bar"></div>
-      <div class="ctx-card-label">The Movement</div>
-      <div class="ctx-card-title">BAM I, II &amp; III: Three Campaigns</div>
-      <p>
-        The Black Action Movement ran three distinct campaigns across 1970, 1975, and 1987 — each demanding meaningful Black enrollment and faculty representation. BAM III's 1987 protest, supported by students from across demographics, ultimately led President James Duderstadt to launch the Michigan Mandate: a sweeping institutional plan to make U-M a multicultural university.
-      </p>
-      <div class="ctx-quote">"Its thesis — that cultural diversity and education were not antithetical but intimately linked — was an early forerunner of ideas soon taken for granted in higher education."<br><small>— Michigan Today, 2024</small></div>
-    </div>
-    <div class="ctx-card">
-      <div class="ctx-card-color-bar"></div>
-      <div class="ctx-card-label">The Intersection</div>
-      <div class="ctx-card-title">The Stage as Argument</div>
-      <p>
-        The UMS programming of this era was itself an implicit argument. Booking Wynton Marsalis (whose JLCO debuted at UMS in 1994), Ravi Shankar (first presented in April 1996), and Sweet Honey in the Rock alongside Vienna Philharmonic and Berlin Philharmonic wasn't just artistic curation — it was a statement about what "world-class" could mean. The artists on stage and the protesters in the streets were both insisting on a more expansive America.
-      </p>
-      <div class="ctx-quote">"The spirit here…you can get the type of student participation you get, and bring the type of people that you've brought, the quality of the orchestras — everything is on the highest level."<br><small>— Wynton Marsalis, on Hill Auditorium</small></div>
-    </div>
-  </div>
-
-  <div class="stats-row">
-    <div class="stat-block">
-      <div class="stat-n">5.4%</div>
-      <div class="stat-l">Black enrollment at U-M, 1987</div>
-    </div>
-    <div class="stat-block">
-      <div class="stat-n">4,200</div>
-      <div class="stat-l">Packed Hill Auditorium, BAM rally 1987</div>
-    </div>
-    <div class="stat-block">
-      <div class="stat-n">9%</div>
-      <div class="stat-l">Black enrollment by 1996 — all-time high</div>
-    </div>
-  </div>
-</section>
-
-<!-- ── TIMELINE ── -->
-<section id="timeline">
-  <span class="section-label">Chronology</span>
-  <h2 class="section-title">Twenty Years,<br>One Stage</h2>
-  <p class="timeline-intro">
-    A parallel record of landmark performances at Hill Auditorium and the campus activism reshaping the university during the same years.
-  </p>
-
-  <div class="timeline-entries">
-
-    <div class="tl-entry">
-      <div class="tl-year">1980</div>
-      <div class="tl-body">
-        <span class="tl-tag campus">Campus</span>
-        <div class="tl-event-title">Reagan Era Begins — Conservative Resurgence on Campus</div>
-        <p class="tl-desc">As Ronald Reagan wins the presidency, Black student enrollment at U-M continues a decline from its 1977 high of 7.7%. The national conservative shift pressures affirmative action programs across higher education. UMS continues its mission of bringing world-class performers to Hill, including the Vienna Philharmonic and Berlin Philharmonic.</p>
-      </div>
-    </div>
-
-    <div class="tl-entry">
-      <div class="tl-year">1982</div>
-      <div class="tl-body">
-        <span class="tl-tag music">Music</span>
-        <div class="tl-event-title">Yo-Yo Ma Performs at Hill Auditorium</div>
-        <p class="tl-desc">The young cellist — already a prodigy who had debuted with the Harvard-Radcliffe Orchestra at age 15 — performs with UMS. His appearances at Hill across the 1980s and 90s become touchstones for U-M audiences. Ma would later join U-M for a formal residency spanning all three campuses. "Life, like music, is based on themes and variations," he told a Hill Auditorium audience.</p>
-        <a class="tl-source" href="https://record.umich.edu/tags/university-musical-society/" target="_blank">University Record → UMS Residency Coverage</a>
-      </div>
-    </div>
-
-    <div class="tl-entry">
-      <div class="tl-year">1984</div>
-      <div class="tl-body">
-        <span class="tl-tag campus">Campus</span>
-        <div class="tl-event-title">Black Enrollment Drops to 5.1%</div>
-        <p class="tl-desc">After hovering near 7% for several years, Black enrollment at U-M falls to 5.1% — far short of the 10% target first demanded by BAM I in 1970. Declining recruitment, reduced financial aid, and a hostile campus climate all contribute. Student organizations begin organizing for a third major campaign.</p>
-        <a class="tl-source" href="https://www.aaihs.org/transformative-anti-racist-politics-at-the-university-of-michigan/" target="_blank">African American Intellectual History Society →</a>
-      </div>
-    </div>
-
-    <div class="tl-entry">
-      <div class="tl-year">1987</div>
-      <div class="tl-body">
-        <span class="tl-tag politics">Activism</span>
-        <div class="tl-event-title">BAM III &amp; UCAR: The Third Wave of Protest</div>
-        <p class="tl-desc">In January, racist flyers appear in dorms. In February, the student radio station WJJX broadcasts racist jokes. The United Coalition Against Racism (UCAR) forms as a multiracial coalition. In March, Black Action Movement III emerges, demanding $35,000 for the BSU, tenure for Black faculty, and a $5 million recruitment plan. Rev. Jesse Jackson mediates. On March 24, a standing-room-only rally of 4,200 fills Hill Auditorium — where President Shapiro announces an agreement.</p>
-        <a class="tl-source" href="https://findingaids.lib.umich.edu/catalog/umich-bhl-2014162" target="_blank">Bentley Historical Library → BAM Documents</a>
-      </div>
-    </div>
-
-    <div class="tl-entry">
-      <div class="tl-year">1988</div>
-      <div class="tl-body">
-        <span class="tl-tag policy">Policy</span>
-        <div class="tl-event-title">Michigan Mandate Launched Under President Duderstadt</div>
-        <p class="tl-desc">Newly installed President James Duderstadt launches the Michigan Mandate — a sweeping institutional commitment to build a genuinely multicultural university. Its founding thesis: that cultural diversity and education are not in tension but are deeply linked. The plan funds minority recruitment, supports the Ella Baker–Nelson Mandela Freedom Center, and repositions diversity as a core institutional value.</p>
-        <a class="tl-source" href="https://oami.umich.edu/bam/" target="_blank">U-M OAMI → BAM History</a>
-      </div>
-    </div>
-
-    <div class="tl-entry">
-      <div class="tl-year">1989</div>
-      <div class="tl-body">
-        <span class="tl-tag music">Music</span>
-        <div class="tl-event-title">Grateful Dead at Crisler Arena — Ann Arbor Embraces the Dead</div>
-        <p class="tl-desc">The Grateful Dead play two sold-out nights at Crisler Arena, with over 12,000 fans each night. Michigan Daily writer Brian Jarvinen previews the shows, highlighting the Dead's ever-shifting setlists. The Ann Arbor News describes a "classically rambling show of over three hours" rich in musical value. Hill Auditorium had famously hosted the band in 1971 for legendary two-night radio broadcasts.</p>
-        <a class="tl-source" href="https://pulp.aadl.org/node/647186" target="_blank">Arts Around Ann Arbor → Crisler Concert History</a>
-      </div>
-    </div>
-
-    <div class="tl-entry">
-      <div class="tl-year">1993</div>
-      <div class="tl-body">
-        <span class="tl-tag policy">Policy</span>
-        <div class="tl-event-title">Office of Minority Affairs Becomes OAMI</div>
-        <p class="tl-desc">Dr. Lester Monts becomes Vice Provost for Academic and Multicultural Affairs. The Office of Minority Affairs is renamed the Office of Academic Multicultural Initiatives (OAMI), reflecting the broadened mission of the Michigan Mandate era. OAMI becomes a hub for recruiting, retaining, and supporting students of color across U-M.</p>
-        <a class="tl-source" href="https://oami.umich.edu/bam/" target="_blank">U-M OAMI → Institutional History</a>
-      </div>
-    </div>
-
-    <div class="tl-entry">
-      <div class="tl-year">1994</div>
-      <div class="tl-body">
-        <span class="tl-tag music">Music</span>
-        <div class="tl-event-title">Wynton Marsalis &amp; Jazz at Lincoln Center Orchestra Debut at UMS</div>
-        <p class="tl-desc">The Jazz at Lincoln Center Orchestra makes its UMS debut — the beginning of a relationship that would see Marsalis return over 17 times. Committed since 1988 to honoring the lineage of Duke Ellington and Louis Armstrong while performing new works, JLCO brings jazz as both art and civic practice to Hill Auditorium. "Education is the future of any idiom," JLCO drummer Ali Jackson said. Marsalis would go on to receive U-M's honorary Doctor of Music at the 2023 commencement.</p>
-        <a class="tl-source" href="https://www.michigandaily.com/arts/1wynton-marsalis-and-jazz-lincoln-center-orchestra-return-hill-auditorium-25th-anniversary-tour30" target="_blank">Michigan Daily → JLCO 25th Anniversary Return</a>
-      </div>
-    </div>
-
-    <div class="tl-entry">
-      <div class="tl-year">1995</div>
-      <div class="tl-body">
-        <span class="tl-tag arts">Arts</span>
-        <div class="tl-event-title">Last UMS May Festival — An Era Ends</div>
-        <p class="tl-desc">The May Festival, a cornerstone of UMS programming since its founding in 1879, holds its final edition. The festival had been central to Ann Arbor's cultural identity for over a century. The UMS Distinguished Artist Award is inaugurated in May 1996 to replace it, recognizing artists with lasting educational contributions — JLCO would receive it in 2014.</p>
-        <a class="tl-source" href="https://findingaids.lib.umich.edu/catalog/umich-bhl-87378" target="_blank">Bentley Library → UMS Records Finding Aid</a>
-      </div>
-    </div>
-
-    <div class="tl-entry">
-      <div class="tl-year">1996</div>
-      <div class="tl-body">
-        <span class="tl-tag music">Music</span>
-        <div class="tl-event-title">Ravi Shankar First Presented at UMS — Rackham Auditorium</div>
-        <p class="tl-desc">Legendary sitarist Ravi Shankar makes his first UMS appearance at Rackham Auditorium in April 1996. The New York Times called him "the sitarist who introduced Indian music to the West." His appearances in Ann Arbor span decades, with a later solo performance at Hill Auditorium in September 2004. A UMS essayist wrote: "He never lost sight of the tradition from which he came. This is the true nature of innovation."</p>
-        <a class="tl-source" href="https://ums.org/tag/ums-history/" target="_blank">UMS History → Ravi Shankar Profile</a>
-      </div>
-    </div>
-
-    <div class="tl-entry">
-      <div class="tl-year">1996</div>
-      <div class="tl-body">
-        <span class="tl-tag campus">Campus</span>
-        <div class="tl-event-title">Black Enrollment Reaches 9% — Michigan Mandate's High Watermark</div>
-        <p class="tl-desc">Black enrollment at U-M reaches 9% — the highest in the university's history and the closest the campus ever came to the 10% benchmark first demanded by BAM I in 1970. The Ella Baker–Nelson Mandela Freedom Center, which had been pivotal in political education and campus organizing since 1988, closes this same year after nearly a decade of activism.</p>
-        <a class="tl-source" href="https://www.aaihs.org/transformative-anti-racist-politics-at-the-university-of-michigan/" target="_blank">AAIHS → Transformative Anti-Racist Politics at U-M</a>
-      </div>
-    </div>
-
-    <div class="tl-entry">
-      <div class="tl-year">1999</div>
-      <div class="tl-body">
-        <span class="tl-tag music">Music</span>
-        <div class="tl-event-title">Wynton Marsalis Premieres <em>All Rise</em> — Commissioned for the Millennium</div>
-        <p class="tl-desc">Marsalis's massive jazz symphony <em>All Rise</em> (Symphony No. 1) is commissioned by the New York Philharmonic and has its world premiere in December 1999. The 12-movement work blends African chant, New Orleans parade music, gospel, and symphonic modernism. Marsalis described it as "the rise from destruction to creativity, drawing joy out of tragedy." UMS would later present it at Hill Auditorium with the U-M Symphony Orchestra and Choirs.</p>
-        <a class="tl-source" href="https://events.umich.edu/event/94974" target="_blank">UMS → All Rise at Hill Auditorium</a>
-      </div>
-    </div>
-
-    <div class="tl-entry">
-      <div class="tl-year">2000</div>
-      <div class="tl-body">
-        <span class="tl-tag campus">Campus</span>
-        <div class="tl-event-title">BSU &amp; Students of Color Coalition Occupy Michigan Union Tower</div>
-        <p class="tl-desc">The Black Student Union joins the Students of Color Coalition in a 37-day sit-in at the Michigan Union tower, protesting the Michigamua secret society's use of offensive depictions of Native Americans in its rituals. The action marks the close of the era documented in this project — the BAM legacy continues to shape activism at U-M into the 21st century.</p>
-        <a class="tl-source" href="https://findingaids.lib.umich.edu/catalog/umich-bhl-2018026" target="_blank">Bentley Library → BSU Records</a>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ── ARTISTS ── -->
-<!-- ── ARTISTS ── -->
-<style>
-  /* Section Background */
-  #artists {
-    background: #f5f7fa; /* Soft neutral background; adjust as desired */
-    padding: 80px 20px;
-  }
-
-  /* Header Styling */
-  .artists-header {
-    max-width: 900px;
-    margin: 0 auto 60px auto;
-    text-align: center;
-  }
-
-  /* Grid Layout */
-  .artist-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 40px;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  /* Artist Card */
-  .artist-card {
-    background: transparent; /* Removes white square */
-    border-radius: 16px;
-    overflow: hidden;
-    position: relative;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-    backdrop-filter: blur(6px);
-    display: flex;
-    flex-direction: column;
-  }
-
-  /* Artist Image */
-  .artist-img {
-    width: 100%;
-    height: 260px;
-    object-fit: cover;
-    display: block;
-    background: #e0e0e0; /* Prevents blank white space while loading */
-  }
-
-  /* Color Stripe */
-  .artist-color-stripe {
-    height: 6px;
-    width: 100%;
-  }
-
-  /* Artist Info */
-  .artist-info {
-    padding: 24px;
-    background: rgba(255, 255, 255, 0.92); /* Subtle overlay instead of solid white */
-    backdrop-filter: blur(4px);
-    flex-grow: 1;
-  }
-
-  /* Typography */
-  .artist-name {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin: 8px 0;
-    color: var(--charcoal);
-  }
-
-  .artist-genre {
-    font-size: 0.9rem;
-    margin-bottom: 12px;
-    color: #666;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-
-  .artist-era {
-    font-size: 0.85rem;
-    font-weight: 600;
-    letter-spacing: 0.05em;
-  }
-
-  .artist-desc {
-    font-size: 0.95rem;
-    line-height: 1.6;
-    color: var(--charcoal);
-  }
-
-  /* Links */
-  .artist-links {
-    margin-top: 16px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-
-  .artist-link {
-    padding: 8px 14px;
-    border: 2px solid;
-    border-radius: 999px;
-    font-size: 0.8rem;
-    font-weight: 600;
-    text-decoration: none;
-    transition: all 0.3s ease;
-  }
-
-  .artist-link:hover {
-    transform: translateY(-2px);
-    opacity: 0.9;
-  }
-
-  /* Responsive Adjustments */
-  @media (max-width: 600px) {
-    #artists {
-      padding: 60px 16px;
-    }
-
-    .artist-img {
-      height: 220px;
-    }
-  }
-</style>
-
-<section id="artists">
-  <div class="artists-header">
-    <span class="section-label">Performers</span>
-    <h2 class="section-title">Artists of<br>the Era</h2>
-    <p class="section-desc">
-      The performers who graced Hill Auditorium's oval stage between 1980 and 2000 — many of them appearing through the University Musical Society — were not merely entertainment. Their presence in Ann Arbor was inseparable from the cultural moment happening outside the auditorium's doors.
-    </p>
-  </div>
-
-  <div class="artist-grid">
-    <!-- Your existing artist cards remain unchanged -->
-    <!-- Wynton Marsalis -->
-    <!-- Yo-Yo Ma -->
-    <!-- Ravi Shankar -->
-    <!-- Elton John -->
-    <!-- Grateful Dead -->
-    <!-- Sweet Honey in the Rock -->
-  </div>
-</section>
-
-  <div class="artist-grid">
-
-    <!-- Wynton Marsalis -->
-    <div class="artist-card">
-      <img class="artist-img" 
-           src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Wynton_Marsalis_2014.jpg/440px-Wynton_Marsalis_2014.jpg" 
-           alt="Wynton Marsalis"
-           onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Wynton_Marsalis.jpg/440px-Wynton_Marsalis.jpg'">
-      <div class="artist-color-stripe" style="background: var(--cobalt);"></div>
-      <div class="artist-info">
-        <div class="artist-era" style="color: var(--cobalt);">UMS Debut 1994 · 17+ Visits</div>
-        <div class="artist-name">Wynton Marsalis</div>
-        <div class="artist-genre">Jazz Trumpet · Composer · Educator</div>
-        <p class="artist-desc" style="font-size:13px;font-weight:700;color:var(--charcoal);margin-bottom:8px;font-style:italic;">
-          "The spirit here — the size of Hill, the student participation, the quality of the orchestras — everything is on the highest level."
-        </p>
-        <p class="artist-desc">
-          Born in New Orleans in 1961, Marsalis joined Art Blakey's Jazz Messengers in 1980 and assembled his own band in 1981. He rekindled jazz's mainstream appeal through the 1980s and 90s, touring over 120 concerts per year for 15 consecutive years. His Jazz at Lincoln Center Orchestra debuted at UMS in 1994 and became nearly annual fixtures at Hill Auditorium. Marsalis received U-M's honorary Doctor of Music at the 2023 commencement.
-        </p>
-        <div class="artist-links">
-          <a class="artist-link" href="https://www.michigandaily.com/arts/1wynton-marsalis-and-jazz-lincoln-center-orchestra-return-hill-auditorium-25th-anniversary-tour30" target="_blank" style="color: var(--cobalt); border-color: var(--cobalt);">Michigan Daily →</a>
-          <a class="artist-link" href="https://www.michigandaily.com/news/campus-life/wynton-marsalis-reflects-on-the-role-of-american-jazz-in-democracy/" target="_blank" style="color: var(--cobalt); border-color: var(--cobalt); background: var(--cobalt); color: white;">Marsalis on Democracy →</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Yo-Yo Ma -->
-    <div class="artist-card">
-      <img class="artist-img" 
-           src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Yo-Yo_Ma_2011_Proms.jpg/440px-Yo-Yo_Ma_2011_Proms.jpg" 
-           alt="Yo-Yo Ma"
-           onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Yo-Yo_Ma_2009.jpg/440px-Yo-Yo_Ma_2009.jpg'">
-      <div class="artist-color-stripe" style="background: var(--vermillion);"></div>
-      <div class="artist-info">
-        <div class="artist-era" style="color: var(--vermillion);">Multiple Visits · 1980s–2000s</div>
-        <div class="artist-name">Yo-Yo Ma</div>
-        <div class="artist-genre">Classical Cello · Cultural Ambassador</div>
-        <p class="artist-desc" style="font-size:13px;font-weight:700;color:var(--charcoal);margin-bottom:8px;font-style:italic;">
-          "Life, like music, is based on themes and variations, experiences and experiments that shape who we are."
-        </p>
-        <p class="artist-desc">
-          Born in Paris to Chinese parents, Yo-Yo Ma debuted with the Harvard-Radcliffe Orchestra at age 15 and became one of the defining musicians of his generation. His appearances at Hill Auditorium spanned decades. He later joined U-M for a formal residency across all three campuses. "Life, like music, is based on themes and variations," he told a packed Hill Auditorium audience — a philosophy that resonated during the university's years of transformation.
-        </p>
-        <div class="artist-links">
-          <a class="artist-link" href="https://record.umich.edu/tags/university-musical-society/" target="_blank" style="color: var(--vermillion); border-color: var(--vermillion);">University Record →</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Ravi Shankar -->
-    <div class="artist-card">
-      <img class="artist-img" 
-           src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Ravi_Shankar_1975_press_photo.jpg/440px-Ravi_Shankar_1975_press_photo.jpg" 
-           alt="Ravi Shankar"
-           onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Ravi_Shankar_2010.jpg/440px-Ravi_Shankar_2010.jpg'">
-      <div class="artist-color-stripe" style="background: var(--jade);"></div>
-      <div class="artist-info">
-        <div class="artist-era" style="color: var(--jade);">UMS Debut April 1996 · Rackham Aud.</div>
-        <div class="artist-name">Ravi Shankar</div>
-        <div class="artist-genre">Hindustani Sitar · Composer · Teacher</div>
-        <p class="artist-desc" style="font-size:13px;font-weight:700;color:var(--charcoal);margin-bottom:8px;font-style:italic;">
-          "He never lost sight of the tradition from which he came. This is the true nature of innovation." — UMS essayist
-        </p>
-        <p class="artist-desc">
-          India's most esteemed musical ambassador and "the sitarist who introduced Indian music to the West" (New York Times). A prolific composer of ragas and talas, he collaborated with George Harrison, Philip Glass, and Yehudi Menuhin. UMS first presented him in April 1996 at Rackham Auditorium. Even at 85, he was still listening to and evaluating his own music.
-        </p>
-        <div class="artist-links">
-          <a class="artist-link" href="https://ums.org/tag/ums-history/" target="_blank" style="color: var(--jade); border-color: var(--jade);">UMS History →</a>
-          <a class="artist-link" href="https://ums.org/2013/12/11/ums-playlist-pandit-ravi-shankar-a-retrospective/" target="_blank" style="background: var(--jade); color: white; border-color: var(--jade);">UMS Retrospective →</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Elton John -->
-    <div class="artist-card">
-      <img class="artist-img" 
-           src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Elton_John_crop.jpg/440px-Elton_John_crop.jpg" 
-           alt="Elton John"
-           onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Elton_John_-_cropped.jpg/440px-Elton_John_-_cropped.jpg'">
-      <div class="artist-color-stripe" style="background: var(--magenta);"></div>
-      <div class="artist-info">
-        <div class="artist-era" style="color: var(--magenta);">Hill Auditorium · Ann Arbor</div>
-        <div class="artist-name">Elton John</div>
-        <div class="artist-genre">Rock · Pop · Piano</div>
-        <p class="artist-desc" style="font-size:13px;font-weight:700;color:var(--charcoal);margin-bottom:8px;font-style:italic;">
-          One of the first rock superstars to play Hill Auditorium — his appearances expanded the venue's identity beyond classical music.
-        </p>
-        <p class="artist-desc">
-          Among the most commercially successful artists of the rock era, Elton John performed at Hill Auditorium as part of his extensive North American touring throughout the 1980s. His appearances at the hall placed pop and rock squarely alongside the UMS classical and jazz programming — a broadening of what Hill Auditorium could mean to Ann Arbor audiences. Wikipedia and Michigan Today both cite John's Hill performances among the venue's landmark pop moments.
-        </p>
-        <div class="artist-links">
-          <a class="artist-link" href="https://en.wikipedia.org/wiki/Hill_Auditorium" target="_blank" style="color: var(--magenta); border-color: var(--magenta);">Wikipedia: Hill Aud. →</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- The Grateful Dead -->
-    <div class="artist-card">
-      <img class="artist-img" 
-           src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Jerry_Garcia_1982.jpg/440px-Jerry_Garcia_1982.jpg" 
-           alt="Jerry Garcia of the Grateful Dead"
-           onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Grateful_Dead_-_Workingman%27s_Dead.jpg/440px-Grateful_Dead_-_Workingman%27s_Dead.jpg'">
-      <div class="artist-color-stripe" style="background: var(--saffron);"></div>
-      <div class="artist-info">
-        <div class="artist-era" style="color: #b87c00;">Hill Aud. 1971 · Crisler 1979, 1989</div>
-        <div class="artist-name">Grateful Dead</div>
-        <div class="artist-genre">Psychedelic Rock · Live Performance</div>
-        <p class="artist-desc" style="font-size:13px;font-weight:700;color:var(--charcoal);margin-bottom:8px;font-style:italic;">
-          Their 1971 Hill Auditorium radio broadcasts are among the most celebrated live recordings in rock history.
-        </p>
-        <p class="artist-desc">
-          The Grateful Dead played Hill Auditorium for legendary two-night radio broadcasts in December 1971 — one of the most documented runs in the band's history. By the 1980s and 90s they moved to the larger Crisler Arena, drawing 12,000+ fans for their 1989 Ann Arbor run. A Michigan Daily writer previewed the 1989 shows, noting the band's ever-shifting setlists. Their 1971 Hill appearances remain among the most celebrated recordings of the Dead's early catalog.
-        </p>
-        <div class="artist-links">
-          <a class="artist-link" href="https://pulp.aadl.org/node/647186" target="_blank" style="color: #b87c00; border-color: #b87c00;">Ann Arbor History →</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Sweet Honey in the Rock -->
-    <div class="artist-card">
-      <img class="artist-img" 
-           src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Sweet_Honey_in_the_Rock_at_the_2012_National_Folk_Festival.jpg/440px-Sweet_Honey_in_the_Rock_at_the_2012_National_Folk_Festival.jpg" 
-           alt="Sweet Honey in the Rock"
-           onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Bernice_Johnson_Reagon_2007.jpg/440px-Bernice_Johnson_Reagon_2007.jpg'">
-      <div class="artist-color-stripe" style="background: var(--plum);"></div>
-      <div class="artist-info">
-        <div class="artist-era" style="color: var(--plum);">UMS · Hill Auditorium 2004</div>
-        <div class="artist-name">Sweet Honey in the Rock</div>
-        <div class="artist-genre">A Cappella · African American Tradition · Social Justice</div>
-        <p class="artist-desc" style="font-size:13px;font-weight:700;color:var(--charcoal);margin-bottom:8px;font-style:italic;">
-          Founded by Dr. Bernice Johnson Reagon — their UMS performances embodied the era's push to expand whose voices Hill amplified.
-        </p>
-        <p class="artist-desc">
-          Founded in 1973 by Dr. Bernice Johnson Reagon, Sweet Honey in the Rock is an a cappella ensemble rooted in African American musical traditions — gospel, blues, jazz, spirituals, and R&B. Their performances at UMS, documented in the UMS digital archive, were emblematic of the era's commitment to expanding whose voices Hill Auditorium would amplify. Their work bridged the worlds of artistic excellence and social justice advocacy.
-        </p>
-        <div class="artist-links">
-          <a class="artist-link" href="https://findingaids.lib.umich.edu/catalog/umich-bhl-87378" target="_blank" style="color: var(--plum); border-color: var(--plum);">UMS Archive →</a>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ── BAM / ACTIVISM ── -->
-<section id="bam">
-  <span class="section-label">Activism</span>
-  <h2 class="section-title" style="color: white;">BAM &amp; The Fight<br>For A Multicultural U-M</h2>
-
-  <div class="bam-grid">
-
-    <div class="bam-card">
-      <div class="bam-card-num">I</div>
-      <div class="bam-card-year">1970 — BAM I</div>
-      <div class="bam-card-title">Strike That Changed the University</div>
-      <p>Black students walk out of classes for 13 days. Over 300 professors cancel classes. The university agrees to a 10% Black enrollment target by 1973-74. Key demands: a Black student center (today's Trotter Multicultural Center), expanded Black studies, and new funding for minority recruitment. Protesters disrupted the annual honors convocation with tear gas bombs. BAM picketers lined the steps of Hill Auditorium at the March convocation.</p>
-    </div>
-
-    <div class="bam-card">
-      <div class="bam-card-num">II</div>
-      <div class="bam-card-year">1975 — BAM II</div>
-      <div class="bam-card-title">Confronting Broken Promises</div>
-      <p>Black enrollment stood at only 7.3% — the university had not reached its own stated goal. BAM II protesters occupied the Administration Building. President Fleming negotiated directly with students. The protest exposed the gap between institutional promises and institutional follow-through — a pattern that would define the decades to come.</p>
-      <a class="tl-source" href="https://findingaids.lib.umich.edu/catalog/umich-bhl-2014162" target="_blank">Bentley Library → BAM II Documents</a>
-    </div>
-
-    <div class="bam-card">
-      <div class="bam-card-num">III</div>
-      <div class="bam-card-year">1987 — BAM III &amp; UCAR</div>
-      <div class="bam-card-title">Two Groups, One Demand: Change</div>
-      <p>Sparked by racist flyers in dorms and a racist radio broadcast on WJJX, both BAM III and the multiracial United Coalition Against Racism mobilize. Rev. Jesse Jackson mediates. Six concessions are reached, including creation of the Office of Minority Affairs. The 4,200-person rally at Hill Auditorium becomes the symbolic moment where music venue and activist space literally converge.</p>
-      <a class="tl-source" href="https://oami.umich.edu/bam/" target="_blank">U-M OAMI → BAM Full History</a>
-    </div>
-
-    <div class="bam-card">
-      <div class="bam-card-num">⟡</div>
-      <div class="bam-card-year">1988–1996 — The Mandate Era</div>
-      <div class="bam-card-title">The Michigan Mandate: Institutionalizing Change</div>
-      <p>President Duderstadt's Michigan Mandate transforms the university's diversity approach. Black enrollment rises from 5.4% in 1987 to a record 9% by 1996. The Ella Baker–Nelson Mandela Freedom Center engages in political education across campus. The Office of Minority Affairs — renamed OAMI under Dr. Lester Monts in 1993 — becomes a permanent institutional pillar.</p>
-      <a class="tl-source" href="https://michigantoday.umich.edu/2024/03/22/thirteen-days-in-1970-the-bam-strike/" target="_blank">Michigan Today → 13 Days in 1970</a>
-    </div>
-
-    <div class="bam-quote-block">
-      <div class="bam-quote-text">
-        "Its thesis — that cultural diversity and education were not antithetical but intimately linked — was an early forerunner of ideas that soon would be taken for granted in higher education and other spheres of American society."
-      </div>
-      <div class="bam-quote-attr">Michigan Today — on the Michigan Mandate, 2024</div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ── MANDATE BAND ── -->
-<div class="mandate-band">
-  <div class="big-num">1988</div>
-  <div>
-    <div class="mandate-title">The Michigan Mandate: A New Kind of University</div>
-    <p>
-      Launched in 1988 under President James Duderstadt, the Michigan Mandate represented the most ambitious institutional response to student activism in U-M's history. Its foundational argument — that diversity strengthens rather than dilutes educational excellence — was a direct answer to the conservative backlash of the Reagan era. By framing multiculturalism as an academic imperative, Duderstadt aligned the university's scholarly mission with the demands students had been making for nearly two decades. The arts played a subtle but real role: UMS programming from 1988 onward reflected an expanding definition of world-class performance — one that included jazz, Indian classical music, African American vocal tradition, and global dance forms alongside the European canon.
+    <p class="argument-body">
+      The reviews are not merely entertainment journalism. They are micro-level evidence in a macro-level argument about race, institutional power, and what it means to be a "multicultural university." Each article choice — which instruments to explain, which Western comparisons to reach for, how to justify a genre's presence at Hill — encodes the ideological work the university needed cultural programming to do during the Michigan Mandate era.
     </p>
   </div>
 </div>
 
-<!-- ── MICHIGAN DAILY ARTICLES ── -->
-<section id="articles">
-  <span class="section-label">Michigan Daily</span>
-  <h2 class="section-title">From the Archive</h2>
-  <p style="max-width: 600px; font-size: 16px; line-height: 1.8; color: rgba(26,18,16,0.6);">
-    The Michigan Daily documented both the cultural life of Hill Auditorium and the activism reshaping campus. Below is a curated set of articles spanning the era — click any card to read the source.
-  </p>
-
-  <div class="articles-grid">
-
-    <div class="article-card" onclick="window.open('https://www.michigandaily.com/arts/1wynton-marsalis-and-jazz-lincoln-center-orchestra-return-hill-auditorium-25th-anniversary-tour30','_blank')">
-      <div class="article-card-top" style="background: var(--cobalt);"></div>
-      <div class="article-date">Arts &amp; Culture · Michigan Daily</div>
-      <div class="article-headline">Wynton Marsalis and Jazz at Lincoln Center Orchestra Return to Hill for Anniversary Tour</div>
-      <p class="article-body">Previewing JLCO's return visit to Hill Auditorium for its 25th anniversary, this piece documents Marsalis's long relationship with Ann Arbor — "14 visits through the University Musical Society" — and JLCO drummer Ali Jackson's commentary on jazz as education and community practice.</p>
-      <a class="article-read" style="background: var(--cobalt);" href="https://www.michigandaily.com/arts/1wynton-marsalis-and-jazz-lincoln-center-orchestra-return-hill-auditorium-25th-anniversary-tour30" target="_blank">Read Article →</a>
+<!-- EXHIBIT INDEX -->
+<section id="exhibit-index">
+  <div class="exhibit-index-header">
+    <div>
+      <span class="section-label" style="background: var(--charcoal); color: var(--cream);">Exhibit Structure</span>
+      <h2 class="section-title">Five Sections,<br>One Argument</h2>
     </div>
+    <p class="exhibit-index-desc">
+      This digital exhibit moves from historical context through primary source analysis, building toward a critical reading of how campus media both advanced and complicated the Michigan Mandate's multicultural vision. Navigate each section in order, or jump directly to any theme.
+    </p>
+  </div>
 
-    <div class="article-card" onclick="window.open('https://www.michigandaily.com/news/campus-life/wynton-marsalis-reflects-on-the-role-of-american-jazz-in-democracy/','_blank')">
-      <div class="article-card-top" style="background: var(--cobalt);"></div>
-      <div class="article-date">Campus Life · Michigan Daily · 2026</div>
-      <div class="article-headline">Wynton Marsalis Reflects on the Role of American Jazz in Democracy</div>
-      <p class="article-body">At Rackham Auditorium, Marsalis speaks with Ford School Dean Celeste Watkins-Hayes about music, democracy, and collective responsibility. A student recalls: "When I was in seventh grade, I watched him at Hill Auditorium, and that's what inspired me to play baritone sax." Marsalis: "This system does not work if you're not educated in how it works — so is jazz."</p>
-      <a class="article-read" style="background: var(--cobalt);" href="https://www.michigandaily.com/news/campus-life/wynton-marsalis-reflects-on-the-role-of-american-jazz-in-democracy/" target="_blank">Read Article →</a>
-    </div>
+  <div class="pages-grid">
 
-    <div class="article-card" onclick="window.open('https://www.michigandaily.com/michigan-in-color/bbum-our-history/','_blank')">
-      <div class="article-card-top" style="background: var(--magenta);"></div>
-      <div class="article-date">Michigan in Color · Michigan Daily</div>
-      <div class="article-headline">BBUM: Our History — The Unfinished Business of BAM</div>
-      <p class="article-body">A retrospective on the Black Action Movement campaigns from a Michigan Daily student writer in the 2010s. Traces the arc from BAM I's 1970 strike through multicultural lounges created in the early 1980s and the ways institutional memory fades even as the underlying struggles persist. "Lasting from 1970 to 1987, BAM progressively worked to increase the Black population and bring attention to harassment on campus."</p>
-      <a class="article-read" style="background: var(--magenta);" href="https://www.michigandaily.com/michigan-in-color/bbum-our-history/" target="_blank">Read Article →</a>
-    </div>
+    <a href="context.html" class="page-card">
+      <div class="page-card-top" style="background: var(--cobalt);">
+        <div class="page-card-icon">🏛️</div>
+        <div class="page-card-num">01</div>
+      </div>
+      <div class="page-card-body">
+        <div class="page-card-num-label">Section One</div>
+        <div class="page-card-title">Historical Context</div>
+        <p class="page-card-desc">The double life of a university: the world inside Hill Auditorium and the demands coming from the Diag. The Michigan Mandate, BAM I–III, and what "multicultural" meant in practice at U-M.</p>
+        <div class="page-card-arrow">Enter Section <span>→</span></div>
+      </div>
+    </a>
 
-    <div class="article-card" onclick="window.open('https://artsatmichigan.umich.edu/seen/2021/11/29/review-jazz-at-lincoln-center-orchestra-with-wynton-marsalis/','_blank')">
-      <div class="article-card-top" style="background: var(--saffron);"></div>
-      <div class="article-date">Arts at Michigan · [art]seen · Nov 2021</div>
-      <div class="article-headline">Review: Jazz at Lincoln Center Orchestra with Wynton Marsalis</div>
-      <p class="article-body">A student review from a packed Hill Auditorium holiday concert: "With true Michigan spirit, Wynton Marsalis opened the performance talking about the OSU game, and ended it by quoting 'The Victors' in a solo during an arrangement of 'Go Tell It on the Mountain.'" The reviewer reflects on what it means to have such easy access to world-class jazz as a U-M student.</p>
-      <a class="article-read" style="background: var(--saffron); color: var(--charcoal) !important;" href="https://artsatmichigan.umich.edu/seen/2021/11/29/review-jazz-at-lincoln-center-orchestra-with-wynton-marsalis/" target="_blank">Read Review →</a>
-    </div>
+    <a href="timeline.html" class="page-card">
+      <div class="page-card-top" style="background: var(--saffron);">
+        <div class="page-card-icon" style="font-size: 40px;">📅</div>
+        <div class="page-card-num" style="color: rgba(0,0,0,0.1);">02</div>
+      </div>
+      <div class="page-card-body">
+        <div class="page-card-num-label">Section Two</div>
+        <div class="page-card-title">Twenty-Year Timeline</div>
+        <p class="page-card-desc">A parallel record of landmark performances at Hill Auditorium and the campus activism reshaping the university — 1980 through 2000.</p>
+        <div class="page-card-arrow">Enter Section <span>→</span></div>
+      </div>
+    </a>
 
-    <div class="article-card" onclick="window.open('https://pulp.aadl.org/node/647186','_blank')">
-      <div class="article-card-top" style="background: var(--jade);"></div>
-      <div class="article-date">Arts Around Ann Arbor · AADL</div>
-      <div class="article-headline">Concert History: Crisler Center — The Grateful Dead, Dylan &amp; More</div>
-      <p class="article-body">Drawing from Michigan Daily archives, Ann Arbor News coverage, and local memory, this deep-dive covers Crisler and Hill Auditorium's concert history. Michigan Daily writer Brian Jarvinen previewed the Dead's 1989 Ann Arbor shows. The Grateful Dead's legendary 1971 Hill Auditorium radio broadcast is described as among "the best-documented run in the band's history."</p>
-      <a class="article-read" style="background: var(--jade);" href="https://pulp.aadl.org/node/647186" target="_blank">Read Feature →</a>
-    </div>
+    <a href="artists.html" class="page-card">
+      <div class="page-card-top" style="background: var(--vermillion);">
+        <div class="page-card-icon">🎵</div>
+        <div class="page-card-num">03</div>
+      </div>
+      <div class="page-card-body">
+        <div class="page-card-num-label">Section Three</div>
+        <div class="page-card-title">Artists of the Era</div>
+        <p class="page-card-desc">Profiles of the artists who performed at Hill — Ravi Shankar, Wynton Marsalis, Run-D.M.C., Cecil Taylor, Gil Scott-Heron, Sweet Honey in the Rock, and more — and what their presence in Ann Arbor meant.</p>
+        <div class="page-card-arrow">Enter Section <span>→</span></div>
+      </div>
+    </a>
 
-    <div class="article-card" onclick="window.open('https://michigantoday.umich.edu/2024/03/22/thirteen-days-in-1970-the-bam-strike/','_blank')">
-      <div class="article-card-top" style="background: var(--vermillion);"></div>
-      <div class="article-date">Michigan Today · March 2024</div>
-      <div class="article-headline">Thirteen Days in 1970: The BAM Strike</div>
-      <p class="article-body">Michigan Today's comprehensive retrospective on BAM I, tracing the 13-day student strike that reshaped U-M's commitments on Black enrollment, faculty, and campus services. Includes the iconic image of BAM picketers in front of Hill Auditorium during the March 1970 convocation — the campus's most famous performance venue as backdrop for its most urgent political drama.</p>
-      <a class="article-read" style="background: var(--vermillion);" href="https://michigantoday.umich.edu/2024/03/22/thirteen-days-in-1970-the-bam-strike/" target="_blank">Read Article →</a>
-    </div>
+    <a href="analysis.html" class="page-card">
+      <div class="page-card-top" style="background: var(--magenta);">
+        <div class="page-card-icon">📰</div>
+        <div class="page-card-num">04</div>
+      </div>
+      <div class="page-card-body">
+        <div class="page-card-num-label">Section Four</div>
+        <div class="page-card-title">Critical Analysis</div>
+        <p class="page-card-desc">Close readings of Michigan Daily reviews across four thematic frames: Popular Innovation, Experimental Challenge, Political Prophecy, and Communal Harmony. The language that reveals the limits of liberal multiculturalism.</p>
+        <div class="page-card-arrow">Enter Section <span>→</span></div>
+      </div>
+    </a>
 
-    <div class="article-card" onclick="window.open('https://michigantoday.umich.edu/2012/10/23/a8479/','_blank')">
-      <div class="article-card-top" style="background: var(--plum);"></div>
-      <div class="article-date">Michigan Today · October 2012</div>
-      <div class="article-headline">Hill Marks Magnificent Centennial</div>
-      <p class="article-body">A centennial retrospective by Michigan Today documenting Hill Auditorium's century of performances. Documents the full arc of artists who performed at Hill — Enrico Caruso, Leonard Bernstein, Count Basie, Dave Brubeck, Miles Davis, Bob Dylan, Elton John, the Grateful Dead, and Yo-Yo Ma — alongside the personal memories of students and performers who called it home.</p>
-      <a class="article-read" style="background: var(--plum);" href="https://michigantoday.umich.edu/2012/10/23/a8479/" target="_blank">Read Feature →</a>
-    </div>
+    <a href="sources.html" class="page-card">
+      <div class="page-card-top" style="background: var(--jade);">
+        <div class="page-card-icon">📚</div>
+        <div class="page-card-num">05</div>
+      </div>
+      <div class="page-card-body">
+        <div class="page-card-num-label">Section Five</div>
+        <div class="page-card-title">Sources & Methodology</div>
+        <p class="page-card-desc">Primary and secondary sources, archival materials, and a reflection on the research methodology behind this project. Duderstadt, Tobin, Johnson, and the Hill Auditorium centennial archive.</p>
+        <div class="page-card-arrow">Enter Section <span>→</span></div>
+      </div>
+    </a>
 
-    <div class="article-card" onclick="window.open('https://ums.org/tag/ums-history/','_blank')">
-      <div class="article-card-top" style="background: var(--sky);"></div>
-      <div class="article-date">UMS History Blog · University Musical Society</div>
-      <div class="article-headline">This Day in UMS History: Ravi Shankar, Pavarotti, and More</div>
-      <p class="article-body">UMS's own archive blog series documents the moments — Ravi Shankar's 1996 Ann Arbor debut, Pavarotti ordering two steak dinners and then stealing ice cream before a recital — that define a century of programming. Essential context for understanding how UMS curated its world-expanding vision of performance alongside the university's multicultural transformation.</p>
-      <a class="article-read" style="background: var(--sky);" href="https://ums.org/tag/ums-history/" target="_blank">Read History →</a>
-    </div>
-
-    <div class="article-card" onclick="window.open('https://apps.lib.umich.edu/online-exhibits/exhibits/show/history-of-the-william-monroe-/the-black-action-movements','_blank')">
-      <div class="article-card-top" style="background: var(--charcoal);"></div>
-      <div class="article-date">U-M Library Online Exhibit</div>
-      <div class="article-headline">History of the Trotter Center: The Black Action Movements</div>
-      <p class="article-body">The University Library's online exhibit documenting the full arc of BAM I, II, III, and #BBUM — with primary source materials, photographs, and contextual analysis. Covers the sit-ins, the demands, the negotiations, and the institutional outcomes that created OAMI, MESA, the Comprehensive Studies Program, and the Trotter Multicultural Center.</p>
-      <a class="article-read" style="background: var(--charcoal);" href="https://apps.lib.umich.edu/online-exhibits/exhibits/show/history-of-the-william-monroe-/the-black-action-movements" target="_blank">View Exhibit →</a>
+    <!-- About card -->
+    <div class="page-card" style="background: var(--offwhite); cursor: default;">
+      <div class="page-card-top" style="background: var(--charcoal);">
+        <div class="page-card-icon">✦</div>
+        <div class="page-card-num">–</div>
+      </div>
+      <div class="page-card-body">
+        <div class="page-card-num-label">About This Project</div>
+        <div class="page-card-title">Nilay Mishra</div>
+        <p class="page-card-desc">A digital research exhibit for AMCULT 103, University of Michigan. Examining how campus media framed guest artists from minority racial and ethnic backgrounds at Hill Auditorium between 1980 and 2000, and what this reveals about U-M's multicultural project.</p>
+        <div class="page-card-arrow" style="color: rgba(26,18,16,0.25);">AMCULT 103 · 2026</div>
+      </div>
     </div>
 
   </div>
 </section>
 
-<!-- ── CLOSING ── -->
-<section id="closing">
-  <div>
-    <h2 class="closing-title">The Stage<br><span>Never Stood</span><br>Alone</h2>
-    <p class="closing-body">
-      Between 1980 and 2000, the University of Michigan lived a double life. In Hill Auditorium, Yo-Yo Ma drew his bow across strings in a hall designed for acoustical perfection. On the Diag, students demanded that the university make good on promises two decades old. These were not separate stories. The same institution that celebrated world-class artistic achievement was also the institution that had let Black enrollment slide to 5%. The Michigan Mandate's core insight — that diversity and excellence reinforce each other — was, in some ways, what the programming at Hill Auditorium had been quietly arguing all along.
-    </p>
-    <p class="closing-body">
-      By 2000, the transformation was incomplete and contested — it remains so. But the 20 years documented here represent a moment when a great university was forced to reckon with the gap between its aspirations and its practices. The stages — physical and metaphorical — were never neutral. They were always sites of argument, memory, and possibility.
-    </p>
-    <a href="#hero" class="btn-primary" style="display: inline-block; margin-top: 8px;">↑ Back to Top</a>
+<!-- SCHOLARS -->
+<section class="scholars-row">
+  <div class="scholars-row-header">
+    <div class="scholars-row-title">Key Secondary Sources</div>
+    <span style="font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(26,18,16,0.35);">Full analysis in Sources section →</span>
   </div>
-  <div class="closing-sidebar">
-    <div class="closing-sidebar-item">
-      <div class="cs-label">Primary Venue</div>
-      <div class="cs-val">Hill Auditorium, University of Michigan — Ann Arbor, Michigan. Opened 1913. 3,500 seats.</div>
+  <div class="scholars-grid">
+    <div class="scholar-card">
+      <div class="scholar-color" style="background: var(--cobalt);"></div>
+      <div class="scholar-name">Matthew Johnson</div>
+      <div class="scholar-work">Undermining Racial Justice (2020)</div>
+      <p class="scholar-contribution">Johnson argues that racial inclusion can become a strategy for institutional stability rather than genuine justice. His concept of "selective incorporation" — celebrating diversity while preserving structural hierarchies — is the critical framework animating this project's analysis of Michigan Daily language.</p>
     </div>
-    <div class="closing-sidebar-item">
-      <div class="cs-label">Presenting Organization</div>
-      <div class="cs-val">University Musical Society (UMS), est. 1879. National Medal of Arts recipient, 2014.</div>
+    <div class="scholar-card">
+      <div class="scholar-color" style="background: var(--vermillion);"></div>
+      <div class="scholar-name">James Duderstadt</div>
+      <div class="scholar-work">A 50-Year History of Social Diversity at U-M</div>
+      <p class="scholar-contribution">The Michigan Mandate's architect provides the institutional narrative of diversification as simultaneous moral imperative and academic strategy. His language of "complementary goals" and necessary "sacrifices" illuminates the ideological framework within which the Michigan Daily reviews were written.</p>
     </div>
-    <div class="closing-sidebar-item">
-      <div class="cs-label">Key Movements</div>
-      <div class="cs-val">BAM I (1970), BAM II (1975), BAM III (1987), UCAR (1987), Michigan Mandate (1988–)</div>
-    </div>
-    <div class="closing-sidebar-item">
-      <div class="cs-label">Sources</div>
-      <div class="cs-val">Michigan Daily Archive · Michigan Today · UMS Rewind Archive · Bentley Historical Library · AAIHS · U-M OAMI</div>
+    <div class="scholar-card">
+      <div class="scholar-color" style="background: var(--jade);"></div>
+      <div class="scholar-name">James Tobin</div>
+      <div class="scholar-work">"Michigan's Affirmative Action Debate"</div>
+      <p class="scholar-contribution">Tobin traces the legal and political pressures that made Michigan's diversity initiatives matters of survival, not merely aspiration. His account of the BAM protests through the Supreme Court cases reveals how high the stakes were when student writers chose how to frame a Ravi Shankar concert or a Run-D.M.C. preview.</p>
     </div>
   </div>
 </section>
+
+<!-- METHOD STRIP -->
+<div class="method-strip">
+  <div class="method-label">Research Approach</div>
+  <div class="method-text">
+    "This project moves from the macro-level arguments of institutional history toward the micro-level evidence of individual concert reviews — using language analysis, framing theory, and critical race scholarship to ask what the smallest editorial choices in campus media reveal about multiculturalism's limits and possibilities."
+  </div>
+</div>
 
 <footer>
   <div class="footer-logo">Stages of Change · U-M 1980–2000</div>
-  <div class="footer-note">Research drawn from Michigan Daily, UMS, Michigan Today &amp; Bentley Historical Library</div>
+  <ul class="footer-nav">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="context.html">Context</a></li>
+    <li><a href="timeline.html">Timeline</a></li>
+    <li><a href="artists.html">Artists</a></li>
+    <li><a href="analysis.html">Analysis</a></li>
+    <li><a href="sources.html">Sources</a></li>
+  </ul>
+  <div class="footer-note">Research drawn from Michigan Daily · UMS Archive · Michigan Today · Bentley Historical Library · AMCULT 103</div>
 </footer>
 
 </body>

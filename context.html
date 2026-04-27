@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Historical Context — Stages of Change</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Instrument+Serif:ital@0;1&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,300;1,9..144,700;1,9..144,900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --vermillion: #E8401A; --cobalt: #1A4FD8; --saffron: #F5A623;
+  --jade: #1A8C5E; --magenta: #C0186C; --sky: #3CB4E8;
+  --plum: #6A1F9E; --cream: #FFF8EF; --charcoal: #1A1210;
+  --offwhite: #FAF6F0; --nav-h: 56px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Instrument Serif', Georgia, serif; background: var(--cream); color: var(--charcoal); overflow-x: hidden; }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+  background: var(--charcoal); display: flex; align-items: center;
+  justify-content: space-between; padding: 0 40px; height: var(--nav-h);
+  border-bottom: 3px solid var(--cobalt);
+}
+.nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 0.08em; color: var(--cream); text-decoration: none; }
+.nav-links { display: flex; gap: 0; list-style: none; }
+.nav-links a {
+  font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: rgba(255,248,239,0.5); text-decoration: none;
+  padding: 0 14px; height: var(--nav-h); display: flex; align-items: center;
+  border-left: 1px solid rgba(255,255,255,0.08); transition: all 0.15s; white-space: nowrap;
+}
+.nav-links a:hover, .nav-links a.active { background: var(--cobalt); color: white; }
+
+/* PAGE HEADER */
+.page-header {
+  padding-top: var(--nav-h); background: var(--cobalt);
+  padding-left: 60px; padding-right: 60px; padding-bottom: 64px;
+  position: relative; overflow: hidden;
+}
+.page-header::after {
+  content: '01'; font-family: 'Bebas Neue', sans-serif;
+  font-size: 300px; color: rgba(255,255,255,0.06);
+  position: absolute; right: -20px; bottom: -40px; line-height: 1;
+  pointer-events: none;
+}
+.page-header-inner { padding-top: 64px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: end; }
+.page-header-eyebrow {
+  font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.25em;
+  text-transform: uppercase; color: rgba(255,248,239,0.5); margin-bottom: 16px; display: block;
+}
+.page-header-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(64px, 10vw, 120px); color: var(--cream); line-height: 0.9; }
+.page-header-title span { color: var(--saffron); }
+.page-header-desc { font-size: 17px; line-height: 1.85; color: rgba(255,248,239,0.65); }
+
+/* BREADCRUMB */
+.breadcrumb {
+  display: flex; align-items: center; gap: 8px;
+  padding: 16px 60px; background: var(--offwhite);
+  border-bottom: 1px solid rgba(26,18,16,0.1);
+}
+.breadcrumb a, .breadcrumb span {
+  font-family: 'Space Mono', monospace; font-size: 8px;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: rgba(26,18,16,0.4); text-decoration: none;
+}
+.breadcrumb a:hover { color: var(--vermillion); }
+.breadcrumb .sep { color: rgba(26,18,16,0.2); }
+.breadcrumb .current { color: var(--charcoal); }
+
+/* SECTION LABEL */
+.section-label {
+  font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.25em;
+  text-transform: uppercase; margin-bottom: 12px; display: inline-block; padding: 5px 12px;
+}
+
+/* DUAL STAGE SECTION */
+.dual-stage {
+  display: grid; grid-template-columns: 1fr 1fr;
+}
+
+.stage-panel {
+  padding: 72px 60px;
+}
+
+.stage-panel--inside { background: var(--offwhite); border-right: 3px solid var(--charcoal); }
+.stage-panel--outside { background: var(--charcoal); }
+
+.stage-panel-eyebrow {
+  font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.2em;
+  text-transform: uppercase; margin-bottom: 16px;
+}
+.stage-panel--inside .stage-panel-eyebrow { color: var(--cobalt); }
+.stage-panel--outside .stage-panel-eyebrow { color: var(--saffron); }
+
+.stage-panel-title {
+  font-family: 'Bebas Neue', sans-serif; font-size: clamp(40px, 5vw, 60px);
+  line-height: 0.95; margin-bottom: 28px;
+}
+.stage-panel--inside .stage-panel-title { color: var(--charcoal); }
+.stage-panel--outside .stage-panel-title { color: var(--cream); }
+
+.stage-panel-body {
+  font-size: 16px; line-height: 1.85; margin-bottom: 24px;
+}
+.stage-panel--inside .stage-panel-body { color: rgba(26,18,16,0.65); }
+.stage-panel--outside .stage-panel-body { color: rgba(255,248,239,0.65); }
+
+.stage-quote {
+  font-family: 'Fraunces', serif; font-style: italic; font-size: 17px;
+  line-height: 1.6; border-left: 3px solid; padding-left: 18px;
+  margin: 24px 0;
+}
+.stage-panel--inside .stage-quote { color: var(--charcoal); border-color: var(--cobalt); }
+.stage-panel--outside .stage-quote { color: var(--cream); border-color: var(--saffron); }
+
+.stage-quote small {
+  display: block; font-family: 'Space Mono', monospace; font-size: 9px;
+  letter-spacing: 0.12em; text-transform: uppercase; margin-top: 8px;
+  font-style: normal; opacity: 0.6;
+}
+
+/* BAM CARDS */
+.bam-section {
+  background: var(--charcoal); padding: 80px 60px;
+}
+
+.bam-section-header {
+  display: grid; grid-template-columns: 1fr 2fr; gap: 60px;
+  align-items: start; margin-bottom: 64px;
+}
+
+.bam-section-title {
+  font-family: 'Bebas Neue', sans-serif; font-size: clamp(56px, 8vw, 100px);
+  color: var(--cream); line-height: 0.9;
+}
+.bam-section-title em { color: var(--magenta); font-style: normal; }
+
+.bam-section-intro { font-size: 16px; line-height: 1.85; color: rgba(255,248,239,0.6); }
+
+.bam-timeline {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 2px; background: rgba(255,255,255,0.06);
+}
+
+.bam-card {
+  background: var(--charcoal); padding: 40px 36px;
+  position: relative; overflow: hidden;
+  border-top: 4px solid;
+  transition: background 0.2s;
+}
+.bam-card:hover { background: #221810; }
+
+.bam-card:nth-child(1) { border-color: var(--cobalt); }
+.bam-card:nth-child(2) { border-color: var(--vermillion); }
+.bam-card:nth-child(3) { border-color: var(--magenta); }
+.bam-card:nth-child(4) { border-color: var(--jade); grid-column: 1 / -1; border-top-color: var(--jade); }
+
+.bam-card-bg-num {
+  font-family: 'Bebas Neue', sans-serif; font-size: 180px;
+  color: rgba(255,255,255,0.04); position: absolute; right: -10px; bottom: -30px;
+  line-height: 1; pointer-events: none;
+}
+
+.bam-card-year {
+  font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.2em;
+  text-transform: uppercase; color: rgba(255,248,239,0.4); margin-bottom: 10px;
+}
+
+.bam-card-roman {
+  font-family: 'Bebas Neue', sans-serif; font-size: 48px; color: rgba(255,255,255,0.12);
+  position: absolute; top: 36px; right: 36px;
+}
+
+.bam-card-title {
+  font-family: 'Fraunces', serif; font-size: 22px; font-weight: 700;
+  color: white; margin-bottom: 16px; line-height: 1.25;
+}
+
+.bam-card-body {
+  font-size: 14px; line-height: 1.8; color: rgba(255,248,239,0.65);
+}
+
+.bam-card-outcome {
+  margin-top: 20px; padding: 14px 18px;
+  background: rgba(255,255,255,0.06);
+  border-left: 3px solid rgba(255,255,255,0.2);
+}
+.bam-card-outcome-label {
+  font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 0.2em;
+  text-transform: uppercase; color: rgba(255,248,239,0.35); margin-bottom: 6px;
+}
+.bam-card-outcome-text {
+  font-family: 'Fraunces', serif; font-style: italic; font-size: 14px;
+  color: rgba(255,248,239,0.75);
+}
+
+.bam-card-source {
+  display: inline-block; margin-top: 14px;
+  font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--saffron); border-bottom: 1px solid var(--saffron);
+  text-decoration: none; opacity: 0.7; transition: opacity 0.15s;
+}
+.bam-card-source:hover { opacity: 1; }
+
+/* ENROLLMENT BAND */
+.enrollment-band {
+  background: var(--vermillion); padding: 0;
+  display: grid; grid-template-columns: repeat(4, 1fr);
+}
+
+.enroll-stat {
+  padding: 48px 40px; text-align: center;
+  border-right: 1px solid rgba(255,255,255,0.2);
+}
+.enroll-stat:last-child { border-right: none; }
+
+.enroll-stat-year {
+  font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.2em;
+  text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 8px;
+}
+
+.enroll-stat-num {
+  font-family: 'Bebas Neue', sans-serif; font-size: 72px; color: white; line-height: 1;
+}
+
+.enroll-stat-label {
+  font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: rgba(255,255,255,0.6); margin-top: 8px;
+}
+
+/* MANDATE SECTION */
+.mandate-section {
+  background: var(--jade); padding: 80px 60px;
+}
+
+.mandate-section-header { margin-bottom: 48px; }
+
+.mandate-section-title {
+  font-family: 'Bebas Neue', sans-serif; font-size: clamp(64px, 9vw, 120px);
+  color: rgba(255,255,255,0.2); line-height: 0.9; margin-bottom: 0;
+}
+
+.mandate-content {
+  display: grid; grid-template-columns: 2fr 1fr; gap: 60px;
+}
+
+.mandate-body { font-size: 16px; line-height: 1.85; color: rgba(255,255,255,0.8); }
+.mandate-body p { margin-bottom: 20px; }
+
+.mandate-quote {
+  font-family: 'Fraunces', serif; font-style: italic; font-size: 21px;
+  color: white; line-height: 1.6; border-left: 4px solid rgba(255,255,255,0.4);
+  padding-left: 20px; margin: 32px 0;
+}
+.mandate-quote small {
+  display: block; font-family: 'Space Mono', monospace; font-size: 9px;
+  letter-spacing: 0.12em; text-transform: uppercase; font-style: normal;
+  color: rgba(255,255,255,0.5); margin-top: 10px;
+}
+
+.mandate-sidebar {}
+.mandate-sidebar-item {
+  padding: 24px 0; border-bottom: 1px solid rgba(255,255,255,0.15);
+}
+.mandate-sidebar-item:first-child { border-top: 1px solid rgba(255,255,255,0.15); }
+.msi-label {
+  font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 0.2em;
+  text-transform: uppercase; color: rgba(255,255,255,0.45); margin-bottom: 8px;
+}
+.msi-val { font-family: 'Fraunces', serif; font-size: 16px; color: white; line-height: 1.4; }
+
+/* JOHNSON FRAME */
+.johnson-frame {
+  background: var(--offwhite); padding: 80px 60px;
+  border-top: 3px solid var(--charcoal);
+}
+.johnson-inner {
+  display: grid; grid-template-columns: 1fr 2fr; gap: 60px; align-items: start;
+}
+.johnson-label {
+  font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.25em;
+  text-transform: uppercase; color: rgba(26,18,16,0.4); margin-bottom: 16px; display: block;
+}
+.johnson-title {
+  font-family: 'Bebas Neue', sans-serif; font-size: clamp(40px, 5vw, 60px);
+  color: var(--charcoal); line-height: 0.95;
+}
+.johnson-title em { color: var(--vermillion); font-style: normal; }
+.johnson-body { font-size: 16px; line-height: 1.85; color: rgba(26,18,16,0.65); }
+.johnson-body p { margin-bottom: 20px; }
+.johnson-pull {
+  font-family: 'Fraunces', serif; font-style: italic; font-size: 20px;
+  color: var(--charcoal); line-height: 1.6; border-left: 4px solid var(--vermillion);
+  padding-left: 20px; margin: 28px 0;
+}
+
+/* NAV BOTTOM */
+.page-nav-bottom {
+  background: var(--charcoal); padding: 40px 60px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.page-nav-link {
+  font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.15em;
+  text-transform: uppercase; color: rgba(255,248,239,0.5); text-decoration: none;
+  display: flex; align-items: center; gap: 12px; transition: color 0.15s;
+}
+.page-nav-link:hover { color: var(--saffron); }
+.page-nav-link .pnl-label { font-family: 'Bebas Neue', sans-serif; font-size: 26px; color: var(--cream); display: block; }
+
+/* FOOTER */
+footer {
+  background: black; padding: 32px 60px;
+  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;
+}
+.footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 20px; color: rgba(255,255,255,0.3); letter-spacing: 0.08em; }
+.footer-nav { display: flex; gap: 20px; list-style: none; flex-wrap: wrap; }
+.footer-nav a {
+  font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: rgba(255,255,255,0.25); text-decoration: none; transition: color 0.15s;
+}
+.footer-nav a:hover { color: rgba(255,255,255,0.65); }
+.footer-note { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 0.12em; color: rgba(255,255,255,0.15); text-transform: uppercase; width: 100%; }
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  nav { padding: 0 20px; }
+  .nav-links { display: none; }
+  .page-header { padding: 0 24px 48px; }
+  .page-header-inner { grid-template-columns: 1fr; gap: 24px; }
+  .dual-stage { grid-template-columns: 1fr; }
+  .stage-panel--inside { border-right: none; border-bottom: 3px solid var(--charcoal); }
+  .bam-section { padding: 48px 24px; }
+  .bam-section-header { grid-template-columns: 1fr; gap: 24px; }
+  .bam-timeline { grid-template-columns: 1fr; }
+  .bam-card:nth-child(4) { grid-column: 1; }
+  .enrollment-band { grid-template-columns: 1fr 1fr; }
+  .mandate-section { padding: 48px 24px; }
+  .mandate-content { grid-template-columns: 1fr; gap: 40px; }
+  .johnson-frame { padding: 48px 24px; }
+  .johnson-inner { grid-template-columns: 1fr; gap: 32px; }
+  .page-nav-bottom { padding: 32px 24px; flex-direction: column; gap: 24px; align-items: flex-start; }
+  footer { padding: 32px 24px; }
+  .stage-panel { padding: 48px 24px; }
+}
+@media (max-width: 600px) {
+  .enrollment-band { grid-template-columns: 1fr 1fr; }
+  .enroll-stat-num { font-size: 52px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Stages of Change</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="context.html" class="active">Context</a></li>
+    <li><a href="timeline.html">Timeline</a></li>
+    <li><a href="artists.html">Artists</a></li>
+    <li><a href="analysis.html">Analysis</a></li>
+    <li><a href="sources.html">Sources</a></li>
+  </ul>
+</nav>
+
+<div class="page-header">
+  <div class="page-header-inner">
+    <div>
+      <span class="page-header-eyebrow">Section 01 — Historical Context</span>
+      <div class="page-header-title">The Stage<br>&amp; <span>The Street</span></div>
+    </div>
+    <p class="page-header-desc">
+      Between 1980 and 2000, the University of Michigan was two institutions at once. Inside Hill Auditorium, world-class artists performed to packed houses of 3,500. Outside, on the Diag and in the administration building, students demanded that the university finally look like the world it claimed to serve. These were never separate stories.
+    </p>
+  </div>
+</div>
+
+<div class="breadcrumb">
+  <a href="index.html">Home</a>
+  <span class="sep">/</span>
+  <span class="current">Historical Context</span>
+</div>
+
+<!-- DUAL STAGE -->
+<div class="dual-stage">
+  <div class="stage-panel stage-panel--inside">
+    <div class="stage-panel-eyebrow">Inside the Building</div>
+    <div class="stage-panel-title">Hill Auditorium:<br>"The Other Big House"</div>
+    <p class="stage-panel-body">
+      Designed by Albert Kahn and opened in 1913, Hill Auditorium was engineered for acoustic perfection — supposedly a pin dropped on stage could be heard from the upper balcony. Its 3,500 seats made it among the largest university performance halls in the country. The University Musical Society (UMS), founded in 1879, presented the world's greatest performers on its oval stage: Enrico Caruso, Leonard Bernstein, Count Basie, Miles Davis, and the Vienna Philharmonic all performed here.
+    </p>
+    <p class="stage-panel-body">
+      By the 1980s, the UMS was booking artists of international repute: Yo-Yo Ma, Wynton Marsalis, Ravi Shankar, Elton John, and the Grateful Dead. Its programming was a statement about what excellence meant — and increasingly, a statement about whose excellence deserved the stage.
+    </p>
+    <div class="stage-quote">
+      "Hill Auditorium speaks to the quality and the standards that we expect in our performances."
+      <small>— Kenneth Kiesler, Director of University Orchestras</small>
+    </div>
+    <p class="stage-panel-body">
+      The Ann Arbor District Library's centennial feature on Hill describes it as a "double-sided coin": a space for orchestral performance and opera on one side, and for political rallies, religious services, and protest gatherings on the other. This duality matters enormously for understanding what it meant when minority artists performed there.
+    </p>
+  </div>
+  <div class="stage-panel stage-panel--outside">
+    <div class="stage-panel-eyebrow">Outside the Building</div>
+    <div class="stage-panel-title">A Campus<br>Demanding Change</div>
+    <p class="stage-panel-body">
+      In January 1987, racist flyers appeared under dormitory doors. A student radio station, WJJX, broadcast racist jokes to the campus. Black enrollment, which had hit a high of 7.7% in 1977, had slid back to 5.4%. The gap between the university's self-image and its actual demographics was impossible to ignore.
+    </p>
+    <p class="stage-panel-body">
+      The United Coalition Against Racism (UCAR) and Black Action Movement III mobilized together — a multiracial coalition unprecedented in U-M protest history. Their demands were concrete: a $35,000 annual allocation for the Black Student Union, tenure-track positions for Black faculty, a $5 million minority recruitment plan, and creation of a permanent Office of Minority Affairs.
+    </p>
+    <div class="stage-quote">
+      "The single most important thing we have agreed on is that it is in the interest of the university to increase the representation of Blacks."
+      <small>— President Harold Shapiro, Hill Auditorium rally, March 1987</small>
+    </div>
+    <p class="stage-panel-body">
+      The 4,200-person rally that followed — held inside Hill Auditorium itself — became the symbolic convergence of the two stages. The very building that amplified Ravi Shankar's sitar and Wynton Marsalis's trumpet also amplified the voices demanding that the institution live up to its own ideals. Hill was never purely a cultural space; it was always also a political one.
+    </p>
+  </div>
+</div>
+
+<!-- BAM SECTION -->
+<section class="bam-section">
+  <div class="bam-section-header">
+    <div>
+      <span class="section-label" style="background: var(--magenta); color: white;">Activism</span>
+      <div class="bam-section-title">BAM: <em>Three</em><br>Campaigns</div>
+    </div>
+    <p class="bam-section-intro">
+      The Black Action Movement ran three distinct campaigns across 1970, 1975, and 1987. Each demanded meaningful Black enrollment and faculty representation. Together, they created the political context within which the Michigan Mandate — and the cultural programming at Hill Auditorium — must be understood. The arc from BAM I to BAM III reveals a pattern Matthew Johnson identifies as "selective incorporation": institutions respond to activist pressure in ways that accommodate change without redistributing fundamental power.
+    </p>
+  </div>
+
+  <div class="bam-timeline">
+    <div class="bam-card">
+      <div class="bam-card-roman">I</div>
+      <div class="bam-card-year">February – March 1970</div>
+      <div class="bam-card-title">BAM I: The Strike That Changed the University</div>
+      <p class="bam-card-body">
+        Black students walk out of classes for 13 days. Over 300 professors cancel classes in solidarity. The university agrees to a 10% Black enrollment target by 1973–74. Key demands include a Black student center (today's Trotter Multicultural Center), expanded Black Studies programming, and new funding for minority recruitment. Protesters disrupted the annual honors convocation at Hill Auditorium — BAM picketers lined its steps during the March convocation, transforming the performance venue into a protest site for the first time.
+      </p>
+      <div class="bam-card-outcome">
+        <div class="bam-card-outcome-label">Institutional Response</div>
+        <div class="bam-card-outcome-text">University agrees to 10% enrollment target. Trotter House established. Black Studies program funded. By 1977, Black enrollment reaches 7.7% — but never reaches the 10% benchmark.</div>
+      </div>
+      <a class="bam-card-source" href="https://michigantoday.umich.edu/2024/03/22/thirteen-days-in-1970-the-bam-strike/" target="_blank">Michigan Today → Thirteen Days in 1970</a>
+    </div>
+
+    <div class="bam-card">
+      <div class="bam-card-roman">II</div>
+      <div class="bam-card-year">1975</div>
+      <div class="bam-card-title">BAM II: Confronting Broken Promises</div>
+      <p class="bam-card-body">
+        By 1975, Black enrollment stood at only 7.3% — the university had not reached its own stated goal of 10%. BAM II protesters occupied the Administration Building. President Robben Fleming negotiated directly with students. The protest exposed the central pattern Matthew Johnson documents in <em>Undermining Racial Justice</em>: institutions can accept activist framing, make institutional commitments, and still fail to follow through — particularly when follow-through would require redistribution of resources or power.
+      </p>
+      <div class="bam-card-outcome">
+        <div class="bam-card-outcome-label">Institutional Response</div>
+        <div class="bam-card-outcome-text">Limited concessions. No structural overhaul. Black enrollment begins declining again through the late 1970s and early 1980s, reaching 5.1% by 1984.</div>
+      </div>
+      <a class="bam-card-source" href="https://findingaids.lib.umich.edu/catalog/umich-bhl-2014162" target="_blank">Bentley Historical Library → BAM Documents</a>
+    </div>
+
+    <div class="bam-card">
+      <div class="bam-card-roman">III</div>
+      <div class="bam-card-year">January – March 1987</div>
+      <div class="bam-card-title">BAM III &amp; UCAR: Two Groups, One Demand</div>
+      <p class="bam-card-body">
+        Sparked by racist flyers in dorms and the WJJX radio broadcast, both BAM III and the multiracial United Coalition Against Racism mobilize simultaneously. Rev. Jesse Jackson mediates. Six concessions are reached, including creation of the Office of Minority Affairs and a $35,000 annual BSU allocation. The 4,200-person rally at Hill Auditorium on March 24, 1987 becomes the symbolic moment where the campus's most prestigious performance venue and its most urgent political drama literally converge.
+      </p>
+      <div class="bam-card-outcome">
+        <div class="bam-card-outcome-label">Institutional Response</div>
+        <div class="bam-card-outcome-text">Six concrete concessions. Office of Minority Affairs created. Michigan Mandate launched the following year under President Duderstadt. First sustained institutional commitment to diversity as a core academic value.</div>
+      </div>
+      <a class="bam-card-source" href="https://oami.umich.edu/bam/" target="_blank">U-M OAMI → BAM Full History</a>
+    </div>
+
+    <div class="bam-card" style="border-color: var(--jade);">
+      <div class="bam-card-bg-num">✦</div>
+      <div class="bam-card-year">1988–1996 — The Mandate Era</div>
+      <div class="bam-card-title">The Pattern: Johnson's "Selective Incorporation"</div>
+      <p class="bam-card-body">
+        Across all three BAM campaigns, a pattern emerges that Matthew Johnson identifies as defining how universities manage racial change. The institution doesn't simply resist or simply comply — it learns to speak the language of inclusion while preserving the structural conditions that require activism in the first place. Each BAM campaign was followed by institutional responses that felt like victories but stopped short of genuine redistribution. The Michigan Mandate was the most ambitious of these responses, and it achieved real gains. But as Johnson argues, measuring success by enrollment numbers or diversity programs can obscure the persistence of cultural and structural inequalities. The Michigan Daily concert reviews are one place where those inequalities become visible at the level of language.
+      </p>
+      <div class="bam-card-outcome">
+        <div class="bam-card-outcome-label">The Key Question</div>
+        <div class="bam-card-outcome-text">Did the Michigan Mandate's cultural programming — including what happened at Hill Auditorium — represent genuine change, or did it represent what Johnson calls "reputational benefit" divorced from structural transformation?</div>
+      </div>
+      <a class="bam-card-source" href="https://oami.umich.edu/bam/" target="_blank">Johnson, Undermining Racial Justice (2020)</a>
+    </div>
+  </div>
+</section>
+
+<!-- ENROLLMENT BAND -->
+<div class="enrollment-band">
+  <div class="enroll-stat">
+    <div class="enroll-stat-year">1977</div>
+    <div class="enroll-stat-num">7.7%</div>
+    <div class="enroll-stat-label">Black enrollment — highest before Mandate</div>
+  </div>
+  <div class="enroll-stat">
+    <div class="enroll-stat-year">1987</div>
+    <div class="enroll-stat-num">5.4%</div>
+    <div class="enroll-stat-label">Black enrollment — year of BAM III</div>
+  </div>
+  <div class="enroll-stat">
+    <div class="enroll-stat-year">1993</div>
+    <div class="enroll-stat-num">7.3%</div>
+    <div class="enroll-stat-label">Black enrollment — mid-Mandate progress</div>
+  </div>
+  <div class="enroll-stat">
+    <div class="enroll-stat-year">1996</div>
+    <div class="enroll-stat-num">9%</div>
+    <div class="enroll-stat-label">All-time high — closest to 10% target</div>
+  </div>
+</div>
+
+<!-- MANDATE SECTION -->
+<section class="mandate-section">
+  <div class="mandate-section-header">
+    <div class="mandate-section-title">The Michigan<br>Mandate</div>
+  </div>
+  <div class="mandate-content">
+    <div>
+      <p class="mandate-body">
+        Launched in 1988 under President James Duderstadt, the Michigan Mandate was the most ambitious institutional response to student activism in U-M's history. Its foundational argument — that diversity strengthens rather than dilutes educational excellence — was both a direct answer to the conservative backlash of the Reagan era and a pre-emptive defense against legal challenges to affirmative action.
+      </p>
+      <div class="mandate-quote">
+        "Its thesis — that cultural diversity and education were not antithetical but intimately linked — was an early forerunner of ideas soon taken for granted in higher education and other spheres of American society."
+        <small>— Michigan Today, 2024</small>
+      </div>
+      <p class="mandate-body">
+        Duderstadt's plan funded minority recruitment, established the Ella Baker–Nelson Mandela Freedom Center for political education, renamed the Office of Minority Affairs as OAMI (under Dr. Lester Monts in 1993), and repositioned diversity as a core institutional value — not a concession to protest but an essential condition for academic excellence.
+      </p>
+      <p class="mandate-body">
+        The results were real: Black enrollment rose from 5.4% in 1987 to a record 9% by 1996, the highest in university history. Underrepresented minorities among staff and students roughly doubled during this period, and graduation rates for minority students reached levels that led Duderstadt to claim Michigan as a national leader in racial equity in higher education.
+      </p>
+      <p class="mandate-body">
+        But the Mandate's gains were uneven and contested. James Tobin's account of the affirmative action debate reveals that diversity initiatives were "forged under pressure, not by choice" — and that the link between cultural diversity and educational quality required constant persuasion of judges, legislators, faculty, and students. The cultural programming at Hill Auditorium was one front in that persuasion effort.
+      </p>
+    </div>
+    <div class="mandate-sidebar">
+      <div class="mandate-sidebar-item">
+        <div class="msi-label">Launched</div>
+        <div class="msi-val">1988, under President James Duderstadt</div>
+      </div>
+      <div class="mandate-sidebar-item">
+        <div class="msi-label">Core Thesis</div>
+        <div class="msi-val">Diversity and academic excellence are "complementary and compelling goals" — not competing ones</div>
+      </div>
+      <div class="mandate-sidebar-item">
+        <div class="msi-label">Key Initiatives</div>
+        <div class="msi-val">Office of Minority Affairs (→OAMI), Ella Baker–Nelson Mandela Freedom Center, Comprehensive Studies Program, Michigan Mandate Action Plan</div>
+      </div>
+      <div class="mandate-sidebar-item">
+        <div class="msi-label">Cultural Dimension</div>
+        <div class="msi-val">UMS programming of the Mandate era reflected an expanding definition of world-class performance — including jazz, Indian classical music, African American vocal traditions, and global dance forms alongside the European canon</div>
+      </div>
+      <div class="mandate-sidebar-item">
+        <div class="msi-label">Johnson's Critique</div>
+        <div class="msi-val">"Selective incorporation" — celebrating diversity while preserving structural hierarchies. Measuring change by reputational benefit rather than power redistribution.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- JOHNSON FRAME -->
+<section class="johnson-frame">
+  <div class="johnson-inner">
+    <div>
+      <span class="johnson-label">Critical Framework</span>
+      <div class="johnson-title">Matthew Johnson's <em>Argument</em></div>
+    </div>
+    <div>
+      <div class="johnson-body">
+        <p>
+          The critical lens animating this entire exhibit comes from Matthew Johnson's <em>Undermining Racial Justice</em> (2020). Johnson examines the University of Michigan not as a story of straightforward progress toward inclusion, but as a case study in how institutions learn to manage racial change in ways that preserve stability while appearing to embrace transformation.
+        </p>
+        <div class="johnson-pull">
+          "Racial inclusion can be a strategy used to keep the university stable rather than a straightforward, clear path towards true racial justice."
+        </div>
+        <p>
+          Johnson's most important analytical move is distinguishing between "being institutionally aligned" and "actually redistributing power or resources." When Michigan celebrates cultural and racial diversity while preserving existing funding priorities and racial hierarchies, that is what he calls "selective incorporation" — and it is visible not just in policy documents, but in the language of student journalists reviewing concerts.
+        </p>
+        <p>
+          The Michigan Daily reviews this project examines are not just entertainment journalism. They are evidence. The choices student writers made about which instruments to explain, which Western comparisons to reach for, how to justify a genre's presence at Hill — these small editorial decisions encode the ideological work the university needed multicultural programming to perform. Close reading of that language is how this project moves from institutional history to cultural analysis.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE NAVIGATION -->
+<div class="page-nav-bottom">
+  <div style="opacity: 0.3; font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--cream);">← Previous Section</div>
+  <a href="timeline.html" class="page-nav-link">
+    <div>
+      <span style="font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,248,239,0.4);">Next Section →</span>
+      <span class="pnl-label">Twenty-Year Timeline</span>
+    </div>
+  </a>
+</div>
+
+<footer>
+  <div class="footer-logo">Stages of Change · U-M 1980–2000</div>
+  <ul class="footer-nav">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="context.html">Context</a></li>
+    <li><a href="timeline.html">Timeline</a></li>
+    <li><a href="artists.html">Artists</a></li>
+    <li><a href="analysis.html">Analysis</a></li>
+    <li><a href="sources.html">Sources</a></li>
+  </ul>
+  <div class="footer-note">Research drawn from Michigan Daily · UMS Archive · Michigan Today · Bentley Historical Library · AMCULT 103</div>
+</footer>
+
+</body>
+</html>

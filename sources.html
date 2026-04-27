@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sources & Methodology — Stages of Change</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Instrument+Serif:ital@0;1&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,300;1,9..144,700;1,9..144,900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --vermillion: #E8401A; --cobalt: #1A4FD8; --saffron: #F5A623;
+  --jade: #1A8C5E; --magenta: #C0186C; --sky: #3CB4E8;
+  --plum: #6A1F9E; --cream: #FFF8EF; --charcoal: #1A1210;
+  --offwhite: #FAF6F0; --nav-h: 56px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Instrument Serif', Georgia, serif; background: var(--cream); color: var(--charcoal); overflow-x: hidden; }
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+  background: var(--charcoal); display: flex; align-items: center;
+  justify-content: space-between; padding: 0 40px; height: var(--nav-h);
+  border-bottom: 3px solid var(--jade);
+}
+.nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 0.08em; color: var(--cream); text-decoration: none; }
+.nav-links { display: flex; gap: 0; list-style: none; }
+.nav-links a {
+  font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: rgba(255,248,239,0.5); text-decoration: none;
+  padding: 0 14px; height: var(--nav-h); display: flex; align-items: center;
+  border-left: 1px solid rgba(255,255,255,0.08); transition: all 0.15s; white-space: nowrap;
+}
+.nav-links a:hover, .nav-links a.active { background: var(--jade); color: white; }
+
+.page-header {
+  padding-top: var(--nav-h); background: var(--jade);
+  padding-left: 60px; padding-right: 60px; padding-bottom: 64px;
+  position: relative; overflow: hidden;
+}
+.page-header::after {
+  content: '05'; font-family: 'Bebas Neue', sans-serif; font-size: 300px;
+  color: rgba(0,0,0,0.08); position: absolute; right: -10px; bottom: -40px; line-height: 1; pointer-events: none;
+}
+.page-header-inner { padding-top: 64px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: end; position: relative; }
+.page-header-eyebrow { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 16px; display: block; }
+.page-header-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(64px, 10vw, 120px); color: white; line-height: 0.9; }
+.page-header-title span { color: var(--saffron); }
+.page-header-desc { font-size: 17px; line-height: 1.85; color: rgba(255,255,255,0.7); }
+
+.breadcrumb { display: flex; align-items: center; gap: 8px; padding: 16px 60px; background: var(--offwhite); border-bottom: 1px solid rgba(26,18,16,0.1); }
+.breadcrumb a, .breadcrumb span { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(26,18,16,0.4); text-decoration: none; }
+.breadcrumb a:hover { color: var(--vermillion); }
+.breadcrumb .sep { color: rgba(26,18,16,0.2); }
+.breadcrumb .current { color: var(--charcoal); }
+
+/* SECTION TABS */
+.section-tabs {
+  background: var(--charcoal); display: flex; overflow-x: auto;
+  border-bottom: 2px solid rgba(255,255,255,0.08);
+  position: sticky; top: var(--nav-h); z-index: 100;
+}
+.stab {
+  font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: rgba(255,248,239,0.4);
+  padding: 0 22px; height: 48px; display: flex; align-items: center;
+  border-right: 1px solid rgba(255,255,255,0.06); text-decoration: none;
+  white-space: nowrap; transition: all 0.15s; flex-shrink: 0;
+}
+.stab:hover { color: white; background: rgba(255,255,255,0.04); }
+
+/* METHODOLOGY */
+.method-section { background: var(--offwhite); padding: 80px 60px; border-bottom: 3px solid var(--charcoal); }
+.method-inner { display: grid; grid-template-columns: 1fr 2fr; gap: 80px; align-items: start; }
+.method-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(48px, 6vw, 72px); color: var(--charcoal); line-height: 0.9; }
+.method-title em { color: var(--jade); font-style: normal; }
+.method-body { font-size: 16px; line-height: 1.85; color: rgba(26,18,16,0.7); }
+.method-body p { margin-bottom: 20px; }
+.method-body p:last-child { margin-bottom: 0; }
+.method-pull {
+  font-family: 'Fraunces', serif; font-style: italic; font-size: 19px;
+  color: var(--charcoal); line-height: 1.6; border-left: 4px solid var(--jade);
+  padding-left: 20px; margin: 28px 0;
+}
+.method-steps { margin-top: 28px; display: flex; flex-direction: column; gap: 0; border: 1px solid rgba(26,18,16,0.12); }
+.method-step { padding: 20px 24px; border-bottom: 1px solid rgba(26,18,16,0.08); display: flex; gap: 16px; }
+.method-step:last-child { border-bottom: none; }
+.method-step-num { font-family: 'Bebas Neue', sans-serif; font-size: 28px; color: var(--jade); line-height: 1; flex-shrink: 0; width: 32px; }
+.method-step-body { font-size: 14px; line-height: 1.75; color: rgba(26,18,16,0.65); }
+.method-step-label { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(26,18,16,0.35); margin-bottom: 6px; }
+
+/* PRIMARY SOURCES */
+.primary-section { background: var(--charcoal); padding: 80px 60px; border-bottom: 3px solid rgba(255,255,255,0.06); }
+.ps-header { margin-bottom: 48px; }
+.ps-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(255,248,239,0.3); margin-bottom: 12px; display: block; }
+.ps-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(48px, 7vw, 80px); color: var(--cream); line-height: 0.9; }
+.ps-intro { font-size: 16px; line-height: 1.85; color: rgba(255,248,239,0.55); max-width: 700px; margin-top: 20px; }
+
+.primary-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: rgba(255,255,255,0.05); }
+.ps-card { background: var(--charcoal); padding: 36px; display: flex; flex-direction: column; transition: background 0.2s; }
+.ps-card:hover { background: #221810; }
+.ps-card-type {
+  font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 0.2em;
+  text-transform: uppercase; padding: 4px 10px; margin-bottom: 16px;
+  display: inline-block; align-self: flex-start;
+}
+.ps-card-title { font-family: 'Fraunces', serif; font-size: 20px; font-weight: 700; color: var(--cream); margin-bottom: 8px; line-height: 1.3; }
+.ps-card-source { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,248,239,0.35); margin-bottom: 14px; }
+.ps-card-desc { font-size: 14px; line-height: 1.75; color: rgba(255,248,239,0.55); flex: 1; }
+.ps-card-use { margin-top: 20px; padding: 14px; background: rgba(255,255,255,0.05); border-left: 3px solid rgba(255,255,255,0.15); }
+.ps-card-use-label { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,248,239,0.3); margin-bottom: 6px; }
+.ps-card-use-text { font-size: 13px; line-height: 1.7; color: rgba(255,248,239,0.6); }
+.ps-card-link {
+  display: inline-block; margin-top: 14px; font-family: 'Space Mono', monospace;
+  font-size: 8px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--saffron); border-bottom: 1px solid var(--saffron);
+  text-decoration: none; opacity: 0.7; transition: opacity 0.15s;
+}
+.ps-card-link:hover { opacity: 1; }
+
+/* SECONDARY SOURCES */
+.secondary-section { background: var(--offwhite); padding: 80px 60px; border-bottom: 3px solid var(--charcoal); }
+.ss-header { display: grid; grid-template-columns: 1fr 2fr; gap: 60px; align-items: end; margin-bottom: 56px; }
+.ss-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(48px, 6vw, 72px); color: var(--charcoal); line-height: 0.9; }
+.ss-intro { font-size: 16px; line-height: 1.85; color: rgba(26,18,16,0.65); }
+
+/* Big featured secondary source cards */
+.secondary-featured { display: grid; grid-template-columns: 1fr; gap: 3px; margin-bottom: 3px; }
+.secondary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; }
+
+.ss-card { background: white; padding: 40px; border: 1px solid rgba(26,18,16,0.1); position: relative; overflow: hidden; }
+.ss-card--featured { background: var(--charcoal); }
+.ss-card-color { height: 4px; margin-bottom: 24px; }
+.ss-card-num { font-family: 'Bebas Neue', sans-serif; font-size: 120px; color: rgba(26,18,16,0.04); position: absolute; right: -8px; bottom: -20px; line-height: 1; pointer-events: none; }
+.ss-card--featured .ss-card-num { color: rgba(255,255,255,0.04); }
+
+.ss-card-type { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(26,18,16,0.35); margin-bottom: 8px; }
+.ss-card--featured .ss-card-type { color: rgba(255,248,239,0.35); }
+
+.ss-card-author { font-family: 'Bebas Neue', sans-serif; font-size: 32px; color: var(--charcoal); line-height: 1; margin-bottom: 4px; }
+.ss-card--featured .ss-card-author { color: var(--cream); }
+
+.ss-card-title { font-family: 'Fraunces', serif; font-style: italic; font-size: 18px; color: rgba(26,18,16,0.6); margin-bottom: 20px; line-height: 1.3; }
+.ss-card--featured .ss-card-title { color: rgba(255,248,239,0.5); }
+
+.ss-card-summary { font-size: 14px; line-height: 1.8; color: rgba(26,18,16,0.65); margin-bottom: 20px; }
+.ss-card--featured .ss-card-summary { color: rgba(255,248,239,0.6); }
+
+.ss-card-key-argument {
+  padding: 16px 18px; border-left: 3px solid;
+  background: rgba(0,0,0,0.03); margin-bottom: 16px;
+}
+.ss-card--featured .ss-card-key-argument { background: rgba(255,255,255,0.06); }
+.ss-card-ka-label { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(26,18,16,0.35); margin-bottom: 6px; }
+.ss-card--featured .ss-card-ka-label { color: rgba(255,248,239,0.3); }
+.ss-card-ka-text { font-family: 'Fraunces', serif; font-style: italic; font-size: 15px; color: rgba(26,18,16,0.75); line-height: 1.6; }
+.ss-card--featured .ss-card-ka-text { color: rgba(255,248,239,0.75); }
+
+.ss-card-use { font-size: 13px; line-height: 1.75; color: rgba(26,18,16,0.5); }
+.ss-card--featured .ss-card-use { color: rgba(255,248,239,0.45); }
+
+.ss-card-use strong { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 0.12em; text-transform: uppercase; display: block; margin-bottom: 6px; color: rgba(26,18,16,0.35); }
+.ss-card--featured .ss-card-use strong { color: rgba(255,248,239,0.3); }
+
+.ss-card-link { display: inline-block; margin-top: 16px; font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 0.12em; text-transform: uppercase; border-bottom: 1px solid; text-decoration: none; opacity: 0.6; transition: opacity 0.15s; }
+.ss-card-link:hover { opacity: 1; }
+
+/* GAPS & TENSIONS */
+.gaps-section { background: var(--vermillion); padding: 80px 60px; }
+.gaps-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(48px, 7vw, 80px); color: white; line-height: 0.9; margin-bottom: 48px; }
+.gaps-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; }
+.gap-card { background: rgba(0,0,0,0.15); padding: 28px; border: 1px solid rgba(255,255,255,0.15); }
+.gap-label { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
+.gap-title { font-family: 'Fraunces', serif; font-size: 18px; font-weight: 700; color: white; margin-bottom: 12px; line-height: 1.3; }
+.gap-text { font-size: 14px; line-height: 1.75; color: rgba(255,255,255,0.75); }
+
+/* ARCHIVES */
+.archives-section { background: var(--charcoal); padding: 80px 60px; }
+.ar-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(48px, 6vw, 72px); color: var(--cream); line-height: 0.9; margin-bottom: 48px; }
+.archives-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: rgba(255,255,255,0.05); }
+.archive-card { background: var(--charcoal); padding: 28px; }
+.ac-color { height: 3px; margin-bottom: 16px; }
+.ac-name { font-family: 'Fraunces', serif; font-size: 17px; font-weight: 700; color: var(--cream); margin-bottom: 6px; }
+.ac-desc { font-size: 13px; line-height: 1.7; color: rgba(255,248,239,0.5); margin-bottom: 14px; }
+.ac-link { display: inline-block; font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--saffron); border-bottom: 1px solid var(--saffron); text-decoration: none; opacity: 0.6; transition: opacity 0.15s; }
+.ac-link:hover { opacity: 1; }
+
+/* REFLECTION */
+.reflection-section { background: var(--offwhite); padding: 80px 60px; border-top: 3px solid var(--charcoal); }
+.ref-inner { display: grid; grid-template-columns: 1fr 2fr; gap: 80px; align-items: start; }
+.ref-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(40px, 5vw, 64px); color: var(--charcoal); line-height: 0.9; }
+.ref-title em { color: var(--jade); font-style: normal; }
+.ref-body { font-size: 16px; line-height: 1.85; color: rgba(26,18,16,0.7); }
+.ref-body p { margin-bottom: 20px; }
+.ref-body p:last-child { margin-bottom: 0; }
+.ref-pull {
+  font-family: 'Fraunces', serif; font-style: italic; font-size: 19px;
+  color: var(--charcoal); line-height: 1.6; border-left: 4px solid var(--jade);
+  padding-left: 20px; margin: 28px 0;
+}
+
+/* CLOSING BAND */
+.closing-band {
+  background: var(--charcoal); padding: 80px 60px;
+  display: grid; grid-template-columns: 2fr 1fr; gap: 60px;
+}
+.closing-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(48px, 8vw, 100px); color: var(--cream); line-height: 0.9; margin-bottom: 28px; }
+.closing-title span { color: var(--saffron); }
+.closing-body { font-size: 16px; line-height: 1.85; color: rgba(255,248,239,0.55); margin-bottom: 28px; }
+.closing-sidebar-item { padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.closing-sidebar-item:first-child { border-top: 1px solid rgba(255,255,255,0.08); }
+.csi-label { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,248,239,0.3); margin-bottom: 6px; }
+.csi-val { font-family: 'Fraunces', serif; font-size: 15px; color: var(--cream); line-height: 1.4; }
+
+.btn-primary { background: var(--vermillion); color: white; font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; padding: 14px 28px; text-decoration: none; border: none; cursor: pointer; transition: background 0.2s; display: inline-block; }
+.btn-primary:hover { background: #FF5030; }
+
+/* PAGE NAV */
+.page-nav-bottom { background: var(--charcoal); padding: 40px 60px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.06); }
+.page-nav-link { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,248,239,0.4); text-decoration: none; display: flex; align-items: center; gap: 12px; transition: color 0.15s; }
+.page-nav-link:hover { color: var(--saffron); }
+.page-nav-link .pnl-label { font-family: 'Bebas Neue', sans-serif; font-size: 26px; color: var(--cream); display: block; }
+
+footer { background: black; padding: 32px 60px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+.footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 20px; color: rgba(255,255,255,0.3); letter-spacing: 0.08em; }
+.footer-nav { display: flex; gap: 20px; list-style: none; flex-wrap: wrap; }
+.footer-nav a { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.25); text-decoration: none; transition: color 0.15s; }
+.footer-nav a:hover { color: rgba(255,255,255,0.65); }
+.footer-note { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 0.12em; color: rgba(255,255,255,0.15); text-transform: uppercase; width: 100%; }
+
+@media (max-width: 900px) {
+  nav { padding: 0 20px; } .nav-links { display: none; }
+  .page-header { padding: 0 24px 48px; }
+  .page-header-inner { grid-template-columns: 1fr; gap: 24px; }
+  .breadcrumb { padding: 16px 24px; }
+  .method-section, .primary-section, .secondary-section, .gaps-section, .archives-section, .reflection-section, .closing-band { padding: 48px 24px; }
+  .method-inner { grid-template-columns: 1fr; gap: 32px; }
+  .primary-grid { grid-template-columns: 1fr; }
+  .ss-header { grid-template-columns: 1fr; gap: 24px; }
+  .secondary-grid { grid-template-columns: 1fr; }
+  .gaps-grid { grid-template-columns: 1fr; }
+  .archives-grid { grid-template-columns: 1fr 1fr; }
+  .ref-inner { grid-template-columns: 1fr; gap: 32px; }
+  .closing-band { grid-template-columns: 1fr; }
+  .page-nav-bottom { padding: 32px 24px; flex-direction: column; gap: 20px; align-items: flex-start; }
+  footer { padding: 32px 24px; }
+}
+@media (max-width: 600px) {
+  .archives-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Stages of Change</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="context.html">Context</a></li>
+    <li><a href="timeline.html">Timeline</a></li>
+    <li><a href="artists.html">Artists</a></li>
+    <li><a href="analysis.html">Analysis</a></li>
+    <li><a href="sources.html" class="active">Sources</a></li>
+  </ul>
+</nav>
+
+<div class="page-header">
+  <div class="page-header-inner">
+    <div>
+      <span class="page-header-eyebrow">Section 05 — Sources &amp; Methodology</span>
+      <div class="page-header-title">Sources &amp;<br><span>Method</span></div>
+    </div>
+    <p class="page-header-desc">
+      The primary and secondary sources underpinning this project, a reflection on research methodology, an account of the archival gaps and tensions the sources reveal, and a closing statement on what close reading of campus media can tell us about the limits and possibilities of institutional multiculturalism.
+    </p>
+  </div>
+</div>
+
+<div class="breadcrumb">
+  <a href="index.html">Home</a>
+  <span class="sep">/</span>
+  <span class="current">Sources &amp; Methodology</span>
+</div>
+
+<div class="section-tabs">
+  <a href="#methodology" class="stab">Methodology</a>
+  <a href="#primary" class="stab">Primary Sources</a>
+  <a href="#secondary" class="stab">Secondary Sources</a>
+  <a href="#gaps" class="stab">Gaps &amp; Tensions</a>
+  <a href="#archives" class="stab">Archives</a>
+  <a href="#reflection" class="stab">Reflection</a>
+</div>
+
+<!-- METHODOLOGY -->
+<section id="methodology" class="method-section">
+  <div class="method-inner">
+    <div>
+      <div class="method-title">Research <em>Method</em></div>
+    </div>
+    <div class="method-body">
+      <p>
+        This project practices a form of close reading informed by critical race theory, framing theory, and institutional history. It takes as its primary objects not policy documents or enrollment statistics, but the micro-level texts of student journalism — concert previews, reviews, and cultural coverage — treating them as evidence of the ideological conditions of their production.
+      </p>
+      <div class="method-pull">
+        "By moving from the high-level arguments of institutional history toward the more micro-level evidence of individual articles, I provide a representation of multiculturalism's change that takes institutional reputation agendas and social stances into consideration."
+      </div>
+      <p>
+        The approach is explicitly anti-positivist: it does not treat language as transparent description of events but as a site of meaning-making that encodes assumptions about race, culture, and value. A reviewer's choice to call Ravi Shankar an "emperor" rather than a "musician," or to spend two paragraphs defending Run-D.M.C.'s lyrics before discussing their music, is not incidental. It is the argument.
+      </p>
+      <p>
+        Matthew Johnson's framework from <em>Undermining Racial Justice</em> — particularly his concept of "selective incorporation" — provides the critical infrastructure for this reading practice. His distinction between "being institutionally aligned" and "actually redistributing power or resources" translates, in this project, into a distinction between reviewing that celebrates diversity and reviewing that reproduces the hierarchies diversity is supposed to challenge.
+      </p>
+      <div class="method-steps">
+        <div class="method-step">
+          <div class="method-step-num">1</div>
+          <div>
+            <div class="method-step-label">Archival Collection</div>
+            <div class="method-step-body">Collected Michigan Daily articles focused on Hill Auditorium between 1980 and 2000, using search terms including "multicultural," "diverse," "world music," and artist names. Supplemented with UMS concert programs and promotional materials from the Bentley Historical Library.</div>
+          </div>
+        </div>
+        <div class="method-step">
+          <div class="method-step-num">2</div>
+          <div>
+            <div class="method-step-label">Contextual Research</div>
+            <div class="method-step-body">Built institutional history through secondary sources: Duderstadt's 50-year diversity report, Tobin's affirmative action account, the Ann Arbor District Library's Hill centennial feature, and the Bentley Library's BAM collections. This context is necessary for reading what the reviews don't say as much as what they do.</div>
+          </div>
+        </div>
+        <div class="method-step">
+          <div class="method-step-num">3</div>
+          <div>
+            <div class="method-step-label">Case Study Selection</div>
+            <div class="method-step-body">Selected five case studies representing a range of genres, years, and framing strategies: Run-D.M.C. (1987, hip-hop), Cecil Taylor (1988, free jazz), Gil Scott-Heron (1988, spoken word/proto-rap), Sweet Honey in the Rock (late 1980s, a cappella/gospel), and Ravi Shankar (1996, Hindustani classical). The selection spans African American and South Asian performance traditions, and the decade from the Mandate's origin to its high-water mark.</div>
+          </div>
+        </div>
+        <div class="method-step">
+          <div class="method-step-num">4</div>
+          <div>
+            <div class="method-step-label">Close Reading</div>
+            <div class="method-step-body">Applied close reading methodology to each article: tracking vocabulary choices, structural patterns (what comes first, what comes after praise), the presence or absence of Western comparative frameworks, and the affective language used to describe audience experience. Comparison across the corpus reveals the systematic nature of the patterns.</div>
+          </div>
+        </div>
+        <div class="method-step">
+          <div class="method-step-num">5</div>
+          <div>
+            <div class="method-step-label">Thematic Organization</div>
+            <div class="method-step-body">Organized findings into four thematic frames (Popular Innovation, Experimental Challenge, Political Prophecy, Communal Harmony) that capture both the specific review strategies and their relationship to the broader arc of the Mandate era. The frames are analytical constructs, not categories the original writers would have recognized.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRIMARY SOURCES -->
+<section id="primary" class="primary-section">
+  <div class="ps-header">
+    <span class="ps-label">Primary Sources</span>
+    <div class="ps-title">The Texts<br>That Speak</div>
+    <p class="ps-intro">
+      The primary source corpus consists of Michigan Daily concert previews and reviews, supplemented by UMS promotional materials and concert programs. These are the texts this project reads closely — student journalism as a form of institutional evidence.
+    </p>
+  </div>
+
+  <div class="primary-grid">
+
+    <div class="ps-card">
+      <span class="ps-card-type" style="background: var(--vermillion); color: white;">Michigan Daily · 1987</span>
+      <div class="ps-card-title">"Walk, Don't Run, To DMC's Tougher Than Leather Rap Show"</div>
+      <div class="ps-card-source">Brian Berger, Entertainment Editor · November 1987</div>
+      <p class="ps-card-desc">
+        Preview of Run-D.M.C.'s Hill Auditorium show on November 17, 1987 — the same academic year as BAM III and the Michigan Mandate's planning phase. The article celebrates the duo's "intelligent rhymes" and "innovative beats" while positioning their legitimacy through their Aerosmith crossover and preemptively defending against association with the 2 Live Crew obscenity controversy.
+      </p>
+      <div class="ps-card-use">
+        <div class="ps-card-use-label">Used In This Project For</div>
+        <div class="ps-card-use-text">Establishing the "Praise + Institutional Defense" pattern. Demonstrating how hip-hop's admission to Hill was framed as a gift from the institution rather than a recognition of existing legitimacy. The article introduces this project's central argument about the apologetic structure of minority arts coverage.</div>
+      </div>
+    </div>
+
+    <div class="ps-card">
+      <span class="ps-card-type" style="background: var(--cobalt); color: white;">Michigan Daily · 1988</span>
+      <div class="ps-card-title">Cecil Taylor at Hill Auditorium — Review</div>
+      <div class="ps-card-source">Anonymous Critic · 1988</div>
+      <p class="ps-card-desc">
+        Review of avant-garde jazz pianist Cecil Taylor's Hill Auditorium performance. The anonymous critic deploys extended hyperbolic praise — "exploding" improvisational style, "nimble-fingered" virtuosity — alongside an equally extended pedagogical explanation of Taylor's technique for readers assumed to be unfamiliar with free jazz abstraction. Both moves work together to make the review twice as long as it would need to be for a European classical performer.
+      </p>
+      <div class="ps-card-use">
+        <div class="ps-card-use-label">Used In This Project For</div>
+        <div class="ps-card-use-text">Establishing the "Rapturous Praise + Pedagogical Explanation" pattern. Demonstrating how avant-garde Black jazz requires more institutional scaffolding than avant-garde European music performed in the same space. The review also provides the "bewilderment" vocabulary that recurs in the Shankar source.</div>
+      </div>
+    </div>
+
+    <div class="ps-card">
+      <span class="ps-card-type" style="background: var(--plum); color: white;">Michigan Daily · 1988</span>
+      <div class="ps-card-title">Gil Scott-Heron at Lydia Mendelssohn Theatre</div>
+      <div class="ps-card-source">Brian Berger, Entertainment Editor · 1988</div>
+      <p class="ps-card-desc">
+        Preview of Gil Scott-Heron's appearance at Lydia Mendelssohn Theatre (part of the broader UMS ecosystem). Berger positions Scott-Heron as a "significant influence on rap music" whose work on "street-level reality" anticipated hip-hop. His obscurity is reframed as proof of his depth. The article contrasts his "mature artistic substance" with "superficial" commercial rap, elevating him through distinction from more popular Black artists.
+      </p>
+      <div class="ps-card-use">
+        <div class="ps-card-use-label">Used In This Project For</div>
+        <div class="ps-card-use-text">Establishing the "Legitimation Through Intellectual Lineage" pattern. Demonstrating how the Mandate's valuation of critical thinking and intellectual depth shapes the reception of Black political art — and how that framing converts systemic neglect into individual artistic virtue.</div>
+      </div>
+    </div>
+
+    <div class="ps-card">
+      <span class="ps-card-type" style="background: var(--jade); color: white;">Michigan Daily · Late 1980s</span>
+      <div class="ps-card-title">Sweet Honey in the Rock — Preview/Review</div>
+      <div class="ps-card-source">Michigan Daily · Late 1980s</div>
+      <p class="ps-card-desc">
+        Preview or review of Sweet Honey in the Rock's UMS appearance at Hill Auditorium. The article praises the group's "stunning harmonies" and their fusion of West African songs, gospel, and civil rights freedom songs. It is the most relaxed of the four Black artist reviews — requiring the least institutional scaffolding — and its comparative ease reveals the logic of the anxious framing in the earlier reviews.
+      </p>
+      <div class="ps-card-use">
+        <div class="ps-card-use-label">Used In This Project For</div>
+        <div class="ps-card-use-text">Establishing the "Ease of Reception Reveals Structural Preference" pattern. The Sweet Honey review is most useful for what it lacks: no obscenity defense, no pedagogical translation, no lineage construction. The absence is evidence about the conditions under which those elements were felt to be necessary.</div>
+      </div>
+    </div>
+
+    <div class="ps-card">
+      <span class="ps-card-type" style="background: var(--saffron); color: var(--charcoal);">Michigan Daily · 1996</span>
+      <div class="ps-card-title">Ravi Shankar at Rackham Auditorium — Review</div>
+      <div class="ps-card-source">Michigan Daily · April 1996</div>
+      <p class="ps-card-desc">
+        Review of Ravi Shankar's first UMS appearance at Rackham Auditorium in April 1996 — at the Michigan Mandate's high-water mark (Black enrollment reached 9% the same year). The article calls Shankar a "virtuoso" and an "emperor," describes Indian classical music as "ancient," foregrounds Western collaborations as validation, selectively explains instruments, and uses "bewilderment" to characterize audience response. The project's initial primary source and the text for the most detailed close reading.
+      </p>
+      <div class="ps-card-use">
+        <div class="ps-card-use-label">Used In This Project For</div>
+        <div class="ps-card-use-text">The anchor primary source. Introduces the core framing patterns — exotic elevation, Western validation, selective explanation, temporal othering — and demonstrates that these patterns persist at the Mandate era's high point, extending beyond African American arts coverage to South Asian classical performance. Grounds the exhibit's comparative argument.</div>
+      </div>
+    </div>
+
+    <div class="ps-card">
+      <span class="ps-card-type" style="background: var(--sky); color: white;">UMS Materials</span>
+      <div class="ps-card-title">Concert Programs, Promotional Materials &amp; UMS Rewind Archive</div>
+      <div class="ps-card-source">University Musical Society · 1980–2000 · Bentley Historical Library</div>
+      <p class="ps-card-desc">
+        UMS concert programs, promotional flyers, and the UMS Rewind blog archive provide the institutional framing of the performances alongside the Michigan Daily's student reception. The UMS materials are crucial context: they show how the institution presenting the artists chose to frame them, and the gap between institutional framing and student reception is itself analytically significant.
+      </p>
+      <div class="ps-card-use">
+        <div class="ps-card-use-label">Used In This Project For</div>
+        <div class="ps-card-use-text">Providing institutional comparison to student reception. UMS program notes on Shankar and Marsalis use different framing strategies than the Daily reviews — generally less anxious, more confident in the artists' standing. The contrast suggests that student writers are not simply reproducing official institutional language but are working through their own cultural assumptions.</div>
+      </div>
+      <a class="ps-card-link" href="https://ums.org/tag/ums-history/" target="_blank" style="color: var(--saffron); border-color: var(--saffron);">UMS History Archive →</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- SECONDARY SOURCES -->
+<section id="secondary" class="secondary-section">
+  <div class="ss-header">
+    <div>
+      <div class="ss-title">Secondary<br>Sources</div>
+    </div>
+    <p class="ss-intro">
+      Three secondary sources provide the historical and theoretical framework within which the primary source analysis is situated. Together they construct the macro-level context — institutional history, political struggle, physical space — that makes the micro-level language of individual reviews legible as evidence rather than mere description.
+    </p>
+  </div>
+
+  <!-- JOHNSON — FEATURED -->
+  <div class="secondary-featured">
+    <div class="ss-card ss-card--featured">
+      <div class="ss-card-num">1</div>
+      <div class="ss-card-color" style="background: var(--vermillion);"></div>
+      <div class="ss-card-type">Critical Framework · Book</div>
+      <div class="ss-card-author">Matthew Johnson</div>
+      <div class="ss-card-title">Undermining Racial Justice: How One University Embraced Inclusion and Inequality (2020)</div>
+      <p class="ss-card-summary">
+        Johnson examines the University of Michigan not as a story of straightforward progress toward inclusion but as a case study in how institutions learn to manage racial change in ways that preserve stability while appearing to embrace transformation. His concept of "selective incorporation" — celebrating diversity while preserving structural hierarchies — provides the critical framework animating this project's entire analysis. Johnson's evidence is primarily institutional: policies, administrative decisions, official statements. This project treats the Michigan Daily reviews as micro-level evidence for the same dynamics Johnson identifies at the macro level.
+      </p>
+      <div class="ss-card-key-argument" style="border-color: var(--vermillion);">
+        <div class="ss-card-ka-label">Core Argument Applied Here</div>
+        <div class="ss-card-ka-text">"Racial inclusion can be a strategy used to keep the university stable rather than a straightforward, clear path towards true racial justice." — The distinction between institutional alignment and actual power redistribution is visible not just in policy documents but in the word choices of concert reviews.</div>
+      </div>
+      <div class="ss-card-use">
+        <strong>How Used in This Project</strong>
+        Johnson provides the analytical vocabulary — "selective incorporation," the distinction between institutional alignment and power redistribution — that this project applies to language analysis. His framework explains why the Michigan Daily reviews both celebrate diversity and reproduce hierarchy simultaneously: that is precisely what "selective incorporation" produces. His approach through institutional evidence also motivates this project's turn to the even finer-grained evidence of student journalism.
+      </div>
+    </div>
+  </div>
+
+  <div class="secondary-grid">
+
+    <div class="ss-card">
+      <div class="ss-card-num">2</div>
+      <div class="ss-card-color" style="background: var(--cobalt);"></div>
+      <div class="ss-card-type">Institutional History · Report</div>
+      <div class="ss-card-author">James Duderstadt</div>
+      <div class="ss-card-title">A 50-Year History of Social Diversity at the University of Michigan</div>
+      <p class="ss-card-summary">
+        The Michigan Mandate's architect provides the institutional narrative of diversification as simultaneous moral imperative and academic strategy. Duderstadt's central claim — that "diversity and excellence are complementary and compelling goals" — frames multiculturalism not as justice but as academic advantage. His language of necessary "sacrifices" and "highly competitive and entrepreneurial spirit" reveals the ideological conditions under which the Mandate operated.
+      </p>
+      <div class="ss-card-key-argument" style="border-color: var(--cobalt);">
+        <div class="ss-card-ka-label">Key Argument Applied Here</div>
+        <div class="ss-card-ka-text">Diversity was framed as something the university was "giving" to the community — requiring sacrifice — rather than as something owed. This framing appears in the concert reviews as the structure of "gift-giving": minority artists arrive, the institution offers them to students, students receive an enriched experience.</div>
+      </div>
+      <div class="ss-card-use">
+        <strong>How Used in This Project</strong>
+        Duderstadt's language — "complementary goals," "sacrifices," "entrepreneurial spirit" — provides the ideological vocabulary the Michigan Daily reviews were produced within. When Berger praises Run-D.M.C.'s "intelligent rhymes," he is working within Duderstadt's framework, in which Black popular music must demonstrate its compatibility with academic excellence to belong at Hill.
+      </div>
+      <a class="ss-card-link" href="https://oami.umich.edu/bam/" target="_blank" style="color: var(--cobalt); border-color: var(--cobalt);">U-M OAMI History →</a>
+    </div>
+
+    <div class="ss-card">
+      <div class="ss-card-num">3</div>
+      <div class="ss-card-color" style="background: var(--jade);"></div>
+      <div class="ss-card-type">Journalism / Political History · Article</div>
+      <div class="ss-card-author">James Tobin</div>
+      <div class="ss-card-title">"Michigan's Affirmative Action Debate"</div>
+      <p class="ss-card-summary">
+        Tobin traces the legal and political pressures that made Michigan's diversity initiatives matters of institutional survival — not merely aspiration. From the Black Action Movement protests through to the Supreme Court cases on admissions policies, Tobin shows that diversity changes at U-M came primarily from courts and public pressure rather than voluntary institutional evolution. His account of the argument that a racially diverse student body "makes for a healthier and more legitimate democracy" shows how high the stakes were when student writers chose how to frame a minority concert.
+      </p>
+      <div class="ss-card-key-argument" style="border-color: var(--jade);">
+        <div class="ss-card-ka-label">Key Argument Applied Here</div>
+        <div class="ss-card-ka-text">Diversity was "forged under pressure, not by choice." The link between cultural diversity and educational quality required constant persuasion. The concert reviews were one front in that persuasion effort — making the case for minority excellence in the same institutional moment that argument was being made to courts and legislators.</div>
+      </div>
+      <div class="ss-card-use">
+        <strong>How Used in This Project</strong>
+        Tobin explains why the concert reviews were ideologically weighted beyond their apparent function as entertainment journalism. They were produced at a moment when the university's entire diversity apparatus was under legal challenge, and the case for Black and minority excellence had to be continuously remade. Student writers making that case — even unconsciously — were participating in a larger institutional argument.
+      </div>
+    </div>
+
+    <div class="ss-card">
+      <div class="ss-card-num">4</div>
+      <div class="ss-card-color" style="background: var(--saffron);"></div>
+      <div class="ss-card-type">Local History · Feature Article</div>
+      <div class="ss-card-author">Ann Arbor District Library</div>
+      <div class="ss-card-title">"Hill Auditorium's Hundredth Birthday" — AADL Centennial Feature</div>
+      <p class="ss-card-summary">
+        The AADL centennial feature (created alongside the University Musical Society) documents Hill Auditorium's century as a space of high performance, religious services, and political debate. It calls Hill a "double-sided coin" — a place of cultural prestige and political contestation simultaneously. From Igor Stravinsky to Bob Dylan to the Grateful Dead to Ravi Shankar, the feature constructs an official memory of Hill that foregrounds Western classical programming while acknowledging Hill's democratic function.
+      </p>
+      <div class="ss-card-key-argument" style="border-color: var(--saffron);">
+        <div class="ss-card-ka-label">Key Argument Applied Here</div>
+        <div class="ss-card-ka-text">Hill's dual identity — cultural prestige and political space — is the physical context for the multicultural concerts this project examines. Late-century multicultural programming was not a break from Hill's identity but an expansion of it, from a primarily Western classical repertoire toward a broader definition of world-class performance.</div>
+      </div>
+      <div class="ss-card-use">
+        <strong>How Used in This Project</strong>
+        The Hill feature provides the spatial and historical context for understanding what it meant to perform there. The venue's centennial narrative — built around Western prestige markers — is the frame within which minority performance arrived. Multicultural concerts were not neutral additions to Hill's programming; they were expansions of a space with a specific cultural history, and that history inflected how every new genre was received.
+      </div>
+      <a class="ss-card-link" href="https://aadl.org" target="_blank" style="color: var(--saffron); border-color: var(--saffron);">Ann Arbor District Library →</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- GAPS & TENSIONS -->
+<section id="gaps" class="gaps-section">
+  <div class="gaps-title">Gaps &amp; Tensions<br>in the Sources</div>
+  <div class="gaps-grid">
+    <div class="gap-card">
+      <div class="gap-label">Gap 1</div>
+      <div class="gap-title">No Student Voice on the Receiving End</div>
+      <p class="gap-text">Neither Duderstadt's report nor Tobin's account covers what students actually felt attending these concerts — their affective responses, the conversations they had leaving Hill, the ways the music changed or didn't change how they understood race on campus. The reviews themselves are one data point, but they are mediated through student writers performing a journalistic function. A fuller project would incorporate oral histories.</p>
+    </div>
+    <div class="gap-card">
+      <div class="gap-label">Gap 2</div>
+      <div class="gap-title">The Artists' Own Perspectives</div>
+      <p class="gap-text">This project analyzes how the Michigan Daily framed minority artists, but it does not have access to the artists' own accounts of performing at Hill Auditorium during this era. Did Ravi Shankar read his reviews? How did Run-D.M.C. understand the institutional context of their 1987 Hill show? These perspectives would significantly complicate the analysis — possibly revealing that the framing produced real harm, or that the artists navigated it strategically.</p>
+    </div>
+    <div class="gap-card">
+      <div class="gap-label">Gap 3</div>
+      <div class="gap-title">Performance vs. Admissions Policies</div>
+      <p class="gap-text">Both Duderstadt and Tobin focus almost entirely on who gets into the university as students and faculty — not on what happens on the stage. The Hill feature focuses on the auditorium's prestige and history — not on the racial demographics of its performers or audiences. This project attempts to bridge these two literatures, but the gap itself reveals how compartmentalized the conversation about diversity was even within the university's own self-narration.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ARCHIVES -->
+<section id="archives" class="archives-section">
+  <div class="ar-title">Archival Sources</div>
+  <div class="archives-grid">
+
+    <div class="archive-card">
+      <div class="ac-color" style="background: var(--cobalt);"></div>
+      <div class="ac-name">Michigan Daily Archive</div>
+      <p class="ac-desc">The student newspaper's digital archive, supplemented by physical copies at the Bentley Historical Library. Primary source for all concert reviews and previews analyzed in this project.</p>
+      <a class="ac-link" href="https://www.michigandaily.com" target="_blank">michigandaily.com →</a>
+    </div>
+
+    <div class="archive-card">
+      <div class="ac-color" style="background: var(--vermillion);"></div>
+      <div class="ac-name">Bentley Historical Library</div>
+      <p class="ac-desc">U-M's institutional archive. Holds BAM collections, UMS records (Finding Aid: umich-bhl-87378), BSU records, and the full run of Michigan Daily physical copies. Essential for primary source collection.</p>
+      <a class="ac-link" href="https://bentley.umich.edu" target="_blank">bentley.umich.edu →</a>
+    </div>
+
+    <div class="archive-card">
+      <div class="ac-color" style="background: var(--jade);"></div>
+      <div class="ac-name">UMS Rewind Archive</div>
+      <p class="ac-desc">The University Musical Society's own blog series documenting moments from its history — Ravi Shankar's 1996 debut, program notes, artist profiles. A curated institutional memory that complements and sometimes diverges from student reception.</p>
+      <a class="ac-link" href="https://ums.org/tag/ums-history/" target="_blank">UMS History Archive →</a>
+    </div>
+
+    <div class="archive-card">
+      <div class="ac-color" style="background: var(--saffron);"></div>
+      <div class="ac-name">U-M OAMI Digital Resources</div>
+      <p class="ac-desc">The Office of Academic Multicultural Initiatives maintains digital documentation of BAM I, II, and III history, including primary source materials from the 1987 campaign and the Michigan Mandate's launch.</p>
+      <a class="ac-link" href="https://oami.umich.edu/bam/" target="_blank">oami.umich.edu →</a>
+    </div>
+
+    <div class="archive-card">
+      <div class="ac-color" style="background: var(--magenta);"></div>
+      <div class="ac-name">Michigan Today</div>
+      <p class="ac-desc">U-M's alumni magazine archive. The 2024 retrospective on the BAM strike and the 2012 Hill centennial feature are key secondary sources for institutional memory and historical context.</p>
+      <a class="ac-link" href="https://michigantoday.umich.edu" target="_blank">michigantoday.umich.edu →</a>
+    </div>
+
+    <div class="archive-card">
+      <div class="ac-color" style="background: var(--plum);"></div>
+      <div class="ac-name">AADL &amp; Arts Around Ann Arbor</div>
+      <p class="ac-desc">The Ann Arbor District Library's local history collections and the Pulp arts journalism archive document Hill Auditorium's place in Ann Arbor's broader cultural life, including the Grateful Dead's legendary 1971 broadcasts.</p>
+      <a class="ac-link" href="https://aadl.org" target="_blank">aadl.org →</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- REFLECTION -->
+<section id="reflection" class="reflection-section">
+  <div class="ref-inner">
+    <div>
+      <div class="ref-title">A <em>Reflection</em> on Method</div>
+    </div>
+    <div class="ref-body">
+      <p>
+        This project began with a single observation: that the Michigan Daily's review of a Ravi Shankar concert used different language — more anxious, more explanatory, more reliant on Western validation — than reviews of European classical performers in the same hall during the same era. That observation seemed worth pursuing because it was not about bad intentions or conscious bias. The reviewers were enthusiastic, often deeply moved. Their language revealed something more interesting and more structural than prejudice: it revealed the ideological conditions of their reception.
+      </p>
+      <div class="ref-pull">
+        "The goal is to use these sources both as puzzle pieces that fit into the larger picture of multiculturalism and as tools of critique — to question whether the small, seemingly quiet texts display the agendas set by the university, or if they complicate the 'smooth' university progression towards diversity."
+      </div>
+      <p>
+        The methodological challenge in this kind of analysis is avoiding reductionism. It would be easy to read these reviews as simple failures — as instances of racism dressed up in liberal enthusiasm. But that reading misses both the genuine cultural work the reviews were doing and the real gains of the Michigan Mandate era. The enrollment figures mattered. The artists who performed at Hill mattered. The student writers who found words to celebrate Wynton Marsalis and Sweet Honey in the Rock were participating, however imperfectly, in a genuine cultural opening.
+      </p>
+      <p>
+        What close reading adds to enrollment statistics and policy documents is a window into the texture of that opening — how wide it actually was, where its edges were, what it cost artists to pass through it. The language of "bewilderment" and "ancient traditions" and the Aerosmith crossover is not evidence that the opening was fake. It is evidence that the opening was real but partial — which is, as Johnson argues, exactly the condition that makes selective incorporation so durable a strategy.
+      </p>
+      <p>
+        A final observation: this project focuses almost entirely on how the institution received minority artists. It has much less to say about how those artists experienced the institution — whether they felt welcomed or surveilled, celebrated or tokenized, whether they would have read these reviews and recognized themselves or found them unrecognizable. That gap is not a flaw in the project's scope; it is a reminder of what close reading of institutional texts cannot, on its own, recover.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING BAND -->
+<div class="closing-band">
+  <div>
+    <h2 class="closing-title">The Stage<br><span>Never Stood</span><br>Alone</h2>
+    <p class="closing-body">
+      Between 1980 and 2000, the University of Michigan lived a double life. In Hill Auditorium, Yo-Yo Ma drew his bow across strings in a hall designed for acoustical perfection. On the Diag, students demanded that the university make good on promises two decades old. These were not separate stories. The Michigan Mandate's core insight — that diversity and excellence reinforce each other — was, in some ways, what the programming at Hill Auditorium had been quietly arguing all along.
+    </p>
+    <p class="closing-body">
+      By 2000, the transformation was incomplete and contested. But the 20 years documented here represent a moment when a great university was forced to reckon with the gap between its aspirations and its practices. The stages — physical and metaphorical — were never neutral. They were always sites of argument, memory, and possibility.
+    </p>
+    <a href="index.html" class="btn-primary" style="display:inline-block; margin-top: 8px;">↑ Return to Exhibit Home</a>
+  </div>
+  <div>
+    <div class="closing-sidebar-item">
+      <div class="csi-label">Primary Venue</div>
+      <div class="csi-val">Hill Auditorium, University of Michigan — Ann Arbor, Michigan. Opened 1913. 3,500 seats. Architect: Albert Kahn.</div>
+    </div>
+    <div class="closing-sidebar-item">
+      <div class="csi-label">Presenting Organization</div>
+      <div class="csi-val">University Musical Society (UMS), est. 1879. National Medal of Arts recipient, 2014. Over 5,000 performances presented.</div>
+    </div>
+    <div class="closing-sidebar-item">
+      <div class="csi-label">Key Movements</div>
+      <div class="csi-val">BAM I (1970), BAM II (1975), BAM III (1987), UCAR (1987), Michigan Mandate (1988–), BBUM (2013)</div>
+    </div>
+    <div class="closing-sidebar-item">
+      <div class="csi-label">Research Produced For</div>
+      <div class="csi-val">AMCULT 103 — Introduction to American Culture. University of Michigan. Winter 2026. Nilay Mishra.</div>
+    </div>
+    <div class="closing-sidebar-item">
+      <div class="csi-label">All Sources</div>
+      <div class="csi-val">Michigan Daily Archive · Michigan Today · UMS Rewind Archive · Bentley Historical Library · U-M OAMI · AADL · AAIHS</div>
+    </div>
+  </div>
+</div>
+
+<div class="page-nav-bottom">
+  <a href="analysis.html" class="page-nav-link">
+    <div>
+      <span style="font-family:'Space Mono',monospace;font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,248,239,0.4);">← Previous</span>
+      <span class="pnl-label">Critical Analysis</span>
+    </div>
+  </a>
+  <a href="index.html" class="page-nav-link">
+    <div style="text-align:right;">
+      <span style="font-family:'Space Mono',monospace;font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,248,239,0.4);">Return to →</span>
+      <span class="pnl-label">Exhibit Home</span>
+    </div>
+  </a>
+</div>
+
+<footer>
+  <div class="footer-logo">Stages of Change · U-M 1980–2000</div>
+  <ul class="footer-nav">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="context.html">Context</a></li>
+    <li><a href="timeline.html">Timeline</a></li>
+    <li><a href="artists.html">Artists</a></li>
+    <li><a href="analysis.html">Analysis</a></li>
+    <li><a href="sources.html">Sources</a></li>
+  </ul>
+  <div class="footer-note">Research drawn from Michigan Daily · UMS Archive · Michigan Today · Bentley Historical Library · AMCULT 103 · Nilay Mishra</div>
+</footer>
+
+</body>
+</html>

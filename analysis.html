@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Critical Analysis — Stages of Change</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Instrument+Serif:ital@0;1&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,300;1,9..144,700;1,9..144,900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --vermillion: #E8401A; --cobalt: #1A4FD8; --saffron: #F5A623;
+  --jade: #1A8C5E; --magenta: #C0186C; --sky: #3CB4E8;
+  --plum: #6A1F9E; --cream: #FFF8EF; --charcoal: #1A1210;
+  --offwhite: #FAF6F0; --nav-h: 56px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Instrument Serif', Georgia, serif; background: var(--cream); color: var(--charcoal); overflow-x: hidden; }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+  background: var(--charcoal); display: flex; align-items: center;
+  justify-content: space-between; padding: 0 40px; height: var(--nav-h);
+  border-bottom: 3px solid var(--magenta);
+}
+.nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 0.08em; color: var(--cream); text-decoration: none; }
+.nav-links { display: flex; gap: 0; list-style: none; }
+.nav-links a {
+  font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: rgba(255,248,239,0.5); text-decoration: none;
+  padding: 0 14px; height: var(--nav-h); display: flex; align-items: center;
+  border-left: 1px solid rgba(255,255,255,0.08); transition: all 0.15s; white-space: nowrap;
+}
+.nav-links a:hover, .nav-links a.active { background: var(--magenta); color: white; }
+
+/* PAGE HEADER */
+.page-header {
+  padding-top: var(--nav-h); background: var(--magenta);
+  padding-left: 60px; padding-right: 60px; padding-bottom: 64px;
+  position: relative; overflow: hidden;
+}
+.page-header::after {
+  content: '04'; font-family: 'Bebas Neue', sans-serif; font-size: 300px;
+  color: rgba(0,0,0,0.08); position: absolute; right: -10px; bottom: -40px;
+  line-height: 1; pointer-events: none;
+}
+.page-header-inner { padding-top: 64px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: end; position: relative; }
+.page-header-eyebrow { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 16px; display: block; }
+.page-header-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(64px, 10vw, 120px); color: white; line-height: 0.9; }
+.page-header-title span { color: var(--saffron); }
+.page-header-desc { font-size: 17px; line-height: 1.85; color: rgba(255,255,255,0.7); }
+
+/* BREADCRUMB */
+.breadcrumb { display: flex; align-items: center; gap: 8px; padding: 16px 60px; background: var(--offwhite); border-bottom: 1px solid rgba(26,18,16,0.1); }
+.breadcrumb a, .breadcrumb span { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(26,18,16,0.4); text-decoration: none; }
+.breadcrumb a:hover { color: var(--vermillion); }
+.breadcrumb .sep { color: rgba(26,18,16,0.2); }
+.breadcrumb .current { color: var(--charcoal); }
+
+/* SECTION NAV TABS */
+.section-tabs {
+  background: var(--charcoal); display: flex; overflow-x: auto;
+  border-bottom: 2px solid rgba(255,255,255,0.08);
+  position: sticky; top: var(--nav-h); z-index: 100;
+}
+.section-tab {
+  font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: rgba(255,248,239,0.4);
+  padding: 0 24px; height: 48px; display: flex; align-items: center;
+  border-right: 1px solid rgba(255,255,255,0.06); text-decoration: none;
+  white-space: nowrap; transition: all 0.15s; flex-shrink: 0;
+  position: relative;
+}
+.section-tab::before { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; opacity: 0; transition: opacity 0.15s; }
+.section-tab:hover { color: white; background: rgba(255,255,255,0.04); }
+.section-tab:hover::before { opacity: 1; }
+.section-tab[data-color="vermillion"]::before { background: var(--vermillion); }
+.section-tab[data-color="cobalt"]::before { background: var(--cobalt); }
+.section-tab[data-color="plum"]::before { background: var(--plum); }
+.section-tab[data-color="jade"]::before { background: var(--jade); }
+.section-tab[data-color="saffron"]::before { background: var(--saffron); }
+
+/* INTRO ARGUMENT */
+.intro-argument {
+  background: var(--offwhite); padding: 80px 60px;
+  border-bottom: 3px solid var(--charcoal);
+}
+.intro-argument-inner { display: grid; grid-template-columns: 1fr 2fr; gap: 80px; align-items: start; }
+.ia-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(48px, 6vw, 72px); color: var(--charcoal); line-height: 0.9; }
+.ia-title em { color: var(--magenta); font-style: normal; }
+.ia-body { font-size: 16px; line-height: 1.85; color: rgba(26,18,16,0.7); }
+.ia-body p { margin-bottom: 20px; }
+.ia-body p:last-child { margin-bottom: 0; }
+.ia-thesis {
+  font-family: 'Fraunces', serif; font-style: italic; font-size: 20px;
+  color: var(--charcoal); line-height: 1.6; border-left: 4px solid var(--magenta);
+  padding-left: 20px; margin: 28px 0;
+}
+
+/* FOUR FRAMES BAND */
+.four-frames-band {
+  background: var(--charcoal); padding: 60px 60px 0;
+}
+.four-frames-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(255,248,239,0.3); margin-bottom: 16px; display: block; }
+.four-frames-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(48px, 7vw, 80px); color: var(--cream); line-height: 0.9; margin-bottom: 48px; }
+.four-frames-grid { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 2px solid rgba(255,255,255,0.08); }
+.frame-pill {
+  padding: 28px 24px; border-right: 1px solid rgba(255,255,255,0.08);
+  display: flex; flex-direction: column; gap: 8px;
+}
+.frame-pill:last-child { border-right: none; }
+.frame-pill-num { font-family: 'Bebas Neue', sans-serif; font-size: 48px; line-height: 1; }
+.frame-pill-name { font-family: 'Fraunces', serif; font-size: 18px; font-weight: 700; color: var(--cream); }
+.frame-pill-artist { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,248,239,0.35); }
+
+/* ─── FRAME SECTIONS ─── */
+.frame-section { padding: 0; border-bottom: 3px solid var(--charcoal); }
+
+/* Frame header */
+.frame-header {
+  display: grid; grid-template-columns: 320px 1fr;
+}
+.frame-header-left {
+  padding: 64px 48px;
+  display: flex; flex-direction: column; justify-content: space-between;
+}
+.frame-num { font-family: 'Bebas Neue', sans-serif; font-size: 120px; line-height: 1; opacity: 0.15; }
+.frame-name { font-family: 'Bebas Neue', sans-serif; font-size: 44px; line-height: 0.95; color: white; margin-bottom: 12px; }
+.frame-artist-name { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.45); }
+.frame-header-right { padding: 64px 60px; background: rgba(0,0,0,0.15); }
+.frame-context-label { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 12px; }
+.frame-context-text { font-size: 15px; line-height: 1.85; color: rgba(255,255,255,0.7); }
+
+/* Close reading block */
+.close-reading {
+  background: var(--offwhite); padding: 64px 60px;
+}
+.cr-label { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(26,18,16,0.35); margin-bottom: 20px; display: block; }
+.cr-title { font-family: 'Bebas Neue', sans-serif; font-size: 42px; color: var(--charcoal); line-height: 1; margin-bottom: 32px; }
+.cr-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+
+/* Excerpt block */
+.excerpt-block {
+  background: white; padding: 32px; border-left: 5px solid;
+  position: relative;
+}
+.excerpt-source { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(26,18,16,0.35); margin-bottom: 16px; }
+.excerpt-text {
+  font-family: 'Fraunces', serif; font-style: italic; font-size: 16px;
+  line-height: 1.75; color: var(--charcoal);
+}
+.excerpt-text mark {
+  background: rgba(232,64,26,0.12); color: var(--charcoal);
+  padding: 1px 3px; border-radius: 2px; font-style: normal;
+}
+
+/* Analysis block */
+.analysis-block { display: flex; flex-direction: column; gap: 24px; }
+.analysis-point { padding: 20px 20px 20px 0; border-bottom: 1px solid rgba(26,18,16,0.08); }
+.analysis-point:last-child { border-bottom: none; }
+.analysis-point-label { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 8px; }
+.analysis-point-text { font-size: 14px; line-height: 1.8; color: rgba(26,18,16,0.7); }
+
+/* Pattern box */
+.pattern-box {
+  margin-top: 40px; padding: 28px; background: var(--charcoal);
+  display: grid; grid-template-columns: auto 1fr; gap: 24px; align-items: start;
+}
+.pattern-box-icon { font-family: 'Bebas Neue', sans-serif; font-size: 48px; color: rgba(255,255,255,0.15); line-height: 1; flex-shrink: 0; }
+.pattern-box-label { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,248,239,0.35); margin-bottom: 8px; }
+.pattern-box-text { font-size: 14px; line-height: 1.75; color: rgba(255,248,239,0.65); }
+
+/* Mandate connection */
+.mandate-connection {
+  padding: 36px 60px; display: flex; gap: 24px; align-items: flex-start;
+  border-top: 1px solid rgba(26,18,16,0.08);
+  background: white;
+}
+.mc-icon { font-family: 'Bebas Neue', sans-serif; font-size: 24px; flex-shrink: 0; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; }
+.mc-label { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 8px; }
+.mc-text { font-size: 14px; line-height: 1.75; color: rgba(26,18,16,0.65); }
+
+/* RAVI SHANKAR PRIMARY SOURCE SECTION */
+.ravi-section { background: var(--cream); }
+.ravi-header {
+  background: var(--jade); padding: 64px 60px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: end;
+}
+.ravi-header-left { }
+.ravi-header-num { font-family: 'Bebas Neue', sans-serif; font-size: 48px; color: rgba(255,255,255,0.2); line-height: 1; }
+.ravi-header-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(48px, 6vw, 80px); color: white; line-height: 0.9; }
+.ravi-header-subtitle { font-family: 'Fraunces', serif; font-style: italic; font-size: 18px; color: rgba(255,255,255,0.7); margin-top: 12px; }
+.ravi-header-right { font-size: 15px; line-height: 1.85; color: rgba(255,255,255,0.7); }
+
+.ravi-reading-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  border-bottom: 3px solid var(--charcoal);
+}
+.ravi-panel { padding: 52px 60px; }
+.ravi-panel--left { border-right: 2px solid var(--charcoal); background: white; }
+.ravi-panel--right { background: var(--offwhite); }
+
+.ravi-panel-title { font-family: 'Bebas Neue', sans-serif; font-size: 32px; color: var(--charcoal); margin-bottom: 24px; }
+
+.language-item { margin-bottom: 28px; padding-bottom: 28px; border-bottom: 1px solid rgba(26,18,16,0.08); }
+.language-item:last-child { border-bottom: none; margin-bottom: 0; }
+.li-word {
+  font-family: 'Bebas Neue', sans-serif; font-size: 28px; display: inline-block;
+  padding: 2px 12px; margin-bottom: 8px; color: white;
+}
+.li-quote { font-family: 'Fraunces', serif; font-style: italic; font-size: 14px; color: rgba(26,18,16,0.55); margin-bottom: 8px; line-height: 1.6; }
+.li-analysis { font-size: 14px; line-height: 1.75; color: rgba(26,18,16,0.65); }
+
+/* SYNTHESIS SECTION */
+.synthesis { background: var(--charcoal); padding: 80px 60px; }
+.synthesis-header { display: grid; grid-template-columns: 1fr 2fr; gap: 60px; margin-bottom: 56px; align-items: start; }
+.synthesis-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(56px, 8vw, 96px); color: var(--cream); line-height: 0.9; }
+.synthesis-title em { color: var(--saffron); font-style: normal; }
+.synthesis-intro { font-size: 16px; line-height: 1.85; color: rgba(255,248,239,0.6); }
+
+.synthesis-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; background: rgba(255,255,255,0.05); }
+.synthesis-card { background: var(--charcoal); padding: 36px; }
+.sc-num { font-family: 'Bebas Neue', sans-serif; font-size: 80px; color: rgba(255,255,255,0.06); line-height: 1; float: right; margin-left: 16px; }
+.sc-title { font-family: 'Fraunces', serif; font-size: 20px; font-weight: 700; color: var(--cream); margin-bottom: 14px; line-height: 1.3; }
+.sc-body { font-size: 14px; line-height: 1.8; color: rgba(255,248,239,0.6); }
+
+.synthesis-conclusion {
+  margin-top: 56px; padding: 48px; background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.sc-conclusion-title { font-family: 'Bebas Neue', sans-serif; font-size: 36px; color: var(--saffron); margin-bottom: 20px; }
+.sc-conclusion-body { font-size: 16px; line-height: 1.85; color: rgba(255,248,239,0.65); }
+.sc-conclusion-body p { margin-bottom: 18px; }
+.sc-conclusion-body p:last-child { margin-bottom: 0; }
+
+/* PAGE NAV */
+.page-nav-bottom { background: var(--charcoal); padding: 40px 60px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.06); }
+.page-nav-link { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,248,239,0.4); text-decoration: none; display: flex; align-items: center; gap: 12px; transition: color 0.15s; }
+.page-nav-link:hover { color: var(--saffron); }
+.page-nav-link .pnl-label { font-family: 'Bebas Neue', sans-serif; font-size: 26px; color: var(--cream); display: block; }
+
+footer { background: black; padding: 32px 60px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+.footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 20px; color: rgba(255,255,255,0.3); letter-spacing: 0.08em; }
+.footer-nav { display: flex; gap: 20px; list-style: none; flex-wrap: wrap; }
+.footer-nav a { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.25); text-decoration: none; transition: color 0.15s; }
+.footer-nav a:hover { color: rgba(255,255,255,0.65); }
+.footer-note { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 0.12em; color: rgba(255,255,255,0.15); text-transform: uppercase; width: 100%; }
+
+@media (max-width: 900px) {
+  nav { padding: 0 20px; } .nav-links { display: none; }
+  .page-header { padding: 0 24px 48px; }
+  .page-header-inner { grid-template-columns: 1fr; gap: 24px; }
+  .breadcrumb { padding: 16px 24px; }
+  .section-tabs { padding: 0; }
+  .intro-argument { padding: 48px 24px; }
+  .intro-argument-inner { grid-template-columns: 1fr; gap: 32px; }
+  .four-frames-band { padding: 48px 24px 0; }
+  .four-frames-grid { grid-template-columns: 1fr 1fr; }
+  .frame-header { grid-template-columns: 1fr; }
+  .frame-header-left { padding: 40px 24px 24px; }
+  .frame-header-right { padding: 24px; }
+  .close-reading { padding: 40px 24px; }
+  .cr-inner { grid-template-columns: 1fr; }
+  .mandate-connection { padding: 28px 24px; }
+  .ravi-header { grid-template-columns: 1fr; padding: 48px 24px; }
+  .ravi-reading-grid { grid-template-columns: 1fr; }
+  .ravi-panel--left { border-right: none; border-bottom: 2px solid var(--charcoal); }
+  .ravi-panel { padding: 40px 24px; }
+  .synthesis { padding: 48px 24px; }
+  .synthesis-header { grid-template-columns: 1fr; gap: 24px; }
+  .synthesis-grid { grid-template-columns: 1fr; }
+  .synthesis-conclusion { padding: 32px 24px; }
+  .page-nav-bottom { padding: 32px 24px; flex-direction: column; gap: 20px; align-items: flex-start; }
+  footer { padding: 32px 24px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Stages of Change</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="context.html">Context</a></li>
+    <li><a href="timeline.html">Timeline</a></li>
+    <li><a href="artists.html">Artists</a></li>
+    <li><a href="analysis.html" class="active">Analysis</a></li>
+    <li><a href="sources.html">Sources</a></li>
+  </ul>
+</nav>
+
+<div class="page-header">
+  <div class="page-header-inner">
+    <div>
+      <span class="page-header-eyebrow">Section 04 — Critical Analysis</span>
+      <div class="page-header-title">Reading<br>the <span>Reviews</span></div>
+    </div>
+    <p class="page-header-desc">
+      Close readings of Michigan Daily concert reviews across four thematic frames — Popular Innovation, Experimental Challenge, Political Prophecy, and Communal Harmony — alongside a detailed analysis of the Ravi Shankar primary source. The language in these reviews does more than describe performances; it enacts the ideological work the university needed multicultural programming to perform.
+    </p>
+  </div>
+</div>
+
+<div class="breadcrumb">
+  <a href="index.html">Home</a>
+  <span class="sep">/</span>
+  <span class="current">Critical Analysis</span>
+</div>
+
+<!-- SECTION TABS -->
+<div class="section-tabs">
+  <a href="#intro" class="section-tab" data-color="saffron">Overview</a>
+  <a href="#frame1" class="section-tab" data-color="vermillion">I · Popular Innovation</a>
+  <a href="#frame2" class="section-tab" data-color="cobalt">II · Experimental Challenge</a>
+  <a href="#frame3" class="section-tab" data-color="plum">III · Political Prophecy</a>
+  <a href="#frame4" class="section-tab" data-color="jade">IV · Communal Harmony</a>
+  <a href="#ravi" class="section-tab" data-color="jade">V · Primary Source: Shankar</a>
+  <a href="#synthesis" class="section-tab" data-color="saffron">VI · Synthesis</a>
+</div>
+
+<!-- INTRO ARGUMENT -->
+<section id="intro" class="intro-argument">
+  <div class="intro-argument-inner">
+    <div>
+      <div class="ia-title">The <em>Argument</em></div>
+    </div>
+    <div class="ia-body">
+      <p>
+        The Michigan Daily concert reviews examined in this project are not neutral cultural journalism. They are ideologically situated texts produced within a specific institutional moment — the launch and consolidation of the Michigan Mandate — by student writers who were themselves participants in the campus culture they were narrating. Reading these reviews closely reveals a recurring structure: <strong>enthusiastic praise for minority artists, combined with the systematic scaffolding that encodes their work as exotic, exceptional, or requiring justification before a primarily white student audience</strong>.
+      </p>
+      <div class="ia-thesis">
+        "The Daily critics did embrace African American and minority innovation at Hill Auditorium — but they struggled to integrate the genres they presented without relating them to familiar cultural hierarchies. The reviews argue for multicultural excellence while simultaneously reproducing the frame that requires excellence to be argued for."
+      </div>
+      <p>
+        This analysis organizes the primary sources into four thematic frames, each representing a different strategy for legitimating minority performance within the institutional logic of the Michigan Mandate. Together, they trace an evolution from the anxious institutional nervousness of 1987 through the more confident, if still compromised, reception of the late 1980s. Matthew Johnson's framework of "selective incorporation" — celebrating diversity while preserving structural hierarchies — is visible at the level of individual word choices, metaphors, and framing decisions in each of these texts.
+      </p>
+      <p>
+        A fifth section offers a detailed close reading of the Ravi Shankar primary source — the Michigan Daily review that serves as this project's initial entry point into the analysis. That reading demonstrates how the patterns identified across the four frames operate in a single, concrete text.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- FOUR FRAMES OVERVIEW BAND -->
+<div class="four-frames-band">
+  <span class="four-frames-label">Four Thematic Frames</span>
+  <div class="four-frames-title">Four Reviews,<br>One Pattern</div>
+  <div class="four-frames-grid">
+    <div class="frame-pill">
+      <div class="frame-pill-num" style="color: var(--vermillion);">I</div>
+      <div class="frame-pill-name">Popular Innovation</div>
+      <div class="frame-pill-artist">Run-D.M.C. · 1987</div>
+    </div>
+    <div class="frame-pill">
+      <div class="frame-pill-num" style="color: var(--cobalt);">II</div>
+      <div class="frame-pill-name">Experimental Challenge</div>
+      <div class="frame-pill-artist">Cecil Taylor · 1988</div>
+    </div>
+    <div class="frame-pill">
+      <div class="frame-pill-num" style="color: var(--plum);">III</div>
+      <div class="frame-pill-name">Political Prophecy</div>
+      <div class="frame-pill-artist">Gil Scott-Heron · 1988</div>
+    </div>
+    <div class="frame-pill">
+      <div class="frame-pill-num" style="color: var(--jade);">IV</div>
+      <div class="frame-pill-name">Communal Harmony</div>
+      <div class="frame-pill-artist">Sweet Honey in the Rock · Late 1980s</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ FRAME 1: RUN-D.M.C. ═══════════ -->
+<section id="frame1" class="frame-section">
+  <div class="frame-header" style="background: var(--vermillion);">
+    <div class="frame-header-left">
+      <div class="frame-num" style="color: white;">I</div>
+      <div>
+        <div class="frame-name">Popular<br>Innovation</div>
+        <div class="frame-artist-name">Run-D.M.C. · November 1987</div>
+      </div>
+    </div>
+    <div class="frame-header-right">
+      <div class="frame-context-label">Institutional Context</div>
+      <p class="frame-context-text">
+        The Run-D.M.C. preview appears in November 1987 — eight months after the BAM III rally at Hill Auditorium and in the same academic year as the Michigan Mandate's planning phase. Entertainment editor Brian Berger's article is the first in this project's corpus, and it sets the template for all the reviews that follow. Its structure — celebratory headline, genuine enthusiasm, followed by preemptive institutional defense — performs the university's anxiety about legitimating hip-hop in its most prestigious performance space.
+      </p>
+      <p class="frame-context-text" style="margin-top: 16px;">
+        The article's positioning of Run-D.M.C. within the "logical progression of rap music from underground street art to mainstream pop sensation" is already doing ideological work: it frames the concert as proof that Black popular music can achieve uplift, can cross over, can become acceptable — not as proof that it was always worthy of Hill's stage.
+      </p>
+    </div>
+  </div>
+
+  <div class="close-reading" id="cr1">
+    <span class="cr-label">Close Reading</span>
+    <div class="cr-title">The Apologetic Preview</div>
+    <div class="cr-inner">
+      <div class="excerpt-block" style="border-color: var(--vermillion);">
+        <div class="excerpt-source">Michigan Daily · Brian Berger · November 1987</div>
+        <div class="excerpt-text">
+          "Rap music super-stars Run DMC are <mark>finally</mark> coming to Ann Arbor as part of their 'Tougher Than Leather' tour... Run DMC's '<mark>intelligent rhymes</mark>' and '<mark>innovative beats</mark>' have been instrumental in the <mark>logical progression</mark> of rap music from <mark>underground street art</mark> to <mark>mainstream pop sensation</mark>. Their hit single 'Walk This Way,' recorded with rock band Aerosmith, is just one example of how Run DMC '<mark>brought rap to the masses</mark>.'
+          <br><br>
+          [The article then shifts to address the 2 Live Crew obscenity trial, assuring readers that Run-D.M.C.'s lyrics are filled with 'positive' messages glorifying 'hard work' and community pride.]"
+        </div>
+      </div>
+      <div class="analysis-block">
+        <div class="analysis-point">
+          <div class="analysis-point-label" style="color: var(--vermillion);">"Finally" — The Arrival Frame</div>
+          <div class="analysis-point-text">The word "finally" positions the concert as long overdue — but to whom? It assumes a primarily white, mainstream Ann Arbor audience for whom Run-D.M.C.'s arrival is a cultural gift rather than an expected continuation of Hill's diverse programming. The framing centers the perspective of the audience being served, not the artist performing.</div>
+        </div>
+        <div class="analysis-point">
+          <div class="analysis-point-label" style="color: var(--vermillion);">"Logical Progression" — The Uplift Narrative</div>
+          <div class="analysis-point-text">Describing rap's move from "underground street art to mainstream pop sensation" as a "logical progression" encodes a hierarchy in which mainstream acceptability — not artistic merit — is the measure of legitimacy. Street art is implicitly lesser; "mainstream pop" is the endpoint worth celebrating.</div>
+        </div>
+        <div class="analysis-point">
+          <div class="analysis-point-label" style="color: var(--vermillion);">The Aerosmith Validation</div>
+          <div class="analysis-point-text">Foregrounding "Walk This Way" — Run-D.M.C.'s collaboration with white rock band Aerosmith — as proof that they "brought rap to the masses" positions Western rock as the gateway through which Black popular music gains legitimacy. The need to establish familiarity through a white cultural reference point is a precise instance of what this project identifies as "validation through Western frameworks."</div>
+        </div>
+        <div class="analysis-point">
+          <div class="analysis-point-label" style="color: var(--vermillion);">The Obscenity Defense</div>
+          <div class="analysis-point-text">The pivot to addressing the 2 Live Crew controversy — unprompted by any threat to the Run-D.M.C. show itself — reveals institutional anxiety. No Vienna Philharmonic preview would interrupt itself to assure readers that the orchestra does not play offensive music. The defense is a symptom: hip-hop requires legitimation that European classical performance does not.</div>
+        </div>
+      </div>
+    </div>
+    <div class="pattern-box">
+      <div class="pattern-box-icon">I</div>
+      <div>
+        <div class="pattern-box-label">Pattern Identified: "Praise + Institutional Defense"</div>
+        <div class="pattern-box-text">Frame I establishes the template. Genuine enthusiasm for the artist is real — Berger's excitement is not cynical. But the structural necessity of defending hip-hop's presence at Hill, of proving its "positivity," of measuring it against white rock crossover — these are the ideological costs of admission. The concert is framed as proof that Black popular music can earn the stage, rather than as evidence that the stage was always owed to it.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mandate-connection">
+    <div class="mc-icon" style="background: var(--vermillion); color: white; font-size: 14px; font-family: 'Space Mono', monospace;">MM</div>
+    <div>
+      <div class="mc-label" style="color: var(--vermillion);">Michigan Mandate Connection</div>
+      <div class="mc-text">Duderstadt's language of "sacrifices" — that the broader community must accept in exchange for diversity's enrichment — finds dramatic expression here. Run-D.M.C.'s presence at Hill is framed as a cultural gift the institution is offering its students, requiring some tolerance of unfamiliar territory. This is precisely Johnson's "selective incorporation": the language of giving rather than the language of receiving what was always owed.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ FRAME 2: CECIL TAYLOR ═══════════ -->
+<section id="frame2" class="frame-section">
+  <div class="frame-header" style="background: var(--cobalt);">
+    <div class="frame-header-left">
+      <div class="frame-num" style="color: white;">II</div>
+      <div>
+        <div class="frame-name">Experimental<br>Challenge</div>
+        <div class="frame-artist-name">Cecil Taylor · 1988</div>
+      </div>
+    </div>
+    <div class="frame-header-right">
+      <div class="frame-context-label">Institutional Context</div>
+      <p class="frame-context-text">
+        The 1988 Cecil Taylor review appears in the Mandate's launch year, and its central problem is acoustic as much as ideological. Hill Auditorium's design — perfected for orchestral clarity and the projection of the human voice — meets free jazz piano improvisation for the first time. The anonymous Daily critic must do two things simultaneously: celebrate Taylor's genius and translate it for an audience trained to hear the hall in a completely different way.
+      </p>
+      <p class="frame-context-text" style="margin-top: 16px;">
+        This dual mandate — praise and pedagogy — escalates the work required of the reviewer beyond what the Run-D.M.C. article needed. Hip-hop could be defended on grounds of popularity and positive messaging. Taylor's abstraction requires something more: a full theory of why his "chaos" counts as excellence.
+      </p>
+    </div>
+  </div>
+
+  <div class="close-reading">
+    <span class="cr-label">Close Reading</span>
+    <div class="cr-title">Genius Requiring Translation</div>
+    <div class="cr-inner">
+      <div class="excerpt-block" style="border-color: var(--cobalt);">
+        <div class="excerpt-source">Michigan Daily · Anonymous Critic · 1988</div>
+        <div class="excerpt-text">
+          "Taylor's '<mark>exploding</mark>' improvisational style, his '<mark>nimble-fingered</mark>' virtuosity as he produces '<mark>riffs</mark>' with relentless energy, his '<mark>gutbucket</mark>' style that '<mark>challenge</mark>' the senses in the way it defies conventional musical expectation, ultimately awarding Taylor the undisputed title of '<mark>winner</mark>' with his '<mark>tight lines</mark>' and '<mark>rhythm</mark>' that show his mastery over his craft.
+          <br><br>
+          [The review then shifts to extended explanation of Taylor's use of the piano 'like a mime artist' evoking abstract expressionism, provoking '<mark>bewilderment</mark>' in the audience.]"
+        </div>
+      </div>
+      <div class="analysis-block">
+        <div class="analysis-point">
+          <div class="analysis-point-label" style="color: var(--cobalt);">Hyperbole as Scaffolding</div>
+          <div class="analysis-point-text">The hyperbolic language — "exploding," "relentless," "winner" — does not simply praise Taylor; it compensates for anticipated resistance. The review works harder than it needs to because it anticipates readers who need to be persuaded. The excess of the praise reveals the depth of the anticipated skepticism.</div>
+        </div>
+        <div class="analysis-point">
+          <div class="analysis-point-label" style="color: var(--cobalt);">Abstract Expressionism as Bridge</div>
+          <div class="analysis-point-text">Comparing Taylor's technique to "mime" and "abstract expressionism of the human body" translates Black avant-garde jazz into a vocabulary borrowed from European visual art and performance theory. The bridge is genuine — Taylor did draw on these traditions — but the need to build it at all signals that jazz abstraction cannot stand on its own terms for this readership.</div>
+        </div>
+        <div class="analysis-point">
+          <div class="analysis-point-label" style="color: var(--cobalt);">"Bewilderment" as Admission</div>
+          <div class="analysis-point-text">The word "bewilderment" appears in this review and in the Ravi Shankar review — a telling repetition. Minority artistic innovation consistently provokes "bewilderment" in the Daily's accounts, while European classical performances produce admiration or reverence. Bewilderment codes difference as disorientation rather than as expansion.</div>
+        </div>
+        <div class="analysis-point">
+          <div class="analysis-point-label" style="color: var(--cobalt);">The Venue as Constraint</div>
+          <div class="analysis-point-text">The review's accounting of Taylor's "dissonance" against Hill's acoustic design — built for orchestral clarity — is actually a productive tension the article half-notices. Taylor's work does not merely fit Hill; it challenges it. But the review frames this as a problem to be explained rather than a productive artistic and institutional confrontation.</div>
+        </div>
+      </div>
+    </div>
+    <div class="pattern-box">
+      <div class="pattern-box-icon">II</div>
+      <div>
+        <div class="pattern-box-label">Pattern Identified: "Rapturous Praise + Pedagogical Explanation"</div>
+        <div class="pattern-box-text">Frame II escalates Frame I's structure. Where hip-hop required institutional defense against moral objection, avant-garde jazz requires intellectual translation for the uninitiated. Both structures share the same premise: Black artistic innovation is not self-evidently legible to a mainstream U-M audience and therefore requires the reviewer to serve as cultural broker. This brokerage is itself a power relation.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mandate-connection">
+    <div class="mc-icon" style="background: var(--cobalt); color: white; font-size: 14px; font-family: 'Space Mono', monospace;">MM</div>
+    <div>
+      <div class="mc-label" style="color: var(--cobalt);">Michigan Mandate Connection</div>
+      <div class="mc-text">Duderstadt's argument that diversity requires "sacrifices" — the intellectual work of engaging with unfamiliar traditions — finds its cultural analogue in the Cecil Taylor review. The "sacrifice" demanded of the U-M audience is cognitive: they must work to understand Taylor's abstraction before they can embrace it as excellence. The review performs this work for them, but in doing so it confirms that the work is necessary — that Taylor's art is not yet assumed to be excellent.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ FRAME 3: GIL SCOTT-HERON ═══════════ -->
+<section id="frame3" class="frame-section">
+  <div class="frame-header" style="background: var(--plum);">
+    <div class="frame-header-left">
+      <div class="frame-num" style="color: white;">III</div>
+      <div>
+        <div class="frame-name">Political<br>Prophecy</div>
+        <div class="frame-artist-name">Gil Scott-Heron · 1988</div>
+      </div>
+    </div>
+    <div class="frame-header-right">
+      <div class="frame-context-label">Institutional Context</div>
+      <p class="frame-context-text">
+        Brian Berger returns as reviewer for Gil Scott-Heron — the same entertainment editor who previewed Run-D.M.C. a year earlier. His framing of Scott-Heron is more sophisticated than the Run-D.M.C. article, and its sophistication is itself revealing. Berger no longer needs to defend against obscenity; Scott-Heron is "cerebral," "intelligent," overtly political in ways that fit the Mandate's vision of critical citizenship. But the framing strategy has shifted rather than disappeared: legitimation now comes through intellectual lineage and historical significance rather than moral acceptability.
+      </p>
+    </div>
+  </div>
+
+  <div class="close-reading">
+    <span class="cr-label">Close Reading</span>
+    <div class="cr-title">Obscurity as Credential</div>
+    <div class="cr-inner">
+      <div class="excerpt-block" style="border-color: var(--plum);">
+        <div class="excerpt-source">Michigan Daily · Brian Berger · 1988</div>
+        <div class="excerpt-text">
+          "Scott-Heron is a '<mark>significant influence on rap music</mark>,' whose seminal work on '<mark>street-level reality</mark>' in '<mark>The Revolution Will Not Be Televised</mark>' <mark>prophetically anticipated</mark> the cultural explosion of hip-hop while still being '<mark>largely unknown</mark>' to the mainstream.
+          <br><br>
+          His '<mark>intelligent</mark>' socially conscious lyrics, his band's '<mark>funky</mark>' rhythmic grooves, and his seamless fusion of revolutionary poetry with live music... Berger contrasts Scott-Heron's '<mark>mature artistic substance</mark>' with the '<mark>superficial flashiness</mark>' of contemporary commercial rappers — asserting that the poet's very '<mark>obscurity</mark>' constitutes <mark>irrefutable proof of his dedication to depth rather than flash</mark>."
+        </div>
+      </div>
+      <div class="analysis-block">
+        <div class="analysis-point">
+          <div class="analysis-point-label" style="color: var(--plum);">Obscurity Reframed as Virtue</div>
+          <div class="analysis-point-text">The claim that Scott-Heron's obscurity proves his artistic seriousness is a remarkable ideological move. It converts structural neglect — the failure of mainstream culture to engage with Black political art — into evidence of the artist's personal integrity. "Unknown" becomes honorable rather than unjust. The review cannot or does not ask why he remains unknown.</div>
+        </div>
+        <div class="analysis-point">
+          <div class="analysis-point-label" style="color: var(--plum);">The Prophecy Frame</div>
+          <div class="analysis-point-text">Calling Scott-Heron a prophetic "ancestor" of rap music positions his value retrospectively — he matters because of what came after him, not primarily for what he created. This is the lineage strategy: legitimating the present by constructing a canon. It implicitly acknowledges that the present (hip-hop) needed legitimation, and that the past (spoken word poetry) is safer to celebrate.</div>
+        </div>
+        <div class="analysis-point">
+          <div class="analysis-point-label" style="color: var(--plum);">Against "Superficial Flashiness"</div>
+          <div class="analysis-point-text">Elevating Scott-Heron by contrasting him with "superficial" commercial rappers mirrors the classical music world's long tradition of distinguishing serious art from popular entertainment. Berger imports this hierarchy into hip-hop in order to make Scott-Heron legible within it — but in doing so, he reproduces a framework that consistently codes Black popular commercial success as artistically inferior.</div>
+        </div>
+        <div class="analysis-point">
+          <div class="analysis-point-label" style="color: var(--plum);">Intellectual Flattery</div>
+          <div class="analysis-point-text">The review's emphasis on Scott-Heron's "cerebral" quality and his fit with U-M's "academic powerhouse" self-image reveals how the Mandate's diversity framework filters cultural reception: Black art that can be categorized as intellectual — poetry, critical consciousness — is more easily absorbed than art that is primarily affective, physical, or popular.</div>
+        </div>
+      </div>
+    </div>
+    <div class="pattern-box">
+      <div class="pattern-box-icon">III</div>
+      <div>
+        <div class="pattern-box-label">Pattern Identified: "Legitimation Through Intellectual Lineage"</div>
+        <div class="pattern-box-text">Frame III shows the Michigan Mandate's multicultural logic operating at full capacity: Scott-Heron's "obscurity" becomes a mark of serious intellectual commitment, his political poetry fits the university's vision of critical citizenship, and his historical importance to hip-hop legitimates him retroactively. But the framing converts a case for systemic recognition into a story about individual artistic depth — which is precisely what Johnson identifies as selective incorporation.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mandate-connection">
+    <div class="mc-icon" style="background: var(--plum); color: white; font-size: 14px; font-family: 'Space Mono', monospace;">MM</div>
+    <div>
+      <div class="mc-label" style="color: var(--plum);">Tobin's Framework Applied</div>
+      <div class="mc-text">James Tobin's account of the affirmative action debate — that Michigan's leaders argued diversity produces "legitimate democracy" through exposure to diverse critical voices — finds its cultural analogue in Berger's Scott-Heron framing. The review argues that Scott-Heron's political consciousness expands U-M students' critical horizons in exactly the way the Mandate claimed diversity would. The concert review becomes, in miniature, the argument the university was making to the courts.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ FRAME 4: SWEET HONEY ═══════════ -->
+<section id="frame4" class="frame-section">
+  <div class="frame-header" style="background: var(--jade);">
+    <div class="frame-header-left">
+      <div class="frame-num" style="color: white;">IV</div>
+      <div>
+        <div class="frame-name">Communal<br>Harmony</div>
+        <div class="frame-artist-name">Sweet Honey in the Rock · Late 1980s</div>
+      </div>
+    </div>
+    <div class="frame-header-right">
+      <div class="frame-context-label">Institutional Context</div>
+      <p class="frame-context-text">
+        The Sweet Honey in the Rock preview represents the most relaxed of the four reviews — and that relaxation is itself analytically significant. Founded by Dr. Bernice Johnson Reagon and rooted in African American traditions of gospel, spiritual, blues, and civil rights song, Sweet Honey's collective form and unambiguous social justice message make them easier for the Michigan Daily to celebrate without institutional scaffolding. The review still exhibits the era's characteristic patterns, but in attenuated form — showing how the arc from 1987 to the late 1980s reflects rising institutional confidence.
+      </p>
+    </div>
+  </div>
+
+  <div class="close-reading">
+    <span class="cr-label">Close Reading</span>
+    <div class="cr-title">Qualified Celebration</div>
+    <div class="cr-inner">
+      <div class="excerpt-block" style="border-color: var(--jade);">
+        <div class="excerpt-source">Michigan Daily · Late 1980s</div>
+        <div class="excerpt-text">
+          "The Daily writers praise the '<mark>stunning harmonies</mark>' and '<mark>vocal acrobatics</mark>' of the group, adroitly blending '<mark>West African songs</mark>,' spiritual '<mark>gospel traditions</mark>,' and powerful '<mark>freedom songs</mark>' inspired by the civil rights movement in arrangements that '<mark>communicate</mark>' the '<mark>politics</mark>' in a manner described as '<mark>adorning accessibility</mark>.'
+          <br><br>
+          Sweet Honey represents the '<mark>joyful collective spirit</mark>' in '<mark>joyfully</mark>' presented lyrics to '<mark>empowerment</mark>' anthems and '<mark>justice</mark>' songs, which fill the '<mark>vast space</mark>' within the Hill Auditorium in a manner '<mark>perfectly suited</mark>' to the venue's potential for '<mark>forging large-scale collective connection</mark>.'"
+        </div>
+      </div>
+      <div class="analysis-block">
+        <div class="analysis-point">
+          <div class="analysis-point-label" style="color: var(--jade);">"Adorning Accessibility" — Form Over Content</div>
+          <div class="analysis-point-text">The phrase "adorning accessibility" is revealing: politics are acceptable when they are aesthetically pleasing, when they arrive adorned in beautiful sound. This framing subtly prioritizes the audience's comfort over the work's political content — the protest tradition is receivable because it sounds good, not because the politics demand engagement.</div>
+        </div>
+        <div class="analysis-point">
+          <div class="analysis-point-label" style="color: var(--jade);">The Geography of "West African" Sound</div>
+          <div class="analysis-point-text">Specifying "West African songs" where other reviews might simply say "traditional" or "folk" is a kind of benevolent exoticization — it marks cultural origin in a way that simultaneously celebrates authenticity and maintains distance. The specificity of origin geography persists throughout the era's reviews of non-European artists.</div>
+        </div>
+        <div class="analysis-point">
+          <div class="analysis-point-label" style="color: var(--jade);">Venue as Vindication</div>
+          <div class="analysis-point-text">The claim that Sweet Honey is "perfectly suited" to Hill's potential for "large-scale collective connection" is a full integration of artist and venue — the most complete acceptance of any minority artist in this corpus. But even here, suitability is measured against what Hill can do, rather than what the artist brings independently of the space.</div>
+        </div>
+        <div class="analysis-point">
+          <div class="analysis-point-label" style="color: var(--jade);">The Absence of Defense</div>
+          <div class="analysis-point-text">What is most significant about this review is what it lacks: there is no obscenity defense, no pedagogical explanation of unfamiliar musical concepts, no historical lineage construction. The absence reveals the logic of its presence in the earlier reviews: they were structural responses to anticipated institutional resistance that has, by the late 1980s, partially relaxed.</div>
+        </div>
+      </div>
+    </div>
+    <div class="pattern-box">
+      <div class="pattern-box-icon">IV</div>
+      <div>
+        <div class="pattern-box-label">Pattern Identified: "Ease of Reception Reveals Structural Preference"</div>
+        <div class="pattern-box-text">Frame IV's relative ease reveals the limits of the previous three frames' difficulty. Sweet Honey is easier to celebrate because their collective form doesn't produce individual-genius anxiety, their politics are legible within the university's progressive self-image, and their acoustic a cappella sound fits Hill's design. The conditions for easy reception are themselves ideologically shaped — what "fits" the institution is not neutral.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mandate-connection">
+    <div class="mc-icon" style="background: var(--jade); color: white; font-size: 14px; font-family: 'Space Mono', monospace;">MM</div>
+    <div>
+      <div class="mc-label" style="color: var(--jade);">The Arc Toward Confidence</div>
+      <div class="mc-text">The evolution from Run-D.M.C.'s apologetic 1987 preview to Sweet Honey's qualified but genuine celebration in the late 1980s does reflect the Michigan Mandate's real impact on campus culture. Student writers became more comfortable with Black performance at Hill. But comfort is not the same as structural equity, and this project's argument is precisely that tracking the language of comfort — what requires justification, what does not — is one way to measure the gap between the Mandate's aspirations and its accomplishments.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ RAVI SHANKAR PRIMARY SOURCE ═══════════ -->
+<section id="ravi" class="ravi-section">
+  <div class="ravi-header">
+    <div class="ravi-header-left">
+      <div class="ravi-header-num">V</div>
+      <div class="ravi-header-title">Primary Source:<br>Ravi Shankar</div>
+      <div class="ravi-header-subtitle">Michigan Daily Review · April 1996 · Rackham Auditorium</div>
+    </div>
+    <div class="ravi-header-right">
+      <p>
+        The Ravi Shankar Michigan Daily review is this project's initial primary source and the text that anchors the exhibit's argument. Unlike the four frames above — which primarily examine African American artists and the specific idioms of hip-hop, jazz, and folk tradition — the Shankar review introduces a distinct set of framing strategies for a South Asian classical performer. The patterns here reveal how the Michigan Mandate era's multicultural framework operated across different racial and cultural contexts, not only within African American arts coverage.
+      </p>
+      <p style="margin-top: 16px;">
+        The review's strategies — elevation through exotic titling, validation through Western collaboration, selective instrument explanation — are distinct from but structurally parallel to the African American coverage. Together they suggest a systematic approach to minority performance across the era, not a set of isolated choices by individual writers.
+      </p>
+    </div>
+  </div>
+
+  <div class="ravi-reading-grid">
+    <div class="ravi-panel ravi-panel--left">
+      <div class="ravi-panel-title">Language Choices & What They Do</div>
+
+      <div class="language-item">
+        <div class="li-word" style="background: var(--jade);">Virtuoso / Emperor</div>
+        <div class="li-quote">"The review starts with quite a lot of boosting... He is called a 'virtuoso' and an 'emperor,' terms that bring him to another level relative to other performers."</div>
+        <div class="li-analysis">These terms do more than praise — they isolate. Calling Shankar an "emperor" frames him as a singular representative of India, converting one artist into an ambassador for an entire subcontinent's musical tradition. The elevation is real, but it collapses the diversity of Indian classical music into a single figure — and positions that figure as exceptional rather than representative of a living tradition.</div>
+      </div>
+
+      <div class="language-item">
+        <div class="li-word" style="background: var(--cobalt);">Ancient / Unchanging</div>
+        <div class="li-quote">"Describing the ragas as 'ancient' shows the age and authenticity, but it also risks showing Indian music as unchanging."</div>
+        <div class="li-analysis">"Ancient" simultaneously praises depth and freezes development. Indian classical music is positioned as timeless — which sounds like a compliment but actually denies it a history of innovation, change, and contemporary relevance. The temporal framing places Indian music in a different relationship to modernity than Western classical music, which is equally old but never called "ancient."</div>
+      </div>
+
+      <div class="language-item">
+        <div class="li-word" style="background: var(--vermillion);">Western Collaborations</div>
+        <div class="li-quote">"Showing that Shankar collaborated with Yehudi Menuhin or Philip Glass... the very need to show familiarity by mixing with Western artists is a way to validate for those attending."</div>
+        <div class="li-analysis">The foregrounding of Harrison, Glass, and Menuhin as proof of Shankar's legitimacy is structurally identical to the Run-D.M.C. review's use of the Aerosmith crossover. In both cases, the gateway to institutional acceptability runs through white Western cultural endorsement. Shankar's work with Indian musicians — equally significant, equally brilliant — receives no equivalent emphasis.</div>
+      </div>
+
+      <div class="language-item">
+        <div class="li-word" style="background: var(--plum);">Selective Explanation</div>
+        <div class="li-quote">"The sitar is explained repeatedly... while the tabla, tamboura, and autoharp aren't elaborated on at all. References to these other instruments without explanation further make the performance seem exotic."</div>
+        <div class="li-analysis">The pattern of what gets explained and what gets left unexplained is itself a framing choice. The sitar becomes a fetish object — explained repeatedly because it is the most recognizable exotic signifier — while the ensemble context of Indian performance disappears. This selective attention reproduces the reduction of a complex tradition to its most Western-legible element.</div>
+      </div>
+
+      <div class="language-item">
+        <div class="li-word" style="background: var(--saffron); color: var(--charcoal);">Musical Vocabulary</div>
+        <div class="li-quote">"The writer chose familiar terms like 'melodic,' 'concertos,' 'ballet,' 'classical,' while sprinkling in 'ragas,' 'talas'... it paints Western classical music vocabulary as the default language for serious music."</div>
+        <div class="li-analysis">Using Western classical terms as the primary vocabulary for Indian classical music is not neutral translation — it subordinates the Indian framework to the Western one. "Ragas" becomes intelligible by analogy to "concertos," rather than on its own terms. The direction of translation always runs from Indian to Western, never the reverse.</div>
+      </div>
+    </div>
+
+    <div class="ravi-panel ravi-panel--right">
+      <div class="ravi-panel-title">Structural Patterns</div>
+
+      <div class="language-item">
+        <div class="li-word" style="background: var(--magenta);">Bewilderment Language</div>
+        <div class="li-quote">"'Bewilderment' and 'impressive' make the performance seem even more appealing as a majestic, exotic, brand-new experience."</div>
+        <div class="li-analysis">The word "bewilderment" appears in this review and in the Cecil Taylor review — not coincidentally. It is the characteristic affect the Daily's reviews assign to encounters with non-Western and avant-garde Black performance. Bewilderment is not hostility, but it marks difference as disorientation rather than as expansion. Compare with the reverence, admiration, or intellectual engagement that characterizes reviews of European classical performances at the same venue.</div>
+      </div>
+
+      <div class="language-item">
+        <div class="li-word" style="background: var(--jade);">Requests on Stage</div>
+        <div class="li-quote">"Shankar 'plays ragas on request' and interacts personally... it subtly reinforces the idea that the exotic minority artist provides a personalized cultural experience for the majority audience."</div>
+        <div class="li-analysis">The image of Shankar taking requests from the audience introduces a service relationship into what is otherwise framed as a grand artistic encounter. The "emperor" is also available for personalized interaction. This asymmetry — the exotic master making himself accessible to the majority audience — reproduces the structure of cultural tourism: the minority artist's value is partly in their availability to be experienced.</div>
+      </div>
+
+      <div class="language-item">
+        <div class="li-word" style="background: var(--charcoal);">Ticket Prices / Commercialization</div>
+        <div class="li-quote">"The article has ad placements for Ticketmaster... '$18.50' and '$12.00'... an encounter with Indian culture is facilitated through purchasing power rather than a normal encounter."</div>
+        <div class="li-analysis">The commercial framing of the concert — ticket prices, Ticketmaster ads, seating categories — embeds Indian classical music within the campus economy of leisure consumption. Cultural encounter with the non-Western world is available for purchase, as a special event, not as ordinary campus life. This commodification of multicultural experience is one of the ways institutions can celebrate diversity while containing its disruptive potential.</div>
+      </div>
+
+      <div class="language-item">
+        <div class="li-word" style="background: var(--cobalt);">Serialization on Page</div>
+        <div class="li-quote">"The coexistence of Ravi Shankar's majestic music being on the same page as student organizations and common news shows how multicultural art events are woven into the University of Michigan."</div>
+        <div class="li-analysis">This observation cuts in two directions. The placement of the Shankar concert alongside ordinary campus news does suggest normalization — multicultural performance as unremarkable campus life. But it also shows the gap: the event is remarkable enough to review, exotic enough to explain, and expensive enough to advertise ticket prices. Normalization and exoticization coexist on the same page.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ SYNTHESIS ═══════════ -->
+<section id="synthesis" class="synthesis">
+  <div class="synthesis-header">
+    <div>
+      <div class="synthesis-title">The<br><em>Full</em><br>Picture</div>
+    </div>
+    <p class="synthesis-intro">
+      Across all four frames and the Ravi Shankar primary source, a coherent pattern emerges. The Michigan Daily's coverage of minority artists at Hill Auditorium between 1987 and 1996 reflects both the genuine enthusiasm of the Michigan Mandate era and its structural limitations. The evolution over time is real; the limits are also real. This synthesis draws the argument together.
+    </p>
+  </div>
+
+  <div class="synthesis-grid">
+    <div class="synthesis-card">
+      <div class="sc-num">1</div>
+      <div class="sc-title">The Praise + Justification Structure</div>
+      <p class="sc-body">Every review in this corpus exhibits some version of the same structure: genuine enthusiasm for the artist, followed by institutional scaffolding that encodes the artist's presence as exceptional, requiring explanation, or needing defense. The scaffolding changes form — obscenity defense (Run-D.M.C.), pedagogical translation (Taylor), intellectual lineage (Scott-Heron), Western validation (Shankar) — but its structural function is identical: it positions Black and minority art as arriving at the stage rather than belonging on it.</p>
+    </div>
+    <div class="synthesis-card">
+      <div class="sc-num">2</div>
+      <div class="sc-title">Bewilderment vs. Admiration</div>
+      <p class="sc-body">The affective vocabulary of the reviews is divided along racial lines. European classical performances produce admiration, reverence, or intellectual engagement. Black and minority performances produce "bewilderment," "amazement," "astonishment" — states of encounter with the unfamiliar. This is not hostility; it is the aesthetic language of cultural tourism, in which the majority encounters the minority as spectacle rather than as peer.</p>
+    </div>
+    <div class="synthesis-card">
+      <div class="sc-num">3</div>
+      <div class="sc-title">Western Validation as Gateway</div>
+      <p class="sc-body">Across all five cases, the most consistent framing strategy is the use of Western cultural reference points to legitimate non-Western or Black artistic achievement. Run-D.M.C. earns the stage through the Aerosmith crossover; Shankar through Harrison, Glass, and Menuhin; Scott-Heron through his value as a progenitor of rap; Taylor through comparison to European abstract expressionism. The direction of legitimation always runs from Western to non-Western — never the reverse.</p>
+    </div>
+    <div class="synthesis-card">
+      <div class="sc-num">4</div>
+      <div class="sc-title">The Evolution Over Time</div>
+      <p class="sc-body">The arc from the anxious 1987 Run-D.M.C. preview to the more confident Sweet Honey coverage in the late 1980s does reflect real change. Student writers became more comfortable with Black performance at Hill, more fluent in the Mandate's multicultural language, more willing to celebrate without institutional hedging. But the Shankar review in 1996 — at the Mandate's high-water mark — still exhibits all the era's characteristic patterns. Comfort with Black artists did not automatically produce comfort with South Asian classical performance.</p>
+    </div>
+  </div>
+
+  <div class="synthesis-conclusion">
+    <div class="sc-conclusion-title">Conclusion: Selective Incorporation in the Review Section</div>
+    <div class="sc-conclusion-body">
+      <p>
+        Matthew Johnson argues that racial inclusion can become a strategy for institutional stability rather than a path toward genuine justice. This argument is most visible in the policy documents and administrative decisions he analyzes — but it is also visible, at a finer grain, in the language of student concert reviews.
+      </p>
+      <p>
+        The Michigan Daily's coverage of minority artists at Hill Auditorium between 1987 and 1996 celebrated multicultural excellence while encoding the hierarchies that made that excellence feel exceptional rather than expected. The reviews did not simply reflect the Michigan Mandate's values — they participated in constructing those values, one adjective at a time.
+      </p>
+      <p>
+        The unanswered question — which Johnson's framework pushes toward — is whether the scaffolding was necessary as a transitional strategy, a way of moving an institution from one cultural condition to another, or whether it was itself a ceiling: a way of incorporating minority excellence into existing hierarchies without transforming those hierarchies. The language of these reviews does not answer that question, but it makes it impossible to avoid.
+      </p>
+      <p>
+        The stages — physical and metaphorical — were never neutral. They were always sites of argument, and the arguments were always larger than the music.
+      </p>
+    </div>
+  </div>
+</section>
+
+<div class="page-nav-bottom">
+  <a href="artists.html" class="page-nav-link">
+    <div>
+      <span style="font-family:'Space Mono',monospace;font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,248,239,0.4);">← Previous</span>
+      <span class="pnl-label">Artists of the Era</span>
+    </div>
+  </a>
+  <a href="sources.html" class="page-nav-link">
+    <div style="text-align:right;">
+      <span style="font-family:'Space Mono',monospace;font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,248,239,0.4);">Next →</span>
+      <span class="pnl-label">Sources & Methodology</span>
+    </div>
+  </a>
+</div>
+
+<footer>
+  <div class="footer-logo">Stages of Change · U-M 1980–2000</div>
+  <ul class="footer-nav">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="context.html">Context</a></li>
+    <li><a href="timeline.html">Timeline</a></li>
+    <li><a href="artists.html">Artists</a></li>
+    <li><a href="analysis.html">Analysis</a></li>
+    <li><a href="sources.html">Sources</a></li>
+  </ul>
+  <div class="footer-note">Research drawn from Michigan Daily · UMS Archive · Michigan Today · Bentley Historical Library · AMCULT 103</div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Artists of the Era — Stages of Change</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Instrument+Serif:ital@0;1&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,300;1,9..144,700;1,9..144,900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --vermillion: #E8401A; --cobalt: #1A4FD8; --saffron: #F5A623;
+  --jade: #1A8C5E; --magenta: #C0186C; --sky: #3CB4E8;
+  --plum: #6A1F9E; --cream: #FFF8EF; --charcoal: #1A1210;
+  --offwhite: #FAF6F0; --nav-h: 56px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Instrument Serif', Georgia, serif; background: var(--cream); color: var(--charcoal); overflow-x: hidden; }
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+  background: var(--charcoal); display: flex; align-items: center;
+  justify-content: space-between; padding: 0 40px; height: var(--nav-h);
+  border-bottom: 3px solid var(--vermillion);
+}
+.nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 0.08em; color: var(--cream); text-decoration: none; }
+.nav-links { display: flex; gap: 0; list-style: none; }
+.nav-links a {
+  font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: rgba(255,248,239,0.5); text-decoration: none;
+  padding: 0 14px; height: var(--nav-h); display: flex; align-items: center;
+  border-left: 1px solid rgba(255,255,255,0.08); transition: all 0.15s; white-space: nowrap;
+}
+.nav-links a:hover, .nav-links a.active { background: var(--vermillion); color: white; }
+
+.page-header {
+  padding-top: var(--nav-h); background: var(--vermillion);
+  padding: var(--nav-h) 60px 0; position: relative; overflow: hidden;
+}
+.page-header::after {
+  content: '03'; font-family: 'Bebas Neue', sans-serif; font-size: 300px;
+  color: rgba(0,0,0,0.08); position: absolute; right: -10px; bottom: -40px; line-height: 1; pointer-events: none;
+}
+.page-header-inner { padding-top: 64px; padding-bottom: 64px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: end; position: relative; }
+.page-header-eyebrow { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 16px; display: block; }
+.page-header-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(64px, 10vw, 120px); color: white; line-height: 0.9; }
+.page-header-title span { color: var(--saffron); }
+.page-header-desc { font-size: 17px; line-height: 1.85; color: rgba(255,255,255,0.7); }
+
+.breadcrumb {
+  display: flex; align-items: center; gap: 8px; padding: 16px 60px;
+  background: var(--offwhite); border-bottom: 1px solid rgba(26,18,16,0.1);
+}
+.breadcrumb a, .breadcrumb span { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(26,18,16,0.4); text-decoration: none; }
+.breadcrumb a:hover { color: var(--vermillion); }
+.breadcrumb .sep { color: rgba(26,18,16,0.2); }
+.breadcrumb .current { color: var(--charcoal); }
+
+/* FEATURED ARTIST — Full width hero card */
+.featured-artist {
+  display: grid; grid-template-columns: 1fr 1fr;
+  min-height: 520px; background: var(--charcoal);
+  border-bottom: 3px solid var(--charcoal);
+}
+
+.featured-img-side {
+  position: relative; overflow: hidden; background: #2A1A10;
+}
+.featured-img-side img { width: 100%; height: 100%; object-fit: cover; object-position: top; filter: grayscale(30%) contrast(1.1); mix-blend-mode: luminosity; opacity: 0.7; }
+.featured-img-side::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, transparent 60%, var(--charcoal) 100%); }
+
+.featured-img-caption {
+  position: absolute; bottom: 16px; left: 16px;
+  font-family: 'Space Mono', monospace; font-size: 8px;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: rgba(255,255,255,0.5); background: rgba(0,0,0,0.5); padding: 4px 10px; z-index: 2;
+}
+
+.featured-info-side {
+  padding: 64px 60px; display: flex; flex-direction: column; justify-content: center;
+}
+
+.featured-tag {
+  font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 0.2em;
+  text-transform: uppercase; padding: 4px 12px; margin-bottom: 16px; display: inline-block;
+}
+
+.featured-era {
+  font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.15em;
+  text-transform: uppercase; color: rgba(255,248,239,0.35); margin-bottom: 12px;
+}
+
+.featured-name {
+  font-family: 'Bebas Neue', sans-serif; font-size: clamp(56px, 8vw, 100px);
+  color: var(--cream); line-height: 0.9; letter-spacing: 0.02em; margin-bottom: 20px;
+}
+
+.featured-pull {
+  font-family: 'Fraunces', serif; font-style: italic; font-size: 18px;
+  color: rgba(255,248,239,0.75); line-height: 1.6; border-left: 3px solid;
+  padding-left: 16px; margin-bottom: 24px;
+}
+
+.featured-body { font-size: 15px; line-height: 1.85; color: rgba(255,248,239,0.55); margin-bottom: 24px; }
+
+.featured-critical-note {
+  padding: 20px; background: rgba(255,255,255,0.05);
+  border-left: 3px solid rgba(255,255,255,0.15);
+}
+.featured-critical-label {
+  font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 0.2em;
+  text-transform: uppercase; color: rgba(255,248,239,0.35); margin-bottom: 8px;
+}
+.featured-critical-text { font-size: 13px; line-height: 1.75; color: rgba(255,248,239,0.6); }
+
+/* ARTIST GRID */
+.artists-section {
+  background: var(--offwhite); padding: 80px 60px;
+  border-top: 3px solid var(--charcoal);
+}
+
+.artists-section-title {
+  font-family: 'Bebas Neue', sans-serif; font-size: clamp(48px, 6vw, 72px);
+  color: var(--charcoal); line-height: 0.95; margin-bottom: 48px;
+}
+
+.artist-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  border: 2px solid var(--charcoal);
+}
+
+.artist-card {
+  border-right: 2px solid var(--charcoal);
+  border-bottom: 2px solid var(--charcoal);
+  overflow: hidden; background: white;
+  display: flex; flex-direction: column;
+  transition: transform 0.2s; position: relative;
+}
+.artist-card:hover { transform: translateY(-3px); z-index: 2; }
+.artist-card:nth-child(3n) { border-right: none; }
+
+.artist-img {
+  width: 100%; height: 220px; object-fit: cover; object-position: top;
+  display: block; filter: grayscale(20%); transition: filter 0.3s;
+}
+.artist-card:hover .artist-img { filter: grayscale(0%); }
+
+.artist-color-stripe { height: 5px; flex-shrink: 0; }
+.artist-info { padding: 28px 28px 24px; flex: 1; display: flex; flex-direction: column; }
+.artist-era { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 6px; }
+.artist-name { font-family: 'Bebas Neue', sans-serif; font-size: 32px; letter-spacing: 0.03em; color: var(--charcoal); line-height: 1; margin-bottom: 4px; }
+.artist-genre { font-family: 'Fraunces', serif; font-style: italic; font-size: 14px; color: rgba(26,18,16,0.45); margin-bottom: 12px; }
+.artist-quote {
+  font-family: 'Fraunces', serif; font-style: italic; font-size: 13px;
+  color: var(--charcoal); border-left: 2px solid; padding-left: 12px;
+  margin-bottom: 14px; line-height: 1.6;
+}
+.artist-desc { font-size: 13px; line-height: 1.75; color: rgba(26,18,16,0.6); flex: 1; margin-bottom: 16px; }
+.artist-critical {
+  font-family: 'Space Mono', monospace; font-size: 9px; line-height: 1.6;
+  color: rgba(26,18,16,0.45); padding: 12px; background: var(--offwhite);
+  margin-bottom: 16px;
+}
+.artist-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; }
+.artist-link {
+  font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 0.12em;
+  text-transform: uppercase; padding: 6px 14px; text-decoration: none;
+  border: 1px solid; transition: all 0.15s;
+}
+.artist-link:hover { color: white !important; }
+
+/* COMPARATIVE NOTE */
+.compare-band {
+  background: var(--magenta); padding: 60px;
+  display: grid; grid-template-columns: 1fr 2fr; gap: 60px; align-items: start;
+}
+.compare-band-title {
+  font-family: 'Bebas Neue', sans-serif; font-size: clamp(40px, 5vw, 60px);
+  color: white; line-height: 0.95;
+}
+.compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.compare-item {
+  background: rgba(255,255,255,0.1); padding: 20px;
+  border: 1px solid rgba(255,255,255,0.15);
+}
+.compare-item-label {
+  font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 0.2em;
+  text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 8px;
+}
+.compare-item-text { font-size: 14px; line-height: 1.7; color: rgba(255,255,255,0.8); }
+
+/* PAGE NAV */
+.page-nav-bottom {
+  background: var(--charcoal); padding: 40px 60px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.page-nav-link {
+  font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.15em;
+  text-transform: uppercase; color: rgba(255,248,239,0.4); text-decoration: none;
+  display: flex; align-items: center; gap: 12px; transition: color 0.15s;
+}
+.page-nav-link:hover { color: var(--saffron); }
+.page-nav-link .pnl-label { font-family: 'Bebas Neue', sans-serif; font-size: 26px; color: var(--cream); display: block; }
+
+footer { background: black; padding: 32px 60px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+.footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 20px; color: rgba(255,255,255,0.3); letter-spacing: 0.08em; }
+.footer-nav { display: flex; gap: 20px; list-style: none; flex-wrap: wrap; }
+.footer-nav a { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.25); text-decoration: none; transition: color 0.15s; }
+.footer-nav a:hover { color: rgba(255,255,255,0.65); }
+.footer-note { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 0.12em; color: rgba(255,255,255,0.15); text-transform: uppercase; width: 100%; }
+
+@media (max-width: 900px) {
+  nav { padding: 0 20px; } .nav-links { display: none; }
+  .page-header { padding: 0 24px; }
+  .page-header-inner { grid-template-columns: 1fr; gap: 24px; }
+  .featured-artist { grid-template-columns: 1fr; }
+  .featured-img-side { height: 280px; }
+  .featured-info-side { padding: 40px 24px; }
+  .artists-section { padding: 48px 24px; }
+  .artist-grid { grid-template-columns: 1fr 1fr; }
+  .artist-card:nth-child(3n) { border-right: 2px solid var(--charcoal); }
+  .artist-card:nth-child(2n) { border-right: none; }
+  .compare-band { grid-template-columns: 1fr; padding: 48px 24px; }
+  .compare-grid { grid-template-columns: 1fr; }
+  .page-nav-bottom { padding: 32px 24px; flex-direction: column; gap: 20px; align-items: flex-start; }
+  footer { padding: 32px 24px; } .breadcrumb { padding: 16px 24px; }
+}
+@media (max-width: 600px) {
+  .artist-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Stages of Change</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="context.html">Context</a></li>
+    <li><a href="timeline.html">Timeline</a></li>
+    <li><a href="artists.html" class="active">Artists</a></li>
+    <li><a href="analysis.html">Analysis</a></li>
+    <li><a href="sources.html">Sources</a></li>
+  </ul>
+</nav>
+
+<div class="page-header">
+  <div class="page-header-inner">
+    <div>
+      <span class="page-header-eyebrow">Section 03 — Performers</span>
+      <div class="page-header-title">Artists<br>of the <span>Era</span></div>
+    </div>
+    <p class="page-header-desc">
+      The performers who graced Hill Auditorium between 1980 and 2000 were not merely entertainment. Their presence in Ann Arbor was inseparable from the cultural moment happening outside the auditorium's doors — and the Michigan Daily's framing of each artist reveals as much about the university's multicultural project as it does about the music itself.
+    </p>
+  </div>
+</div>
+
+<div class="breadcrumb">
+  <a href="index.html">Home</a>
+  <span class="sep">/</span>
+  <span class="current">Artists of the Era</span>
+</div>
+
+<!-- FEATURED: RAVI SHANKAR — the first primary source artist -->
+<div class="featured-artist">
+  <div class="featured-img-side">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Ravi_Shankar_1975_press_photo.jpg/440px-Ravi_Shankar_1975_press_photo.jpg" alt="Ravi Shankar" onerror="this.style.display='none'">
+    <div class="featured-img-caption">Ravi Shankar · Press Photo</div>
+  </div>
+  <div class="featured-info-side">
+    <span class="featured-tag" style="background: var(--jade); color: white;">Primary Source Artist</span>
+    <div class="featured-era">UMS Debut April 1996 · Rackham Auditorium</div>
+    <div class="featured-name">Ravi<br>Shankar</div>
+    <div class="featured-pull" style="border-color: var(--jade);">
+      "He never lost sight of the tradition from which he came. This is the true nature of innovation."
+      <small style="display: block; font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; font-style: normal; color: rgba(255,248,239,0.4); margin-top: 8px;">— UMS Essayist</small>
+    </div>
+    <p class="featured-body">
+      India's most esteemed musical ambassador and "the sitarist who introduced Indian music to the West" (New York Times). A prolific composer of ragas and talas, Shankar collaborated with George Harrison, Philip Glass, and Yehudi Menuhin. His first UMS appearance came in April 1996 at Rackham Auditorium. He was still performing and listening critically to his own recordings at age 85. UMS would present him again at Hill Auditorium in September 2004.
+    </p>
+    <div class="featured-critical-note">
+      <div class="featured-critical-label">How the Michigan Daily Framed Him</div>
+      <div class="featured-critical-text">
+        The Daily's review calls Shankar a "virtuoso" and an "emperor" — titles that both elevate and exoticize. Indian classical music is described as "ancient," framing it as unchanging. His Western collaborations (Harrison, Glass, Menuhin) are foregrounded as validation — the need to establish familiarity through Western reference points encodes the assumption that Indian music alone cannot stand on the same stage as European classical work. This is the central framing pattern this project traces across all the era's reviews.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ARTIST GRID -->
+<section class="artists-section">
+  <div class="artists-section-title">All Featured Artists</div>
+
+  <div class="artist-grid">
+
+    <!-- Run-D.M.C. -->
+    <div class="artist-card">
+      <div style="height: 220px; background: linear-gradient(135deg, #1A1210 0%, #3A2010 100%); display: flex; align-items: center; justify-content: center;">
+        <div style="font-family: 'Bebas Neue', sans-serif; font-size: 60px; color: rgba(255,255,255,0.15); letter-spacing: -0.02em; text-align: center; line-height: 1;">RUN<br>D.M.C.</div>
+      </div>
+      <div class="artist-color-stripe" style="background: var(--vermillion);"></div>
+      <div class="artist-info">
+        <div class="artist-era" style="color: var(--vermillion);">Hill Auditorium · Nov. 1987</div>
+        <div class="artist-name">Run-D.M.C.</div>
+        <div class="artist-genre">Hip-Hop · Rap · "Tougher Than Leather" Tour</div>
+        <div class="artist-quote" style="border-color: var(--vermillion);">
+          "Rap music super-stars Run DMC are finally coming to Ann Arbor." — Michigan Daily, Brian Berger, 1987
+        </div>
+        <p class="artist-desc">
+          Formed in Hollis, Queens in 1981, Run-D.M.C. were among the first hip-hop artists to bring the genre to mainstream American audiences. Their collaboration with Aerosmith on "Walk This Way" (1986) became a crossover landmark. Their Hill Auditorium show on November 17, 1987 — just months after the BAM III protests that had filled the same hall with 4,200 students demanding institutional change — placed hip-hop at the center of U-M's cultural life at its most contested moment.
+        </p>
+        <div class="artist-critical">
+          CRITICAL NOTE: The Michigan Daily preview spends significant space distinguishing Run-D.M.C. from the "obscenity" controversy surrounding 2 Live Crew — framing Black popular music as requiring institutional defense to justify its presence at Hill. The apologetic structure of the article encodes the anxiety that hip-hop was a "sacrifice" (Duderstadt's term) rather than a straightforward cultural achievement.
+        </div>
+        <div class="artist-links">
+          <a class="artist-link" href="analysis.html" style="color: var(--vermillion); border-color: var(--vermillion);">Full Analysis →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cecil Taylor -->
+    <div class="artist-card">
+      <div style="height: 220px; background: linear-gradient(135deg, #0E0A30 0%, #1A1260 100%); display: flex; align-items: center; justify-content: center;">
+        <div style="font-family: 'Bebas Neue', sans-serif; font-size: 64px; color: rgba(255,255,255,0.12); letter-spacing: -0.02em; text-align: center; line-height: 1;">CECIL<br>TAYLOR</div>
+      </div>
+      <div class="artist-color-stripe" style="background: var(--cobalt);"></div>
+      <div class="artist-info">
+        <div class="artist-era" style="color: var(--cobalt);">Hill Auditorium · 1988</div>
+        <div class="artist-name">Cecil Taylor</div>
+        <div class="artist-genre">Avant-Garde Jazz · Free Improvisation · Piano</div>
+        <div class="artist-quote" style="border-color: var(--cobalt);">
+          "Nimble-fingered virtuosity," "gutbucket style that challenges the senses." — Michigan Daily, 1988
+        </div>
+        <p class="artist-desc">
+          One of the founding figures of free jazz, Cecil Taylor studied at the New England Conservatory and developed a percussive, densely chromatic piano style rooted in both the European classical tradition and African American musical experience. His 1988 Hill Auditorium performance tested the venue's acoustic design — conceived for orchestral clarity — in ways that European classical programming never had. His work expanded what Hill could mean.
+        </p>
+        <div class="artist-critical">
+          CRITICAL NOTE: The Daily review praises Taylor's genius while spending equal space explaining his "chaos" to an uninitiated audience. This "rapturous praise + pedagogical explanation" structure mirrors the Run-D.M.C. review's "praise + defense against obscenity" — both encode the assumption that Black artistic innovation requires more institutional scaffolding than European classical performance.
+        </div>
+        <div class="artist-links">
+          <a class="artist-link" href="analysis.html" style="color: var(--cobalt); border-color: var(--cobalt);">Full Analysis →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gil Scott-Heron -->
+    <div class="artist-card">
+      <div style="height: 220px; background: linear-gradient(135deg, #1A0820 0%, #3A1048 100%); display: flex; align-items: center; justify-content: center;">
+        <div style="font-family: 'Bebas Neue', sans-serif; font-size: 40px; color: rgba(255,255,255,0.12); letter-spacing: -0.02em; text-align: center; line-height: 1.1;">GIL<br>SCOTT-<br>HERON</div>
+      </div>
+      <div class="artist-color-stripe" style="background: var(--plum);"></div>
+      <div class="artist-info">
+        <div class="artist-era" style="color: var(--plum);">Lydia Mendelssohn Theatre · 1988</div>
+        <div class="artist-name">Gil Scott-Heron</div>
+        <div class="artist-genre">Spoken Word · Proto-Rap · Political Poetry</div>
+        <div class="artist-quote" style="border-color: var(--plum);">
+          "A significant influence on rap music" — his obscurity is proof of "dedication to depth rather than flash." — Brian Berger, 1988
+        </div>
+        <p class="artist-desc">
+          Gil Scott-Heron was one of the most important figures in the lineage from jazz and blues to hip-hop. His 1970 album "Small Talk at 125th and Lenox" and his seminal "The Revolution Will Not Be Televised" anticipated the social consciousness of hip-hop two decades before it became a genre. His 1988 appearance at Lydia Mendelssohn Theatre (part of the broader UMS ecosystem) placed political poetry at the center of U-M's cultural programming during the Michigan Mandate's launch year.
+        </p>
+        <div class="artist-critical">
+          CRITICAL NOTE: The Daily preview justifies Scott-Heron's worth through his intellectual lineage — he matters because he influenced rap, and his obscurity proves his depth. This framing legitimates his work through the lens of academic value, fitting it into Duderstadt's vision of a "multicultural community" cultivating critical thinking. It also unconsciously codes "unknown to the mainstream" as evidence of artistic seriousness rather than systemic neglect.
+        </div>
+        <div class="artist-links">
+          <a class="artist-link" href="analysis.html" style="color: var(--plum); border-color: var(--plum);">Full Analysis →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sweet Honey in the Rock -->
+    <div class="artist-card">
+      <img class="artist-img"
+           src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Sweet_Honey_in_the_Rock_at_the_2012_National_Folk_Festival.jpg/440px-Sweet_Honey_in_the_Rock_at_the_2012_National_Folk_Festival.jpg"
+           alt="Sweet Honey in the Rock"
+           onerror="this.style.display='none'">
+      <div class="artist-color-stripe" style="background: var(--jade);"></div>
+      <div class="artist-info">
+        <div class="artist-era" style="color: var(--jade);">Hill Auditorium · Late 1980s</div>
+        <div class="artist-name">Sweet Honey in the Rock</div>
+        <div class="artist-genre">A Cappella · African American Tradition · Social Justice</div>
+        <div class="artist-quote" style="border-color: var(--jade);">
+          "Stunning harmonies," "vocal acrobatics" blending "West African songs, gospel traditions, and freedom songs." — Michigan Daily
+        </div>
+        <p class="artist-desc">
+          Founded in 1973 by Dr. Bernice Johnson Reagon — a SNCC activist and Smithsonian scholar — Sweet Honey in the Rock is an a cappella ensemble rooted in African American musical traditions: gospel, blues, jazz, spirituals, and R&B. Reagon's vision was always explicitly political: the group's repertoire drew from the civil rights movement, anti-apartheid activism, and African diaspora traditions. Their UMS appearance at Hill placed that tradition in Ann Arbor's most prestigious performance space.
+        </p>
+        <div class="artist-critical">
+          CRITICAL NOTE: The Daily review requires the least institutional justification of any Black artist reviewed in this era — their social justice message and collective form fit the university's self-image as a space of progressive values. But even here, a subtle exoticization of their "West African" sound persists. Their relative ease of reception reveals how institutional framing works: the less threatening or "abstract" the art form, the less anxious the review.
+        </div>
+        <div class="artist-links">
+          <a class="artist-link" href="analysis.html" style="color: var(--jade); border-color: var(--jade);">Full Analysis →</a>
+          <a class="artist-link" href="https://findingaids.lib.umich.edu/catalog/umich-bhl-87378" target="_blank" style="color: var(--jade); border-color: var(--jade);">UMS Archive →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Wynton Marsalis -->
+    <div class="artist-card">
+      <img class="artist-img"
+           src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Wynton_Marsalis_2014.jpg/440px-Wynton_Marsalis_2014.jpg"
+           alt="Wynton Marsalis"
+           onerror="this.style.display='none'">
+      <div class="artist-color-stripe" style="background: var(--sky);"></div>
+      <div class="artist-info">
+        <div class="artist-era" style="color: var(--sky);">UMS Debut 1994 · 17+ Visits</div>
+        <div class="artist-name">Wynton Marsalis</div>
+        <div class="artist-genre">Jazz Trumpet · Composer · JLCO</div>
+        <div class="artist-quote" style="border-color: var(--sky);">
+          "The spirit here — the size of Hill, the student participation, the quality of the orchestras — everything is on the highest level." — Marsalis
+        </div>
+        <p class="artist-desc">
+          Born in New Orleans in 1961, Marsalis became jazz's most prominent institutional advocate, building Jazz at Lincoln Center into a permanent home for America's classical music. His UMS debut in 1994 began a relationship that saw him return over 17 times. Unlike Run-D.M.C. or Cecil Taylor, Marsalis's framing in the Daily is largely free of apologetic scaffolding — his institutional positioning as a MacArthur Fellow, Pulitzer Prize winner, and formally trained musician places him within existing categories of excellence that require little additional justification.
+        </p>
+        <div class="artist-critical">
+          CRITICAL NOTE: Marsalis's relatively smooth institutional reception compared to Run-D.M.C. reveals how the Michigan Mandate's framing of diversity shaped what kinds of Black performance required defense. His "jazz as democracy" argument — visible in his 2026 Michigan Daily interview — shows how African American artists sometimes navigated institutional anxiety by translating their work into terms the institution already valued.
+        </div>
+        <div class="artist-links">
+          <a class="artist-link" href="https://www.michigandaily.com/arts/1wynton-marsalis-and-jazz-lincoln-center-orchestra-return-hill-auditorium-25th-anniversary-tour30" target="_blank" style="color: var(--sky); border-color: var(--sky);">Michigan Daily →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Yo-Yo Ma -->
+    <div class="artist-card">
+      <img class="artist-img"
+           src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Yo-Yo_Ma_2011_Proms.jpg/440px-Yo-Yo_Ma_2011_Proms.jpg"
+           alt="Yo-Yo Ma"
+           onerror="this.style.display='none'">
+      <div class="artist-color-stripe" style="background: var(--saffron);"></div>
+      <div class="artist-info">
+        <div class="artist-era" style="color: #b87c00;">Multiple Visits · 1980s–2000s</div>
+        <div class="artist-name">Yo-Yo Ma</div>
+        <div class="artist-genre">Classical Cello · Cultural Ambassador</div>
+        <div class="artist-quote" style="border-color: var(--saffron);">
+          "Life, like music, is based on themes and variations, experiences and experiments that shape who we are." — Ma, Hill Auditorium
+        </div>
+        <p class="artist-desc">
+          Born in Paris to Chinese parents, Yo-Yo Ma debuted with the Harvard-Radcliffe Orchestra at age 15. His repeated visits to Hill Auditorium — through a formal UMS residency across all three U-M campuses — made him the era's most beloved performer in Ann Arbor. His multicultural background was rarely discussed in reviews; his virtuosity within the Western classical tradition positioned him as "universal" in ways that Indian classical or hip-hop performance was not.
+        </p>
+        <div class="artist-critical">
+          CRITICAL NOTE: Yo-Yo Ma's framing in the Michigan Daily is instructive for what it lacks: the anxious justification, pedagogical scaffolding, or exoticizing language that marks reviews of Shankar, Run-D.M.C., or Cecil Taylor. His Chinese heritage is invisible in the reviews. This invisibility reveals the limits of the Mandate era's multiculturalism — "excellence" was measured against Western classical standards, and Ma's mastery of those standards made difference disappear.
+        </div>
+        <div class="artist-links">
+          <a class="artist-link" href="https://record.umich.edu/tags/university-musical-society/" target="_blank" style="color: #b87c00; border-color: var(--saffron);">University Record →</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- COMPARATIVE FRAMING NOTE -->
+<div class="compare-band">
+  <div>
+    <div class="compare-band-title">How Framing Reveals Hierarchy</div>
+  </div>
+  <div class="compare-grid">
+    <div class="compare-item">
+      <div class="compare-item-label">Artists Requiring Justification</div>
+      <div class="compare-item-text">Run-D.M.C. (defended against obscenity), Cecil Taylor (explained to uninitiated), Gil Scott-Heron (legitimated through intellectual lineage), Ravi Shankar (validated through Western collaborations). In each case, the review performs institutional work alongside cultural appreciation.</div>
+    </div>
+    <div class="compare-item">
+      <div class="compare-item-label">Artists Received Without Defense</div>
+      <div class="compare-item-text">Yo-Yo Ma, Wynton Marsalis (largely), Vienna Philharmonic. Their excellence is assumed; no scaffolding required. The contrast is the argument: whose cultural production is treated as self-evidently worthy, and whose requires institutional sponsorship to be received?</div>
+    </div>
+    <div class="compare-item">
+      <div class="compare-item-label">The Pattern Johnson Identifies</div>
+      <div class="compare-item-text">Selective incorporation: the institution celebrates diversity while the framing of that celebration reproduces the cultural hierarchies diversity is supposed to challenge. The concert reviews are one site where this contradiction becomes visible at the level of language.</div>
+    </div>
+    <div class="compare-item">
+      <div class="compare-item-label">What Changes Over Time</div>
+      <div class="compare-item-text">The evolution from the anxious 1987 Run-D.M.C. preview to the more confident Sweet Honey coverage reflects rising institutional comfort with Black performance at Hill. But comfort is not the same as equity. Ease of reception does not equal structural change.</div>
+    </div>
+  </div>
+</div>
+
+<div class="page-nav-bottom">
+  <a href="timeline.html" class="page-nav-link">
+    <div>
+      <span style="font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,248,239,0.4);">← Previous</span>
+      <span class="pnl-label">Timeline</span>
+    </div>
+  </a>
+  <a href="analysis.html" class="page-nav-link">
+    <div style="text-align: right;">
+      <span style="font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,248,239,0.4);">Next →</span>
+      <span class="pnl-label">Critical Analysis</span>
+    </div>
+  </a>
+</div>
+
+<footer>
+  <div class="footer-logo">Stages of Change · U-M 1980–2000</div>
+  <ul class="footer-nav">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="context.html">Context</a></li>
+    <li><a href="timeline.html">Timeline</a></li>
+    <li><a href="artists.html">Artists</a></li>
+    <li><a href="analysis.html">Analysis</a></li>
+    <li><a href="sources.html">Sources</a></li>
+  </ul>
+  <div class="footer-note">Research drawn from Michigan Daily · UMS Archive · Michigan Today · Bentley Historical Library · AMCULT 103</div>
+</footer>
+
+</body>
+</html>
